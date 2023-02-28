@@ -5,6 +5,7 @@ static class Utility {
     #region CONSTANTS
 
     public const float TWO_PI = 2 * Mathf.PI;
+    public static readonly Vector3 CAMFIXEDOFFSET = new Vector3(0f, 0f, -15f);
     public static readonly int ANIM_STATE_KEY = Animator.StringToHash("State");
 
     #endregion
