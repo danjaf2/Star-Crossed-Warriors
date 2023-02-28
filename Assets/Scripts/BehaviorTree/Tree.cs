@@ -22,6 +22,18 @@ namespace BehaviorTree
 
         protected abstract Node SetupTree();
 
+        public void setRoot(List<Node> children, Node root)
+        {
+            foreach (Node node in children)
+            {
+                node.root = root;
+                if (node.children.Count > 0)
+                {
+                    setRoot(node.children, root);
+                }
+            }
+        }
+
     }
 
 }

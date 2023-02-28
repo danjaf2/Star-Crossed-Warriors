@@ -13,10 +13,11 @@ public class ExampleDecisionNode : Node
 
     public override NodeState Evaluate()
     {
+
+        //IF YOU WANT TO ADD DATA TO THE DICTIONARY, YOU DO NOT NEED TO do parent.parent.parent...SetData() anymore, now just use the root
+        //root.SetData("Guy", new object());
+
         //Evaluation of state and apply transformation changes
-
-
-
         state = NodeState.FAILURE;
         return state;
     }

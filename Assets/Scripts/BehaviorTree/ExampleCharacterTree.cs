@@ -10,6 +10,7 @@ public class ExampleCharacterTree : Tree
             
         }) ;
 
+        setRoot(root.children, root);
         return root;
     }
 }
