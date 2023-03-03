@@ -42,6 +42,7 @@ public class PlaneController : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
+       
 
     }
 
@@ -49,6 +50,8 @@ public class PlaneController : MonoBehaviour
     void Update()
     {
         ControllerProcessing();
+       
+
     }
 
     private void FixedUpdate()
@@ -56,15 +59,18 @@ public class PlaneController : MonoBehaviour
         if (brakesOn)
         {
             rb.AddForce(new Vector3(0, -1.0f, 0) * rb.mass * 0.001f);
-            return; 
+            return;
         }
-        rb.AddForce(transform.forward * thrust * throttle);
+       
         float adjustedSensitivity = getAdjustedSensitivity();
+
+        //Debug.DrawRay(transform.position, transform.forward * 10,Color.red, 10f);
+        rb.AddForce(transform.forward * throttle * adjustedSensitivity);
         rb.AddTorque(transform.up * yaw * adjustedSensitivity);
         rb.AddTorque(transform.right * pitch * adjustedSensitivity);
         rb.AddTorque(-transform.forward * roll * adjustedSensitivity);
         rb.AddForce(new Vector3(0, -1.0f, 0) * rb.mass * 0.001f);
-        Debug.Log(transform.position); 
+        //Debug.Log(transform.position); 
     }
 
     public float getAdjustedSensitivity()
@@ -72,22 +78,7 @@ public class PlaneController : MonoBehaviour
         return (rb.mass / sensitivityScale) * sensitivity;
     }
 
-    public void ThereminControllerProcessing()
-    {
-        if (!EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
-        Vector3 mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        Debug.Log(mousePos.x);
-        Debug.Log(mousePos.y);
-
-        roll = mousePos.x * 2 - 1.0f;
-        pitch = mousePos.y * 2 - 1.0f;
-
-        //audioSource.panStereo = mousePos.x*2 - 1.0f;
-       // audioSource.pitch = mousePos.y * 2 + 1.0f; 
-    }
+  
 
     public void ControllerProcessing()
     {
@@ -110,16 +101,11 @@ public class PlaneController : MonoBehaviour
         pitch = Input.GetAxis(pitchlAxis);
         yaw = Input.GetAxis(yawAxis);
 
-        if (Input.GetKey(KeyCode.Mouse2))
-        {
-            ThereminControllerProcessing();
-        }
-        else
-        {
-            //audioSource.panStereo =0;
-            //audioSource.pitch =1.5f;
-        }
+        Debug.Log(roll);
+        Debug.Log(pitch);
+        Debug.Log(yaw);
 
+       
         if (Input.GetButton(throttleKey))
         {
            Debug.Log("Throttle on"); 
