@@ -9,8 +9,9 @@ public class ExampleCharacterTree : Tree
         {
             
         }) ;
-
+        
         setRoot(root.children, root);
+        setTreeRef(root.children, this);
         return root;
     }
 }

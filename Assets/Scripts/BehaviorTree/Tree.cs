@@ -34,6 +34,18 @@ namespace BehaviorTree
             }
         }
 
+        public void setTreeRef(List<Node> children, Tree tree)
+        {
+            foreach (Node node in children)
+            {
+                node.referenceTree = tree;
+                if (node.children.Count > 0)
+                {
+                    setTreeRef(node.children, tree);
+                }
+            }
+        }
+
     }
 
 }

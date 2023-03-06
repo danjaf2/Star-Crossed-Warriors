@@ -17,6 +17,7 @@ namespace BehaviorTree
 
         public Node parent;
         public Node root;
+        public Tree referenceTree;
         public List<Node> children = new List<Node>();
         private Dictionary<string, object> _dataContext = new Dictionary<string, object>();
 
