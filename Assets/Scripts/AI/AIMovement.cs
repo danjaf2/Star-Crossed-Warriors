@@ -8,7 +8,7 @@ namespace AI
 
         public float weight;
 
-        public bool canPerform = false;
+        public bool canPerform = true;
 
         public virtual SteeringOutput GetKinematic(AIAgent agent)
         {
