@@ -16,6 +16,8 @@ namespace AI
 
         public GameObject SeekerPrefab;
 
+        public Vehicle vehicle; 
+
         public enum EBehaviorType { Kinematic, Steering }
         public EBehaviorType behaviorType;
 
@@ -62,11 +64,15 @@ namespace AI
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            vehicle = GetComponent<Vehicle>(); 
         }
 
 
         private void Update()
         {
+            Vector3 currentPos = this.transform.position;
+            Quaternion currentRot = this.transform.rotation; 
+          
                 if (debug)
                     Debug.DrawRay(transform.position, Velocity, Color.red);
 
@@ -76,21 +82,26 @@ namespace AI
                 {
                         GetKinematicAvg(out finalVelocity, out finalRotation);
                         Velocity = finalVelocity * maxSpeed;
-                        this.transform.position += Velocity * Time.deltaTime;
-                        this.transform.rotation = finalRotation;
-                }
-                else
+                        //TODO calculate sum 
+                        currentPos += Velocity * Time.deltaTime;
+                        currentRot = finalRotation;
+
+              
+                } else
                 {
                     GetSteeringSum(out finalVelocity, out finalRotation);
                     Vector3 acc = finalVelocity / 3;//This has not been tested in depth, the value is just to determine an accelatation for testing
                     Velocity += acc * Time.deltaTime;
                     Velocity = Vector3.ClampMagnitude(Velocity, maxSpeed);
-                    transform.position += Velocity * Time.deltaTime;
-                    this.transform.rotation = finalRotation;
+                    currentPos += Velocity * Time.deltaTime;
+                    currentRot = finalRotation;
                 }
-                //animator.SetBool("walking", Velocity.magnitude > 0.1);
-                //animator.SetBool("running", Velocity.magnitude > maxSpeed / 2);
-            
+            //animator.SetBool("walking", Velocity.magnitude > 0.1);
+            //animator.SetBool("running", Velocity.magnitude > maxSpeed / 2);
+
+            //TODO 
+            //vehicle.ControllerProcessing(Vector3 translation, Quaternion rotation, bool throttleOn, bool brakingOn)
+
         }
 
         private void GetKinematicAvg(out Vector3 kinematicAvg, out Quaternion rotation)
