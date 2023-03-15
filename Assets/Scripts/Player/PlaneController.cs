@@ -64,7 +64,8 @@ public class PlaneController : MonoBehaviour
        
         float adjustedSensitivity = getAdjustedSensitivity();
 
-        //Debug.DrawRay(transform.position, transform.forward * 10,Color.red, 10f);
+        Debug.DrawRay(transform.position, transform.forward * 10,Color.red, 10f);
+        Debug.DrawRay(transform.position, transform.right * 10, Color.blue, 10f);
         rb.AddForce(transform.forward * throttle * adjustedSensitivity);
         rb.AddTorque(transform.up * yaw * adjustedSensitivity);
         rb.AddTorque(transform.right * pitch * adjustedSensitivity);
