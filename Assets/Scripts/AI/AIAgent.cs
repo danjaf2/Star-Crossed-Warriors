@@ -67,6 +67,11 @@ namespace AI
             vehicle = GetComponent<Vehicle>(); 
         }
 
+        private void Start()
+        {
+            vehicle = GetComponent<Vehicle>();
+        }
+
 
         private void Update()
         {
@@ -85,17 +90,35 @@ namespace AI
                         //TODO calculate sum 
                         currentPos += Velocity * Time.deltaTime;
                         currentRot = finalRotation;
+                if(Vector3.Dot(finalVelocity, -transform.up) > 0.8)
+                {
+                    
+                    vehicle.ControllerProcessing(finalVelocity, currentRot, true, false);
+                }
+                else
+                {
+                    vehicle.ControllerProcessing(finalVelocity, currentRot, false, true);
+                }
+                        
 
-              
-                } else
+
+            } else
                 {
                     GetSteeringSum(out finalVelocity, out finalRotation);
-                    Vector3 acc = finalVelocity / 3;//This has not been tested in depth, the value is just to determine an accelatation for testing
-                    Velocity += acc * Time.deltaTime;
-                    Velocity = Vector3.ClampMagnitude(Velocity, maxSpeed);
-                    currentPos += Velocity * Time.deltaTime;
-                    currentRot = finalRotation;
+                Velocity = finalVelocity * maxSpeed;
+                //TODO calculate sum 
+                currentPos += Velocity * Time.deltaTime;
+                currentRot = finalRotation;
+                if (Vector3.Dot(finalVelocity, -transform.up) > 0.8)
+                {
+
+                    vehicle.ControllerProcessing(finalVelocity, currentRot, true, false);
                 }
+                else
+                {
+                    vehicle.ControllerProcessing(finalVelocity, currentRot, false, true);
+                }
+            }
             //animator.SetBool("walking", Velocity.magnitude > 0.1);
             //animator.SetBool("running", Velocity.magnitude > maxSpeed / 2);
 
@@ -160,13 +183,12 @@ namespace AI
                     {
                         if (currentRotCount == 0)
                         {
-                            firstRotation = movement.GetKinematic(this).angular;
+                            firstRotation = movement.GetSteering(this).angular;
                         }
                         currentRotCount++;
-                        rotation = AverageQuaternion(ref cummulitiveRot, movement.GetKinematic(this).angular, firstRotation, currentRotCount);
+                        rotation = AverageQuaternion(ref cummulitiveRot, movement.GetSteering(this).angular, firstRotation, currentRotCount);
                     }
                 }
-
             }
         }
 

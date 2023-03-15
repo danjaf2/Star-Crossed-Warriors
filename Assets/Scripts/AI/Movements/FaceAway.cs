@@ -9,7 +9,7 @@ namespace AI
             var output = base.GetKinematic(agent);
 
             // TODO: calculate angular component
-            Vector3 direction = this.transform.position - agent.transform.position;
+            Vector3 direction = agent.TargetPosition - this.transform.position;
 
             if (direction.normalized == transform.forward || Mathf.Approximately(direction.magnitude, 0f))
             {
