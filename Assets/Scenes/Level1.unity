@@ -1092,7 +1092,7 @@ MonoBehaviour:
   pitch: 0
   yaw: 0
   throttle: 0
-  throttleIncrement: 50
+  throttleIncrement: 500
   brakeIncrement: 5000
   maxThrottle: 50000
   sensitivity: 10
@@ -1148,7 +1148,7 @@ Rigidbody:
   m_GameObject: {fileID: 1284546805}
   serializedVersion: 2
   m_Mass: 500
-  m_Drag: 0.1
+  m_Drag: 0.2
   m_AngularDrag: 5
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -1188,7 +1188,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 72
-  avoidanceDistanceFactor: 0.1
+  avoidanceDistanceFactor: 0.3
   avoidanceDistanceMinimum: 50
   avoidanceTime: 5
 --- !u!1 &1372732658
@@ -1282,7 +1282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372732658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4608483, y: -0.17, z: -0.086993694}
+  m_LocalPosition: {x: -2.4608483, y: -115, z: -0.086993694}
   m_LocalScale: {x: 96.38342, y: 0.32995966, z: 214.29845}
   m_ConstrainProportionsScale: 0
   m_Children: []

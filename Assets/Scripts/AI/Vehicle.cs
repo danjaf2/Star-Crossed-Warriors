@@ -94,9 +94,9 @@ public class Vehicle : MonoBehaviour
 
        
 
-        pitch = (int) Mathf.Clamp(((rotation).eulerAngles.x), -1, 1);
-        roll = (int) Mathf.Clamp(((rotation).eulerAngles.z), -1, 1);
-        yaw = -(int) Mathf.Clamp(((rotation).eulerAngles.y), -1, 1);
+        //pitch = (int) Mathf.Clamp(((rotation).eulerAngles.x), -1, 1);
+        //roll = (int) Mathf.Clamp(((rotation).eulerAngles.z), -1, 1);
+        //yaw = -(int) Mathf.Clamp(((rotation).eulerAngles.y), -1, 1);
 
         rb.rotation = Quaternion.RotateTowards(transform.rotation,rotation.normalized, rotationMaxDegrees);
 

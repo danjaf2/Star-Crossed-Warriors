@@ -30,7 +30,7 @@ public class ObstacleCollisionAvoidance : AIMovement
         }
         Vector3 desiredVelocity = Vector3.zero;
         RaycastHit hit;
-        Debug.DrawRay(transform.position, rb.velocity * 20, Color.yellow);
+        //Debug.DrawRay(transform.position, rb.velocity * 20, Color.yellow);
         //Debug.Log(Vector3.Magnitude(rb.velocity)/avoidanceDistanceFactor);
         float distance;
         Vector3 checkDirection;
@@ -44,10 +44,10 @@ public class ObstacleCollisionAvoidance : AIMovement
             distance = Vector3.Magnitude(rb.velocity) / avoidanceDistanceFactor;
             checkDirection = rb.velocity;
         }
-        //Will need to replace the Raycast to more like a Cylinder cast so like that the whole body is safe and not just the direction we are going
-        if (Physics.Raycast(transform.position, checkDirection, out hit,distance, layerMask, QueryTriggerInteraction.Collide))
+        if (Physics.CapsuleCast(transform.position, transform.position + checkDirection.normalized, 20, checkDirection, out hit, distance, layerMask, QueryTriggerInteraction.Collide))
         {
-            desiredVelocity = hit.normal;
+            desiredVelocity = Vector3.Cross(hit.normal, transform.forward);
+            
             output.linear = desiredVelocity * weight;
             output.angular = Quaternion.LookRotation(desiredVelocity);
             prevRotation = output.angular; 
@@ -56,7 +56,7 @@ public class ObstacleCollisionAvoidance : AIMovement
             Debug.Log(hit.transform.name);
         }
      
-        Debug.DrawRay(transform.position, output.linear * 20, Color.green);
+        Debug.DrawRay(transform.position, output.linear * 20, Color.magenta);
 
 
         return output;
@@ -77,9 +77,11 @@ public class ObstacleCollisionAvoidance : AIMovement
     {
         avoiding= true;
         GetComponent<Seek>().canPerform = false;
+        GetComponent<FaceTarget>().canPerform = false;
         yield return new WaitForSeconds(avoidanceTime);
         avoiding= false;
         GetComponent<Seek>().canPerform = true;
+        GetComponent<FaceTarget>().canPerform = true;
         prevRotation = Quaternion.identity;
         prevDirection = Vector3.zero;
     }
