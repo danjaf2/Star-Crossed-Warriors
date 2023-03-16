@@ -20,6 +20,7 @@ public class Vehicle : MonoBehaviour
 
 
     [SerializeField] public float sensitivityScale = 10.0f;
+    [SerializeField] public float rotationMaxDegrees = 30.0f;
 
     [SerializeField] public string rollAxis = "Roll";
     [SerializeField] public string pitchlAxis = "Pitch";
@@ -67,9 +68,10 @@ public class Vehicle : MonoBehaviour
 
         Debug.DrawRay(transform.position, transform.forward * 10,Color.red);
         rb.AddForce(transform.forward * throttle * adjustedSensitivity);
-        rb.AddTorque(transform.up * yaw * adjustedSensitivity);
-        rb.AddTorque(transform.right * pitch * adjustedSensitivity);
-        rb.AddTorque(-transform.forward * roll * adjustedSensitivity);
+     
+        //rb.AddTorque(transform.up * yaw * adjustedSensitivity);
+       // rb.AddTorque(transform.right * pitch * adjustedSensitivity);
+        //rb.AddTorque(-transform.forward * roll * adjustedSensitivity);
         rb.AddForce(new Vector3(0, -1.0f, 0) * rb.mass * 0.001f);
         //Debug.Log(transform.position); 
     }
@@ -88,12 +90,16 @@ public class Vehicle : MonoBehaviour
             return;
         }
 
-        pitch = (rotation * Quaternion.Euler(180, 0, 0)).eulerAngles.x;
-        roll = (rotation * Quaternion.Euler(0, 0, 180)).eulerAngles.z;
-        yaw = (rotation * Quaternion.Euler(0, 0, 180)).eulerAngles.y;
+       
 
-       // Debug.Log(roll);
-       // Debug.Log(pitch);
+        pitch = (int) Mathf.Clamp(((rotation).eulerAngles.x), -1, 1);
+        roll = (int) Mathf.Clamp(((rotation).eulerAngles.z), -1, 1);
+        yaw = -(int) Mathf.Clamp(((rotation).eulerAngles.y), -1, 1);
+
+        rb.rotation = Quaternion.RotateTowards(transform.rotation,rotation, rotationMaxDegrees);
+
+        // Debug.Log(roll);
+        // Debug.Log(pitch)
         //Debug.Log(yaw);
 
         if (brakingOn)

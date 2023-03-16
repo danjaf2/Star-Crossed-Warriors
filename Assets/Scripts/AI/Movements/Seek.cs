@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 namespace AI
 {
@@ -15,6 +16,8 @@ namespace AI
 
             
                 Debug.DrawRay(transform.position, output.linear*20, Color.cyan);
+
+            output.angular = Quaternion.LookRotation(desiredVelocity);
 
             return output;
         }
