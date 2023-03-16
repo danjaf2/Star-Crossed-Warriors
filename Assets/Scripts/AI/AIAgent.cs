@@ -90,7 +90,7 @@ namespace AI
                         //TODO calculate sum 
                         currentPos += Velocity * Time.deltaTime;
                         currentRot = finalRotation;
-                if(Vector3.Dot(finalVelocity, -transform.up) > 0.8)
+                if(Vector3.Dot(finalVelocity, -transform.up) > 0.6)
                 {
                     
                     vehicle.ControllerProcessing(finalVelocity, currentRot, true, false);
@@ -109,7 +109,8 @@ namespace AI
                 //TODO calculate sum 
                 currentPos += Velocity * Time.deltaTime;
                 currentRot = finalRotation;
-                if (Vector3.Dot(finalVelocity, -transform.up) > 0.8)
+                print("Hiiii");
+                if (Vector3.Dot(finalVelocity, transform.forward) > 0.6)
                 {
 
                     vehicle.ControllerProcessing(finalVelocity, currentRot, true, false);

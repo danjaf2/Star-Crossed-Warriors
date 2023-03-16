@@ -92,9 +92,9 @@ public class Vehicle : MonoBehaviour
         roll = (rotation * Quaternion.Euler(0, 0, 180)).eulerAngles.z;
         yaw = (rotation * Quaternion.Euler(0, 0, 180)).eulerAngles.y;
 
-        Debug.Log(roll);
-        Debug.Log(pitch);
-        Debug.Log(yaw);
+       // Debug.Log(roll);
+       // Debug.Log(pitch);
+        //Debug.Log(yaw);
 
         if (brakingOn)
         {

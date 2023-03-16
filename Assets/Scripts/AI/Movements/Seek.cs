@@ -13,7 +13,8 @@ namespace AI
             desiredVelocity = desiredVelocity.normalized * agent.maxSpeed;
             output.linear = desiredVelocity;
 
-            if (debug) Debug.DrawRay(transform.position, output.linear, Color.cyan);
+            
+                Debug.DrawRay(transform.position, output.linear*20, Color.cyan);
 
             return output;
         }
