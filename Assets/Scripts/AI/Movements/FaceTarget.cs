@@ -9,7 +9,7 @@ namespace AI
             var output = base.GetKinematic(agent);
 
             // TODO: calculate angular component
-            print("Turning?");
+            //print("Turning?");
             Vector3 direction = agent.TargetPosition - this.transform.position;
             output.angular = Quaternion.LookRotation(direction.normalized);
             return output;

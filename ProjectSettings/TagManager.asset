@@ -7,14 +7,16 @@ TagManager:
   - Plane
   - PlayerCockpit
   - PlayerFollowCamera
+  - Enemy
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Obstacle
   - Water
   - UI
-  - 
+  - Character
   - 
   - 
   - 

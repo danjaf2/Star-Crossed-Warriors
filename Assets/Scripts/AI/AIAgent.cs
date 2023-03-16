@@ -25,6 +25,7 @@ namespace AI
 
         [SerializeField] private Transform trackedTarget;
         [SerializeField] private Vector3 targetPosition;
+        [SerializeField] private float thrustThreshold;
         public Vector3 TargetPosition
         {
             get => trackedTarget != null ? trackedTarget.position : targetPosition;
@@ -91,7 +92,7 @@ namespace AI
                         currentPos += Velocity * Time.deltaTime;
                         currentRot = finalRotation;
                 //transform.rotation = currentRot;
-                if (Vector3.Dot(finalVelocity, transform.forward) > 0.2)
+                if (Vector3.Dot(finalVelocity, transform.forward) > thrustThreshold)
                 {
                     
                     vehicle.ControllerProcessing(finalVelocity, currentRot, true, false);
@@ -111,7 +112,7 @@ namespace AI
                 currentPos += Velocity * Time.deltaTime;
                 currentRot = finalRotation.normalized;
                 
-                if (Vector3.Dot(finalVelocity, transform.forward) > 0.2)
+                if (Vector3.Dot(finalVelocity, transform.forward) > thrustThreshold)
                 {
 
                     vehicle.ControllerProcessing(finalVelocity, currentRot, true, false);

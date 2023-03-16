@@ -13,6 +13,7 @@ public class Vehicle : MonoBehaviour
     [SerializeField] public float yaw;
     [SerializeField] public float throttle;
     [SerializeField] public float throttleIncrement;
+    [SerializeField] public float brakeIncrement;
     [SerializeField] public float maxThrottle = 200.0f;
     [SerializeField] public float sensitivity;
     [SerializeField] public float thrust = 5.0f;
@@ -37,6 +38,7 @@ public class Vehicle : MonoBehaviour
 
 
     [SerializeField] private bool brakesOn = false;
+
 
 
     void Start()
@@ -130,7 +132,7 @@ public class Vehicle : MonoBehaviour
     public void Brake()
     {
         Debug.Log("Brakes on");
-        throttle -= throttleIncrement;
+        throttle -= brakeIncrement;
 
         if (throttle < 0)
         {

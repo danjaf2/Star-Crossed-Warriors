@@ -12,7 +12,7 @@ namespace AI
             // TODO: calculate linear component
             Vector3 desiredVelocity = agent.TargetPosition - this.transform.position;
             desiredVelocity = desiredVelocity.normalized * agent.maxSpeed;
-            output.linear = desiredVelocity;
+            output.linear = desiredVelocity * weight;
 
             
                 Debug.DrawRay(transform.position, output.linear*20, Color.cyan);
