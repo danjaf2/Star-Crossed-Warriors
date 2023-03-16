@@ -96,7 +96,7 @@ public class Vehicle : MonoBehaviour
         roll = (int) Mathf.Clamp(((rotation).eulerAngles.z), -1, 1);
         yaw = -(int) Mathf.Clamp(((rotation).eulerAngles.y), -1, 1);
 
-        rb.rotation = Quaternion.RotateTowards(transform.rotation,rotation, rotationMaxDegrees);
+        rb.rotation = Quaternion.RotateTowards(transform.rotation,rotation.normalized, rotationMaxDegrees);
 
         // Debug.Log(roll);
         // Debug.Log(pitch)

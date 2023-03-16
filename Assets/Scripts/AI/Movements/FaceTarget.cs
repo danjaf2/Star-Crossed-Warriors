@@ -2,23 +2,16 @@
 
 namespace AI
 {
-    public class FaceAway : AIMovement
+    public class FaceTarget : AIMovement
     {
         public override SteeringOutput GetKinematic(AIAgent agent)
         {
             var output = base.GetKinematic(agent);
 
             // TODO: calculate angular component
+            print("Turning?");
             Vector3 direction = agent.TargetPosition - this.transform.position;
-
-            if (direction.normalized == transform.forward || Mathf.Approximately(direction.magnitude, 0f))
-            {
-                output.angular = transform.rotation;
-            }
-            else
-            {
-                output.angular = Quaternion.LookRotation(direction);
-            }
+            output.angular = Quaternion.LookRotation(direction.normalized);
             return output;
         }
 

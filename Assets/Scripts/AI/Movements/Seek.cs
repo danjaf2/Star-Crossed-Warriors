@@ -17,7 +17,7 @@ namespace AI
             
                 Debug.DrawRay(transform.position, output.linear*20, Color.cyan);
 
-            output.angular = Quaternion.LookRotation(desiredVelocity);
+            //output.angular = Quaternion.LookRotation(desiredVelocity);
 
             return output;
         }
