@@ -7,6 +7,8 @@ public class BaseEnemy: BehaviorTree.Tree
     public LayerMask findMask;
     public float findRange = 700f;
 
+    public float maxAggroRange = 800f;
+
     public float attackRange = 500;
     public float attackAngleThreshold = 10;
     public LayerMask attackMask;
@@ -30,7 +32,7 @@ public class BaseEnemy: BehaviorTree.Tree
                 }), new Sequence(new List<Node>
                 {
                     new CheckTargetInFOV(),
-                    new FollowTarget()
+                    new FollowTarget(maxAggroRange)
                 }),
                 new FindTarget(findRange, findMask)
 

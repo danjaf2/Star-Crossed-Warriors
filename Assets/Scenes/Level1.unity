@@ -1207,6 +1207,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   findRange: 500
+  maxAggroRange: 800
   attackRange: 400
   attackAngleThreshold: 10
   attackMask:
@@ -2050,7 +2051,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7842001558655534674, guid: c12f1dbf8730e974e8daea3a279fd2a1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 515
+      value: 411.9
       objectReference: {fileID: 0}
     - target: {fileID: 7842001558655534674, guid: c12f1dbf8730e974e8daea3a279fd2a1, type: 3}
       propertyPath: m_LocalPosition.z

@@ -54,9 +54,9 @@ public class FindTarget : Node
         }
         else
         {
-            root.SetData("target", hitColliders[0].transform);//We can develop how to choose our target later
-            referenceTree.GetComponent<AIAgent>().TrackTarget(hitColliders[0].transform);
-            Debug.Log(hitColliders[0].transform.name);
+            root.SetData("target", validTargets[0].transform);//We can develop how to choose our target later
+            //referenceTree.GetComponent<AIAgent>().TrackTarget(validTargets[0].transform);
+            Debug.Log(validTargets[0].transform.name);
             Debug.Log("Found Target");
         }
 
