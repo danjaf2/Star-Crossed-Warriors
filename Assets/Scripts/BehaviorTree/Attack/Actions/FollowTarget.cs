@@ -1,3 +1,4 @@
+using AI;
 using BehaviorTree;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ public class FollowTarget : Node
         {
 
             //TODO:INSERT CODE TO MAKE THE TREEREFERENCE TO COMMAND AGENT TO GET CLOSER TO THE TARGET
+            //referenceTree.GetComponent<AIAgent>().TrackTarget(target);
 
 
             Vector3 toTarget = target.position - referenceTree.transform.position;

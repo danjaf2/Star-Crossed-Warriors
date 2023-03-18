@@ -15,7 +15,7 @@ namespace AI
             output.linear = desiredVelocity * weight;
 
             
-                Debug.DrawRay(transform.position, output.linear*20, Color.cyan);
+                //Debug.DrawRay(transform.position, output.linear*20, Color.cyan);
 
             //output.angular = Quaternion.LookRotation(desiredVelocity);
 

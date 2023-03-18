@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Rendering.CameraUI;
 
 namespace AI
 {
@@ -91,8 +92,9 @@ namespace AI
                         //TODO calculate sum 
                         currentPos += Velocity * Time.deltaTime;
                         currentRot = finalRotation;
+                        Debug.DrawRay(transform.position, finalVelocity * 20, Color.cyan);
                 //transform.rotation = currentRot;
-                if (Vector3.Dot(finalVelocity, transform.forward) > thrustThreshold)
+                if (Vector3.Dot(finalVelocity.normalized, transform.forward.normalized) > thrustThreshold)
                 {
                     
                     vehicle.ControllerProcessing(finalVelocity, currentRot, true, false);
@@ -111,8 +113,8 @@ namespace AI
                 //TODO calculate sum 
                 currentPos += Velocity * Time.deltaTime;
                 currentRot = finalRotation.normalized;
-                
-                if (Vector3.Dot(finalVelocity, transform.forward) > thrustThreshold)
+                Debug.DrawRay(transform.position, finalVelocity * 20, Color.cyan);
+                if (Vector3.Dot(finalVelocity.normalized, transform.forward.normalized) > thrustThreshold)
                 {
 
                     vehicle.ControllerProcessing(finalVelocity, currentRot, true, false);
