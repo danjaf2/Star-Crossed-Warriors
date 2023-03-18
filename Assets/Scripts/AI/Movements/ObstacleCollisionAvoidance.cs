@@ -41,7 +41,7 @@ public class ObstacleCollisionAvoidance : AIMovement
         }
         else
         {
-            distance = Vector3.Magnitude(rb.velocity) / avoidanceDistanceFactor;
+            distance = Vector3.Magnitude(rb.velocity) * avoidanceDistanceFactor;
             checkDirection = rb.velocity;
         }
         if (Physics.CapsuleCast(transform.position, transform.position + checkDirection.normalized, 20, checkDirection, out hit, distance, layerMask, QueryTriggerInteraction.Collide))

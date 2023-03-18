@@ -862,31 +862,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f69c15558436a2944a7f50de8dc8b579, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8847445
+      value: 0.9999953
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f69c15558436a2944a7f50de8dc8b579, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.43890828
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f69c15558436a2944a7f50de8dc8b579, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.14046659
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f69c15558436a2944a7f50de8dc8b579, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.069683634
+      value: -0.003071777
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f69c15558436a2944a7f50de8dc8b579, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -52.771
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f69c15558436a2944a7f50de8dc8b579, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 18.043
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f69c15558436a2944a7f50de8dc8b579, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -0.352
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f69c15558436a2944a7f50de8dc8b579, type: 3}
       propertyPath: m_Name
@@ -1188,9 +1188,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 72
-  avoidanceDistanceFactor: 0.3
+  avoidanceDistanceFactor: 1.5
   avoidanceDistanceMinimum: 50
-  avoidanceTime: 5
+  avoidanceTime: 2
 --- !u!114 &1284546824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1213,6 +1213,22 @@ MonoBehaviour:
   attackMask:
     serializedVersion: 2
     m_Bits: 72
+--- !u!114 &1284546825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284546805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 861e4900501a40b4fa92167aa1b89d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 1
+  weight: 1
+  canPerform: 1
+  lightSource: {fileID: 1866352276}
 --- !u!1 &1372732658
 GameObject:
   m_ObjectHideFlags: 0
