@@ -1190,6 +1190,7 @@ MonoBehaviour:
     m_Bits: 72
   avoidanceDistanceFactor: 1.5
   avoidanceDistanceMinimum: 50
+  objectToAvoid: {fileID: 0}
   avoidanceTime: 2
 --- !u!114 &1284546824
 MonoBehaviour:
@@ -2067,7 +2068,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7842001558655534674, guid: c12f1dbf8730e974e8daea3a279fd2a1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 411.9
+      value: -63.2
       objectReference: {fileID: 0}
     - target: {fileID: 7842001558655534674, guid: c12f1dbf8730e974e8daea3a279fd2a1, type: 3}
       propertyPath: m_LocalPosition.z
