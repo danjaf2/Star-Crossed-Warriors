@@ -12,6 +12,10 @@ public class BaseEnemy: BehaviorTree.Tree
     public float attackRange = 500;
     public float attackAngleThreshold = 10;
     public LayerMask attackMask;
+
+    public float wanderStartNodeSearchRange;
+    public LayerMask wanderMask;
+
     protected override Node SetupTree()
     {
         Node root = new Selector(new List<Node>
@@ -36,6 +40,10 @@ public class BaseEnemy: BehaviorTree.Tree
                 }),
                 new FindTarget(findRange, findMask)
 
+            }),
+            new Selector(new List<Node>
+            { 
+                new WanderRandomly(wanderStartNodeSearchRange, wanderMask)
             })
         }); ;
         

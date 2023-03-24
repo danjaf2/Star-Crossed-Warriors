@@ -88,7 +88,9 @@ namespace AI
         {
             Vector3 currentPos = this.transform.position;
             Quaternion currentRot = this.transform.rotation;
-            if (trackedTarget == null && path.Count == 0)
+
+            //Pathfinding logic
+            if (trackedTarget == null && path.Count == 0 && goalWaypoint!=null)
             {
                 Debug.Log("Finding Path!");
                 path = pathfinding.FindPath(mostRecentWaypoint, goalWaypoint);
@@ -97,10 +99,20 @@ namespace AI
                     print(path.gameObject.name);
                 }
             }
+            //We have a path to follow
             if (path.Count != 0)
             {
                 FollowPath();
             }
+            //Reset if you found a enemy
+            if(trackedTarget!= null)
+            {
+                path.Clear();
+                pathIndex= 0;
+                goalWaypoint=null;
+            }
+
+
 
             if (debug)
                 Debug.DrawRay(transform.position, Velocity, Color.red);
@@ -166,6 +178,7 @@ namespace AI
                     if (pathIndex >= path.Count - 1)
                     {
                         path.Clear();
+                        goalWaypoint = null;
                         pathIndex = 0;
 
                     }

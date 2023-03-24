@@ -48,7 +48,7 @@ public class Waypoint : MonoBehaviour
     {
         if (!isMoveable)
         {
-            DrawConnections();
+            //DrawConnections();
             //SetCurrentDangerLevel();
         }
         else
