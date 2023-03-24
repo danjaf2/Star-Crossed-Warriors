@@ -54,7 +54,7 @@ public class WaypointLinker : EditorWindow
         numberRows = 10;
         numberColumn = 10;
         zDepth = 10;
-        spacing= 60;
+        spacing= 500;
         for (int row =0;row<numberRows;row++)
         {
             for (int col = 0; col < numberColumn; col++)
@@ -77,11 +77,11 @@ public class WaypointLinker : EditorWindow
 
 
 
-    private void FunctionToRun()
+    public void FunctionToRun()
     {
         waypoints = GameObject.FindGameObjectWithTag("Manager").GetComponent<Rooms>().waypoints;
-        spacing= 60;
-        float distanceLimit = Mathf.Sqrt((Mathf.Pow(60, 2) + Mathf.Pow(60, 2)));
+        spacing= 500;
+        float distanceLimit = Mathf.Sqrt((Mathf.Pow(500, 2) + Mathf.Pow(500, 2)));
         foreach (var w in waypoints)
         {
 
@@ -117,7 +117,7 @@ public class WaypointLinker : EditorWindow
                         if (!w.connectedTo.Contains(current))
                         {
                             w.connectedTo.Add(current);
-                        }
+                            }
 
                         if (!current.connectedTo.Contains(w))
                         {

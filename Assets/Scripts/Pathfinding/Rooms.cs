@@ -17,7 +17,8 @@ public class Rooms : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //WaypointLinker linker= new WaypointLinker();
+        //linker.FunctionToRun();
         longerUpdate = gameObject.AddComponent<Timer>() as Timer;
         longerUpdate.timeDefault = 2;
         longerUpdate.timeLeft = 0;

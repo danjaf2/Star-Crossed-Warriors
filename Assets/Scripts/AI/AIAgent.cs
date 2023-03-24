@@ -8,25 +8,34 @@ namespace AI
 {
     public class AIAgent : MonoBehaviour
     {
+        #region Stats
+        [Header("Stats Variables:")]
         public float maxSpeed;
         public float maxDegreesDelta;
         public bool lockY = true;
         public bool debug;
+        #endregion
 
-        public AIAgent AIAgentTarget;
-
-        public GameObject SeekerPrefab;
-
-        public Vehicle vehicle; 
+        public Vehicle vehicle;
 
         public enum EBehaviorType { Kinematic, Steering }
         public EBehaviorType behaviorType;
 
-        private Animator animator;
-
+        #region Pathfinding
+        [Header("Pathfinding Variables:")]
+        [SerializeField] private Pathfinding pathfinding;
+        [SerializeField] private List<Waypoint> path;
+        [SerializeField] public Waypoint mostRecentWaypoint;
+        [SerializeField] public Waypoint goalWaypoint;
+        [SerializeField] private int pathIndex;
+        [SerializeField] private LayerMask skipNodeMask;
+        #endregion
+        #region Tracking
+        [Header("Tracking Variables:")]
         [SerializeField] private Transform trackedTarget;
         [SerializeField] private Vector3 targetPosition;
         [SerializeField] private float thrustThreshold;
+        #endregion
         public Vector3 TargetPosition
         {
             get => trackedTarget != null ? trackedTarget.position : targetPosition;
@@ -65,50 +74,64 @@ namespace AI
 
         private void Awake()
         {
-            animator = GetComponent<Animator>();
-            vehicle = GetComponent<Vehicle>(); 
+            vehicle = GetComponent<Vehicle>();
         }
 
         private void Start()
         {
             vehicle = GetComponent<Vehicle>();
+            pathfinding = GameObject.Find("RoundManager").GetComponent<Pathfinding>();
         }
 
 
         private void Update()
         {
             Vector3 currentPos = this.transform.position;
-            Quaternion currentRot = this.transform.rotation; 
-          
-                if (debug)
-                    Debug.DrawRay(transform.position, Velocity, Color.red);
-
-                Vector3 finalVelocity = new Vector3();
-                Quaternion finalRotation = new Quaternion();
-                if (behaviorType == EBehaviorType.Kinematic)
+            Quaternion currentRot = this.transform.rotation;
+            if (trackedTarget == null && path.Count == 0)
+            {
+                Debug.Log("Finding Path!");
+                path = pathfinding.FindPath(mostRecentWaypoint, goalWaypoint);
+                foreach (var path in path)
                 {
-                        GetKinematicAvg(out finalVelocity, out finalRotation);
-                        Velocity = finalVelocity * maxSpeed;
-                        //TODO calculate sum 
-                        currentPos += Velocity * Time.deltaTime;
-                        currentRot = finalRotation;
-                        Debug.DrawRay(transform.position, finalVelocity * 20, Color.cyan);
+                    print(path.gameObject.name);
+                }
+            }
+            if (path.Count != 0)
+            {
+                FollowPath();
+            }
+
+            if (debug)
+                Debug.DrawRay(transform.position, Velocity, Color.red);
+
+            Vector3 finalVelocity = new Vector3();
+            Quaternion finalRotation = new Quaternion();
+            if (behaviorType == EBehaviorType.Kinematic)
+            {
+                GetKinematicAvg(out finalVelocity, out finalRotation);
+                Velocity = finalVelocity * maxSpeed;
+                //TODO calculate sum 
+                currentPos += Velocity * Time.deltaTime;
+                currentRot = finalRotation;
+                Debug.DrawRay(transform.position, finalVelocity * 20, Color.cyan);
                 //transform.rotation = currentRot;
                 if (Vector3.Dot(finalVelocity.normalized, transform.forward.normalized) > thrustThreshold)
                 {
-                    
+
                     vehicle.ControllerProcessing(finalVelocity, currentRot, true, false);
                 }
                 else
                 {
                     vehicle.ControllerProcessing(finalVelocity, currentRot, false, true);
                 }
-                        
 
 
-            } else
-                {
-                    GetSteeringSum(out finalVelocity, out finalRotation);
+
+            }
+            else
+            {
+                GetSteeringSum(out finalVelocity, out finalRotation);
                 Velocity = finalVelocity * maxSpeed;
                 //TODO calculate sum 
                 currentPos += Velocity * Time.deltaTime;
@@ -132,30 +155,61 @@ namespace AI
 
         }
 
+        public void FollowPath()
+        {
+            targetPosition = path[pathIndex].transform.position;
+            
+                if (Vector3.Distance(this.transform.position, targetPosition) < 300)
+                {
+                    mostRecentWaypoint = path[pathIndex];
+                    pathIndex = pathIndex + 1;
+                    if (pathIndex >= path.Count - 1)
+                    {
+                        path.Clear();
+                        pathIndex = 0;
+
+                    }
+                    return;
+                }
+            for (int i = pathIndex; i < path.Count; i++)
+            {
+                RaycastHit hit;
+                // Does the ray intersect any objects excluding the player layer
+                if (Physics.Raycast(transform.position, path[i].transform.position - transform.position, out hit, Mathf.Infinity, skipNodeMask))
+                {
+                    if (hit.transform.gameObject == path[i].gameObject)
+                    {
+                        pathIndex = i;
+                    }
+                }
+            }
+        }
+
         private void GetKinematicAvg(out Vector3 kinematicAvg, out Quaternion rotation)
         {
             kinematicAvg = Vector3.zero;
             AIMovement[] movements = GetComponents<AIMovement>();
             Vector4 cummulitiveRot = Vector4.zero;
-            Quaternion firstRotation= Quaternion.identity;
+            Quaternion firstRotation = Quaternion.identity;
             Quaternion finalRotation = transform.rotation;
             int count = 0;
             int currentRotCount = 0;
 
             foreach (AIMovement movement in movements)
             {
-                if (movement.canPerform) { 
-                kinematicAvg += movement.GetKinematic(this).linear;
-                ++count;
-                if (movement.GetKinematic(this).angular != Quaternion.identity)
+                if (movement.canPerform)
                 {
-                    if(currentRotCount== 0)
+                    kinematicAvg += movement.GetKinematic(this).linear;
+                    ++count;
+                    if (movement.GetKinematic(this).angular != Quaternion.identity)
                     {
-                        firstRotation = movement.GetKinematic(this).angular;
+                        if (currentRotCount == 0)
+                        {
+                            firstRotation = movement.GetKinematic(this).angular;
+                        }
+                        currentRotCount++;
+                        finalRotation = AverageQuaternion(ref cummulitiveRot, movement.GetKinematic(this).angular, firstRotation, currentRotCount);
                     }
-                    currentRotCount++;
-                    finalRotation = AverageQuaternion(ref cummulitiveRot, movement.GetKinematic(this).angular, firstRotation, currentRotCount);
-                }
                 }
             }
 
