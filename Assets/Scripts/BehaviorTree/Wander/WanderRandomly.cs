@@ -28,6 +28,7 @@ public class WanderRandomly : Node
     public override NodeState Evaluate()
     {
         Transform target = (Transform)GetData("target");
+        Debug.Log(referenceTree.gameObject.name);
         if (target == null)
         {
             if (referenceTree.TryGetComponent<AIAgent>(out AIAgent agent))

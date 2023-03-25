@@ -12,10 +12,12 @@ public class FindTarget : Node
 
     float range = 300f;//must be likely changed later
     LayerMask mask;
-    public FindTarget(float range, LayerMask mask)
+    bool friendly =false;
+    public FindTarget(float range, LayerMask mask, bool friendly)
     {
         this.range = range;
         this.mask = mask;
+        this.friendly = friendly;
     }
     public FindTarget()
     {
@@ -33,10 +35,21 @@ public class FindTarget : Node
            hitColliders = Physics.OverlapSphere(referenceTree.transform.position, range, mask);
             foreach (Collider collider in hitColliders)
             {
-                if (collider.transform.CompareTag("Plane")|| collider.transform.CompareTag("Player"))
+                if (!friendly)
                 {
-                    validTargets.Add(collider);
+                    if (collider.transform.CompareTag("Plane") || collider.transform.CompareTag("Player"))
+                    {
+                        validTargets.Add(collider);
+                    }
                 }
+                else
+                {
+                    if (collider.transform.CompareTag("Enemy"))
+                    {
+                        validTargets.Add(collider);
+                    }
+                }
+                
             }
         }
         else
@@ -56,7 +69,7 @@ public class FindTarget : Node
         {
             root.SetData("target", validTargets[0].transform);//We can develop how to choose our target later
             //referenceTree.GetComponent<AIAgent>().TrackTarget(validTargets[0].transform);
-            Debug.Log(validTargets[0].transform.name);
+            //Debug.Log(validTargets[0].transform.name);
             Debug.Log("Found Target");
         }
 

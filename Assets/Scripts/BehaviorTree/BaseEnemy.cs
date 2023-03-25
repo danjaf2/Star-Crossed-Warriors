@@ -16,6 +16,8 @@ public class BaseEnemy: BehaviorTree.Tree
     public float wanderStartNodeSearchRange;
     public LayerMask wanderMask;
 
+    public bool friendly;
+
     protected override Node SetupTree()
     {
         Node root = new Selector(new List<Node>
@@ -38,7 +40,7 @@ public class BaseEnemy: BehaviorTree.Tree
                     new CheckTargetInFOV(),
                     new FollowTarget(maxAggroRange)
                 }),
-                new FindTarget(findRange, findMask)
+                new FindTarget(findRange, findMask, friendly)
 
             }),
             new Selector(new List<Node>

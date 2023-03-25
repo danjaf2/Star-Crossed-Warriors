@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 3151469609202224343}
   - component: {fileID: 3151469609202224344}
   - component: {fileID: 3151469609202224345}
+  - component: {fileID: 235127231}
+  - component: {fileID: 235127243}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -34,7 +36,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2845480260140199198}
-  m_LocalRotation: {x: -0, y: -0, z: -0.003071777, w: 0.9999953}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0030717016, w: 0.9999953}
   m_LocalPosition: {x: -75, y: 139.1, z: -445.2}
   m_LocalScale: {x: 3.008752, y: 3.008752, z: 3.008752}
   m_ConstrainProportionsScale: 0
@@ -138,15 +140,19 @@ MonoBehaviour:
   maxDegreesDelta: 360
   lockY: 0
   debug: 0
-  AIAgentTarget: {fileID: 0}
-  SeekerPrefab: {fileID: 0}
   vehicle: {fileID: 0}
   behaviorType: 0
   pathfinding: {fileID: 0}
   path: []
+  mostRecentWaypoint: {fileID: 0}
+  goalWaypoint: {fileID: 0}
+  pathIndex: 0
+  skipNodeMask:
+    serializedVersion: 2
+    m_Bits: 136
   trackedTarget: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  thrustThreshold: 0.3
+  thrustThreshold: 0.5
 --- !u!114 &3151469609202224423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,6 +262,11 @@ MonoBehaviour:
   attackMask:
     serializedVersion: 2
     m_Bits: 72
+  wanderStartNodeSearchRange: 600
+  wanderMask:
+    serializedVersion: 2
+    m_Bits: 128
+  friendly: 0
 --- !u!114 &3151469609202224345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,3 +283,72 @@ MonoBehaviour:
   weight: 1
   canPerform: 1
   lightSource: {fileID: 0}
+--- !u!114 &235127231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2845480260140199198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 034bc47afcbf5e141a58d5c20b7808e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &235127243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2845480260140199198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe91dc294731a9428c0941ea7579110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  complexMaskingMode: 1
+  drawingMode: 1
+  outlineLayer: 0
+  outlineTargets:
+  - IsVisible: 1
+    CutoutMask: 8
+    edgeDilateAmount: 5
+    frontEdgeDilateAmount: 5
+    backEdgeDilateAmount: 5
+    renderer: {fileID: 4358870122868591819}
+    SubmeshIndex: 0
+    BoundsMode: 0
+    Bounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+    CutoutThreshold: 0.5
+    CullMode: 2
+    cutoutTextureName: 
+    DilateRenderingMode: 0
+    cutoutTextureIndex: 0
+  renderStyle: 1
+  outlineParameters:
+    enabled: 1
+    color: {r: 1, g: 0, b: 0.029372692, a: 1}
+    dilateShift: 1
+    blurShift: 1
+    fillPass:
+      shader: {fileID: 0}
+      serializedProperties: []
+  backParameters:
+    enabled: 1
+    color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    dilateShift: 1
+    blurShift: 1
+    fillPass:
+      shader: {fileID: 0}
+      serializedProperties: []
+  frontParameters:
+    enabled: 1
+    color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    dilateShift: 1
+    blurShift: 1
+    fillPass:
+      shader: {fileID: 0}
+      serializedProperties: []
