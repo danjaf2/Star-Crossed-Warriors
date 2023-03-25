@@ -30,7 +30,7 @@ public class FindTarget : Node
         List<Collider> validTargets = new List<Collider>();
         Debug.Log("Searching for target");
         Transform target = (Transform)GetData("target");
-        if (target == null)
+        if (target ==null)
         {
            hitColliders = Physics.OverlapSphere(referenceTree.transform.position, range, mask);
             foreach (Collider collider in hitColliders)
@@ -67,13 +67,31 @@ public class FindTarget : Node
         }
         else
         {
-            root.SetData("target", validTargets[0].transform);//We can develop how to choose our target later
-            //referenceTree.GetComponent<AIAgent>().TrackTarget(validTargets[0].transform);
+            Transform t = GetClosestTarget(validTargets).transform;//He currently hyper fixates on one target, we should have a solution to make him switch maybe
+            root.SetData("target", t);
+            referenceTree.GetComponent<AIAgent>().TrackTarget(t);
             //Debug.Log(validTargets[0].transform.name);
             Debug.Log("Found Target");
         }
 
         state = NodeState.SUCCESS;
         return state;
+    }
+
+    Collider GetClosestTarget(List<Collider> targets)
+    {
+        Collider tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = referenceTree.transform.position;
+        foreach (Collider t in targets)
+        {
+            float dist = Vector3.Distance(t.transform.position, currentPos);
+            if (dist < minDist)
+            {
+                tMin = t;
+                minDist = dist;
+            }
+        }
+        return tMin;
     }
 }
