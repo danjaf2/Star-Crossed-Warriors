@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Progress;
 
 public class WaypointLinker : EditorWindow
 {
@@ -84,8 +85,8 @@ public class WaypointLinker : EditorWindow
         float distanceLimit = Mathf.Sqrt((Mathf.Pow(500, 2) + Mathf.Pow(500, 2)));
         foreach (var w in waypoints)
         {
-
-            foreach(var current in waypoints)
+            
+            foreach (var current in waypoints)
             {
                 if (w == null)
                 {
@@ -99,16 +100,26 @@ public class WaypointLinker : EditorWindow
                     continue;
                 }
 
+                Collider[] hitColliders = Physics.OverlapSphere(current.transform.position, 5);
+                bool inside = false;
+                foreach (var hitCollider in hitColliders)
+                {
+                    if (hitCollider.transform.gameObject.layer == 3)
+                    {
+                        inside = true;
+                    }
+                }
+
                 w.position = w.transform.position;
 
                 Ray ray3 = new Ray(current.position, w.position - current.position);
 
                 RaycastHit hit;
-
+                
                 if (Physics.Raycast(ray3, out hit, (w.position - current.position).magnitude))
                 {
 
-                    if (hit.transform.tag != "Wall" && hit.transform.tag != "Ground" &&hit.transform.position == w.position)
+                    if ((hit.transform.gameObject.layer !=3 &&hit.transform.gameObject == w.gameObject) && !inside)
 
                     {
                         if(hit.distance < distanceLimit) { 
@@ -146,10 +157,11 @@ public class WaypointLinker : EditorWindow
                 }
                 else
                 {
-                    Debug.DrawLine(current.position, w.position, Color.blue, 9f);
+                    Debug.DrawLine(current.position, w.position, Color.red, 9f);
+                    
                     if (!w.connectedTo.Contains(current))
                     {
-                        w.connectedTo.Add(current);
+                       w.connectedTo.Add(current);
                     }
 
                     if (!current.connectedTo.Contains(w))

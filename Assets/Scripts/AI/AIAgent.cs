@@ -89,15 +89,11 @@ namespace AI
             Vector3 currentPos = this.transform.position;
             Quaternion currentRot = this.transform.rotation;
 
-            //Pathfinding logic
+            //Pathfinding logic 
             if (trackedTarget == null && path.Count == 0 && goalWaypoint!=null)
             {
                 Debug.Log("Finding Path!");
                 path = pathfinding.FindPath(mostRecentWaypoint, goalWaypoint);
-                foreach (var path in path)
-                {
-                    print(path.gameObject.name);
-                }
             }
             //We have a path to follow
             if (path.Count != 0)

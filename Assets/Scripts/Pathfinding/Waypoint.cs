@@ -99,6 +99,21 @@ public class Waypoint : MonoBehaviour
         }
     }
 
+    void OnDrawGizmosSelected()
+    {
+        // Display the explosion radius when selected
+        foreach (var connection in connectedTo)
+        {
+            if (connection == null || connection.transform == null) continue;
+            if (!connection.isMoveable)
+            {
+                Gizmos.DrawLine(this.transform.position, connection.transform.position);
+            }
+
+        }
+    }
+
+
     /*public void SetCurrentDangerLevel()
     {
         Chaser[] chasers = GameObject.FindObjectsOfType<Chaser>();
