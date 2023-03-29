@@ -41,6 +41,8 @@ public class Waypoint : MonoBehaviour
         {
             connectedTo = new List<Waypoint>();
         }
+
+       
     }
 
     // Update is called once per frame

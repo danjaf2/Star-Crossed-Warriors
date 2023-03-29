@@ -2,13 +2,15 @@ using AI;
 using BehaviorTree;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WanderRandomly : Node
 {
     // Start is called before the first frame update
-    Waypoint[] waypoints;
+    Waypoint[] wp;
+    List<Waypoint> waypoints;
 
     float range = 600f;//must be likely changed later
     LayerMask mask;
@@ -17,12 +19,13 @@ public class WanderRandomly : Node
     {
         this.range = range;
         this.mask = mask;
-        waypoints = GameObject.FindObjectsOfType<Waypoint>();
+        waypoints = GameObject.FindObjectsOfType(typeof(Waypoint)).Cast<Waypoint>().Where(obj => obj.connectedTo.Count>1).ToList();
+
     }
     public WanderRandomly()//Dont use ever
     {
         //Constructor for setting up base values in Example Character Tree
-        waypoints = GameObject.FindObjectsOfType<Waypoint>();
+        waypoints = GameObject.FindObjectsOfType(typeof(Waypoint)).Cast<Waypoint>().Where(obj => obj.connectedTo.Count > 1).ToList();
     }
 
     public override NodeState Evaluate()
@@ -39,7 +42,7 @@ public class WanderRandomly : Node
                     //Select closest hit waypoint
                     agent.mostRecentWaypoint = GetClosestWaypoint(hitColliders).GetComponent<Waypoint>();
 
-                    int randomNumber = Random.Range(0, waypoints.Length - 1);
+                    int randomNumber = Random.Range(0, waypoints.Count - 1);
                     agent.goalWaypoint = waypoints[randomNumber];
                     state = NodeState.SUCCESS;
                     return state;

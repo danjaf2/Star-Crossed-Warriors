@@ -188,6 +188,7 @@ public class Rooms : MonoBehaviour
         {
             
             waypoints.Remove(current);
+
         }
     }
     public void RemoveWaypoint(Waypoint current)
