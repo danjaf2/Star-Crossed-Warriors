@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 static class Utility {
     #region CONSTANTS
@@ -85,6 +87,14 @@ static class Utility {
 
 
     #region LISTS
+
+    public static void ForEachComponent<T>(Collider[] inRange, Action<T> toPerform) where T : Component {
+        foreach (Collider coll in inRange) {
+            if (coll.TryGetComponent<T>(out var component)) {
+                toPerform(component);
+            }
+        }
+    }
 
     /// <summary>
     /// Adds the element to the list if it's not already present.
