@@ -17,6 +17,7 @@ public class AutomaticCMAttachToPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        virtualCamera.transform.rotation = virtualCamera.Follow.rotation; 
         
     }
 }

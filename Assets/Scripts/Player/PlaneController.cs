@@ -43,6 +43,9 @@ public class PlaneController : MonoBehaviour
     [SerializeField] public LayerMask waypointMask;
 
 
+    [SerializeField] public float rotationSpeed = 1; 
+
+
     void Start()
     {
 
@@ -61,29 +64,32 @@ public class PlaneController : MonoBehaviour
         {
             callForHelp();
         }
-    }
 
-    private void FixedUpdate()
-    {
+
         if (brakesOn)
         {
             rb.AddForce(new Vector3(0, -1.0f, 0) * rb.mass * 0.001f);
             return;
         }
-       
+
         float adjustedSensitivity = getAdjustedSensitivity();
 
-        Debug.DrawRay(transform.position, transform.forward * 50,Color.magenta);
+        Debug.DrawRay(transform.position, transform.forward * 50, Color.magenta);
         Debug.DrawRay(transform.position, transform.right * 50, Color.red);
         Debug.DrawRay(transform.position, transform.up * 50, Color.green);
         Debug.Log("Applying forces");
         Debug.Log(transform.up * yaw * adjustedSensitivity);
         rb.AddForce(transform.forward * throttle * adjustedSensitivity);
-        rb.AddTorque(transform.up * yaw * adjustedSensitivity);
-        rb.AddTorque(transform.right * pitch * adjustedSensitivity);
-        rb.AddTorque(-transform.forward * roll * adjustedSensitivity);
-        rb.AddForce(new Vector3(0, -1.0f, 0) * rb.mass * 0.001f);
-        //Debug.Log(transform.position); 
+        rb.AddTorque(transform.up * yaw * adjustedSensitivity * rotationSpeed);
+        rb.AddTorque(transform.right * pitch * adjustedSensitivity * rotationSpeed);
+        rb.AddTorque(-transform.forward * roll * adjustedSensitivity * rotationSpeed);
+        //rb.AddForce(new Vector3(0, -1.0f, 0) * rb.mass * 0.001f);
+        //Debug.Log(transform.position);
+    }
+
+    private void FixedUpdate()
+    {
+       
     }
 
     public float getAdjustedSensitivity()
