@@ -12,6 +12,7 @@ TagManager:
   - Manager
   - Waypoint
   - PlayerModel
+  - Star
   layers:
   - Default
   - TransparentFX
