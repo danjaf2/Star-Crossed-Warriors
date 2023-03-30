@@ -146,6 +146,7 @@ MonoBehaviour:
   path: []
   mostRecentWaypoint: {fileID: 0}
   goalWaypoint: {fileID: 0}
+  currentGoalWaypoint: {fileID: 0}
   pathIndex: 0
   skipNodeMask:
     serializedVersion: 2
@@ -236,7 +237,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 72
-  avoidanceDistanceFactor: 1.5
+  avoidanceDistanceFactor: 1.8
   avoidanceDistanceMinimum: 50
   objectToAvoid: {fileID: 0}
   avoidanceTime: 2

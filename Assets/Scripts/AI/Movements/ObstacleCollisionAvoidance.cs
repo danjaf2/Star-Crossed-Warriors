@@ -56,7 +56,7 @@ public class ObstacleCollisionAvoidance : AIMovement
             prevRotation = output.angular; 
             prevDirection = desiredVelocity;
             StartCoroutine(Avoiding());
-            Debug.Log(hit.transform.name);
+            //Debug.Log(hit.transform.name);
         }
      
         Debug.DrawRay(transform.position, output.linear * 20, Color.magenta);

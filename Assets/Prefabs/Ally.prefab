@@ -146,6 +146,7 @@ MonoBehaviour:
   path: []
   mostRecentWaypoint: {fileID: 0}
   goalWaypoint: {fileID: 0}
+  currentGoalWaypoint: {fileID: 0}
   pathIndex: 0
   skipNodeMask:
     serializedVersion: 2
@@ -311,7 +312,7 @@ MonoBehaviour:
   drawingMode: 1
   outlineLayer: 0
   outlineTargets:
-  - IsVisible: 1
+  - IsVisible: 0
     CutoutMask: 8
     edgeDilateAmount: 5
     frontEdgeDilateAmount: 5

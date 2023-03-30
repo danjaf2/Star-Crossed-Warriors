@@ -36,10 +36,10 @@ public class CheckTargetCanBeAttacked : Node
                     //Can be seen? (might need to add layer mask later)
                     if (Physics.Raycast(referenceTree.transform.position, toTarget, out RaycastHit hit, Mathf.Infinity, mask))
                     {
-                        Debug.Log("Hit");
+                        //Debug.Log("Hit");
                         if (hit.transform.gameObject == target.gameObject)
                         {
-                            Debug.Log("Can fire");
+                            //Debug.Log("Can fire");
                             state = NodeState.SUCCESS;
                             return state;
                         }
@@ -48,7 +48,7 @@ public class CheckTargetCanBeAttacked : Node
             }
             
         }
-        Debug.Log("Cannot fire");
+        //Debug.Log("Cannot fire");
         //Evaluation of state and apply transformation changes
         state = NodeState.FAILURE;
         return state;
