@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class EnergyRecoverZone : ZoneOfEffect<ShipEntity> {
+public class EnergyRecoverZone : ZoneOfEffect<EnergizedEntity> {
 
     [Tooltip("Energy recovery per second")]
     [SerializeField] float _energyRecover;
 
     protected override void FixedUpdate() {
         base.FixedUpdate();
-        foreach (var ship in _InRange) {
-            ship.RecoverEnergy(_energyRecover * Time.fixedDeltaTime);
+        foreach (var entity in _InRange) {
+            entity.RecoverEnergy(_energyRecover * Time.fixedDeltaTime);
         }
     }
 }
