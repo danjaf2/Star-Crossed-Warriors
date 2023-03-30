@@ -24,9 +24,10 @@ namespace AI
         #region Pathfinding
         [Header("Pathfinding Variables:")]
         [SerializeField] private Pathfinding pathfinding;
-        [SerializeField] private List<Waypoint> path;
+        [SerializeField] public List<Waypoint> path;
         [SerializeField] public Waypoint mostRecentWaypoint;
         [SerializeField] public Waypoint goalWaypoint;
+        [SerializeField] private Waypoint currentGoalWaypoint;
         [SerializeField] private int pathIndex;
         [SerializeField] private LayerMask skipNodeMask;
         #endregion
@@ -90,10 +91,12 @@ namespace AI
             Quaternion currentRot = this.transform.rotation;
 
             //Pathfinding logic 
-            if (trackedTarget == null && path.Count == 0 && goalWaypoint!=null)
+            if (trackedTarget == null && (path.Count == 0|| goalWaypoint != currentGoalWaypoint) && (goalWaypoint!=null||goalWaypoint!=currentGoalWaypoint))
             {
                 Debug.Log("Finding Path!");
+                pathIndex = 0;
                 path = pathfinding.FindPath(mostRecentWaypoint, goalWaypoint);
+                currentGoalWaypoint = goalWaypoint;
             }
             //We have a path to follow
             if (path.Count != 0)
@@ -165,6 +168,7 @@ namespace AI
 
         public void FollowPath()
         {
+            
             targetPosition = path[pathIndex].transform.position;
             
                 if (Vector3.Distance(this.transform.position, targetPosition) < 300)

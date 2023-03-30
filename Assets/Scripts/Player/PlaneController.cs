@@ -1,7 +1,9 @@
+using AI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlaneController : MonoBehaviour
 {
@@ -37,6 +39,10 @@ public class PlaneController : MonoBehaviour
     [SerializeField] private bool brakesOn = false;
 
 
+    [SerializeField] public float pingRange = 600f;
+    [SerializeField] public LayerMask waypointMask;
+
+
     void Start()
     {
 
@@ -51,7 +57,10 @@ public class PlaneController : MonoBehaviour
     {
         ControllerProcessing();
        
-
+        if(Input.GetKeyDown(KeyCode.H))
+        {
+            callForHelp();
+        }
     }
 
     private void FixedUpdate()
@@ -81,7 +90,47 @@ public class PlaneController : MonoBehaviour
         return (rb.mass / sensitivityScale) * sensitivity;
     }
 
-  
+    public void callForHelp()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, 1000, waypointMask);
+        if (hitColliders.Length > 0)
+        {
+            //Select closest hit waypoint
+            if (GetClosestWaypoint(hitColliders).TryGetComponent<Waypoint>(out Waypoint point))
+            {
+
+                //Should be changed latter
+                foreach (GameObject ally in TeamManager.alliesList)
+                {
+                    if (ally.TryGetComponent<BaseAlly>(out BaseAlly friend))
+                    {
+                        friend._root.SetData("AllyPingedLocation", point);
+                        Debug.Log("Alerted Ally");
+                    }
+                }
+            }
+        }
+    }
+
+    Collider GetClosestWaypoint(Collider[] points)
+    {
+        Collider tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = this.transform.position;
+        foreach (Collider t in points)
+        {
+            float dist = Vector3.Distance(t.transform.position, this.transform.position);
+            if (dist < minDist)
+            {
+
+                tMin = t;
+                print("SET");
+                minDist = dist;
+            }
+        }
+        print(tMin);
+        return tMin;
+    }
 
     public void ControllerProcessing()
     {

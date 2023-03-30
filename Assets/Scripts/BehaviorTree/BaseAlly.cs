@@ -45,6 +45,7 @@ public class BaseAlly: BehaviorTree.Tree
             }),
             new Selector(new List<Node>
             { 
+                new CheckAllyIsInDanger(),
                 new WanderRandomly(wanderStartNodeSearchRange, wanderMask)
             })
         }); ;
