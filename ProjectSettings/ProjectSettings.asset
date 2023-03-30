@@ -615,7 +615,23 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: URP_OUTLINE;EPO_DOTWEEN
+    EmbeddedLinux: URP_OUTLINE;EPO_DOTWEEN
+    GameCoreScarlett: URP_OUTLINE;EPO_DOTWEEN
+    GameCoreXboxOne: URP_OUTLINE;EPO_DOTWEEN
+    LinuxHeadlessSimulation: URP_OUTLINE;EPO_DOTWEEN
+    Lumin: URP_OUTLINE;EPO_DOTWEEN
+    Nintendo Switch: URP_OUTLINE;EPO_DOTWEEN
+    PS4: URP_OUTLINE;EPO_DOTWEEN
+    PS5: URP_OUTLINE;EPO_DOTWEEN
+    Stadia: URP_OUTLINE;EPO_DOTWEEN
+    Standalone: URP_OUTLINE
+    WebGL: URP_OUTLINE;EPO_DOTWEEN
+    Windows Store Apps: URP_OUTLINE;EPO_DOTWEEN
+    XboxOne: URP_OUTLINE;EPO_DOTWEEN
+    iPhone: URP_OUTLINE;EPO_DOTWEEN
+    tvOS: URP_OUTLINE;EPO_DOTWEEN
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

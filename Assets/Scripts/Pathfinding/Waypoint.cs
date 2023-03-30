@@ -41,6 +41,8 @@ public class Waypoint : MonoBehaviour
         {
             connectedTo = new List<Waypoint>();
         }
+
+       
     }
 
     // Update is called once per frame
@@ -48,7 +50,7 @@ public class Waypoint : MonoBehaviour
     {
         if (!isMoveable)
         {
-            DrawConnections();
+            //DrawConnections();
             //SetCurrentDangerLevel();
         }
         else
@@ -98,6 +100,21 @@ public class Waypoint : MonoBehaviour
            
         }
     }
+
+    void OnDrawGizmosSelected()
+    {
+        // Display the explosion radius when selected
+        foreach (var connection in connectedTo)
+        {
+            if (connection == null || connection.transform == null) continue;
+            if (!connection.isMoveable)
+            {
+                Gizmos.DrawLine(this.transform.position, connection.transform.position);
+            }
+
+        }
+    }
+
 
     /*public void SetCurrentDangerLevel()
     {

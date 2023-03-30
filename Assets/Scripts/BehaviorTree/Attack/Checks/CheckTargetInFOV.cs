@@ -6,7 +6,7 @@ using UnityEngine;
 public class CheckTargetInFOV : Node
 {
     // Start is called before the first frame update
-    float viewAngle = 70f;
+    float viewAngle = 120f;
     public CheckTargetInFOV()
     {
         //Constructor for setting up base values in Example Character Tree
@@ -22,7 +22,7 @@ public class CheckTargetInFOV : Node
             {
                 if (Physics.Raycast(referenceTree.transform.position, toTarget, out RaycastHit hit))
                 {
-                    if(hit.transform.root == target)
+                    if(hit.transform.gameObject == target.gameObject)
                     {
                         state = NodeState.SUCCESS;
                         return state;

@@ -8,10 +8,12 @@ public class CheckTargetCanBeAttacked : Node
     // Start is called before the first frame update
     float attackAngleThreshold = 5f;
     float attackRange = 100f;//must be likely changed later
-    public CheckTargetCanBeAttacked(float attackAngle, float range)
+    LayerMask mask;
+    public CheckTargetCanBeAttacked(float attackAngle, float range, LayerMask m)
     {
         attackAngleThreshold= attackAngle;
         attackRange= range; 
+        mask = m;
     }
     public CheckTargetCanBeAttacked()
     {
@@ -26,16 +28,18 @@ public class CheckTargetCanBeAttacked : Node
         {
             Vector3 toTarget = target.position - referenceTree.transform.position;
             //Is in range?
-            if(toTarget.magnitude < attackRange)
+            if(Vector3.Distance(target.position, referenceTree.transform.position) < attackRange)
             {
                 //Is in shooting reticle?
                 if (Vector3.Angle(referenceTree.transform.forward, toTarget) <= attackAngleThreshold)
                 {
                     //Can be seen? (might need to add layer mask later)
-                    if (Physics.Raycast(referenceTree.transform.position, toTarget, out RaycastHit hit))
+                    if (Physics.Raycast(referenceTree.transform.position, toTarget, out RaycastHit hit, Mathf.Infinity, mask))
                     {
-                        if (hit.transform.root == target)
+                        //Debug.Log("Hit");
+                        if (hit.transform.gameObject == target.gameObject)
                         {
+                            //Debug.Log("Can fire");
                             state = NodeState.SUCCESS;
                             return state;
                         }
@@ -44,6 +48,7 @@ public class CheckTargetCanBeAttacked : Node
             }
             
         }
+        //Debug.Log("Cannot fire");
         //Evaluation of state and apply transformation changes
         state = NodeState.FAILURE;
         return state;
