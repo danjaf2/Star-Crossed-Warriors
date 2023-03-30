@@ -24,6 +24,7 @@ public class BaseAlly: BehaviorTree.Tree
         {
             new Selector(new List<Node>
             {
+                new CheckAllyIsInDanger(),
                 new Sequence(new List<Node>{ 
                 new CheckTargetCanBeAttacked(attackAngleThreshold, attackRange, attackMask),
                 new Sequence(new List<Node>{
@@ -45,7 +46,7 @@ public class BaseAlly: BehaviorTree.Tree
             }),
             new Selector(new List<Node>
             { 
-                new CheckAllyIsInDanger(),
+                
                 new WanderRandomly(wanderStartNodeSearchRange, wanderMask)
             })
         }); ;

@@ -40,12 +40,19 @@ public class WanderRandomly : Node
                 {
                     Collider[] hitColliders = Physics.OverlapSphere(referenceTree.transform.position, range, mask);
                     //Select closest hit waypoint
-                    agent.mostRecentWaypoint = GetClosestWaypoint(hitColliders).GetComponent<Waypoint>();
+                    if (hitColliders.Length > 0)
+                    {
+                        agent.mostRecentWaypoint = GetClosestWaypoint(hitColliders).GetComponent<Waypoint>();
 
-                    int randomNumber = Random.Range(0, waypoints.Count - 1);
-                    agent.goalWaypoint = waypoints[randomNumber];
-                    state = NodeState.SUCCESS;
-                    return state;
+                        int randomNumber = Random.Range(0, waypoints.Count - 1);
+                        agent.goalWaypoint = waypoints[randomNumber];
+                        state = NodeState.SUCCESS;
+                        return state;
+                    }
+                    else
+                    {
+                        agent.goalWaypoint = agent.mostRecentWaypoint;
+                    }
                 }
             }
         }

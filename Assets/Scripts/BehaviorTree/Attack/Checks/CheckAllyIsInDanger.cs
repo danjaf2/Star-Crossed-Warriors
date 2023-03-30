@@ -33,7 +33,7 @@ public class CheckAllyIsInDanger : Node
                     agent.goalWaypoint = target;
                 }
             }
-            if(Vector3.Distance(referenceTree.transform.position, target.transform.position) < 300)
+            if(Vector3.Distance(referenceTree.transform.position, target.transform.position) < referenceTree.GetComponent<BaseAlly>().findRange)
             {
                 root.ClearData("AllyPingedLocation");
             }
