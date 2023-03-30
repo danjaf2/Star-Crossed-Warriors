@@ -56,13 +56,15 @@ public enum ClassType { SCOUT, DEMO, HEAVY, NONE};
 public class PlayerManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject vehicle;
-    public float currentEnergyPercentage = 100;
+    [SerializeField] public GameObject vehicle;
+    [SerializeField] public float currentEnergyPercentage = 100;
 
-    public ClassType type;
-    public PlayerStats playerClass;
+    [SerializeField] public ClassType type;
+    [SerializeField] public PlayerStats playerClass;
 
-    public Dictionary<ClassType, GameObject> specialAbilityPrefabs;
+    [SerializeField] public List<GameObject> specialAbilityPrefabs;
+
+    [SerializeField] public List<GameObject> vehicles;
 
     void Start()
     {
@@ -70,20 +72,23 @@ public class PlayerManager : MonoBehaviour
 
         if(type == ClassType.DEMO)
         {
-            playerClass = new Demoman(specialAbilityPrefabs[type]); 
+            playerClass = new Demoman(specialAbilityPrefabs[(int)type]); 
         }
         else if (type == ClassType.SCOUT)
         {
-            playerClass = new Scout(specialAbilityPrefabs[type]);
+            playerClass = new Scout(specialAbilityPrefabs[(int)type]);
         }
         else if (type == ClassType.HEAVY)
         {
-            playerClass = new Heavy(specialAbilityPrefabs[type]);
+            playerClass = new Heavy(specialAbilityPrefabs[(int)type]);
         }
         else
         {
             playerClass = null; 
         }
+
+        vehicles[(int)type].SetActive(true); //Set correct vehicle to active
+        
     }
 
     public void AdjustVehicleBasedOnType()
