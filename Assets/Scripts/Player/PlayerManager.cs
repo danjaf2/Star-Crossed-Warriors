@@ -3,52 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerStats
-{
-    public float maxHealth;
-    public float maxEnergy;
-    public float speed;
-    public float primaryFireRate;
-    public float lockOnRate;
-    public GameObject specialUtility; 
-}
 
-public class Scout: PlayerStats
+
+public class Scout: PlayerShip
 {
-    public Scout(GameObject abilityPrefab)
+    public Scout()
     {
         maxHealth = 150;
         maxEnergy = 300;
         speed = 2;
         primaryFireRate = 7;
         lockOnRate = 100;
-        specialUtility = abilityPrefab;
+       
 }
 }
 
-public class Demoman : PlayerStats
+public class Demoman : PlayerShip
 {
-    public Demoman(GameObject abilityPrefab)
+    public Demoman()
     {
         maxHealth = 225;
         maxEnergy = 300;
         speed = 1.0f;
         primaryFireRate = 5;
         lockOnRate = 100;
-        specialUtility = abilityPrefab;
+        
     }
 }
 
-public class Heavy : PlayerStats
+public class Heavy : PlayerShip
 {
-    public Heavy(GameObject abilityPrefab)
+    public Heavy()
     {
         maxHealth = 350;
         maxEnergy = 400;
         speed = 0.5f;
         primaryFireRate = 5;
         lockOnRate = 100;
-        specialUtility = abilityPrefab;
+        
     }
 }
 
@@ -60,9 +52,9 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public float currentEnergyPercentage = 100;
 
     [SerializeField] public ClassType type;
-    [SerializeField] public PlayerStats playerClass;
+    [SerializeField] public PlayerShip playerClass;
 
-    [SerializeField] public List<GameObject> specialAbilityPrefabs;
+    //[SerializeField] public List<GameObject> specialAbilityPrefabs;
 
     [SerializeField] public List<GameObject> vehicles;
 
@@ -72,15 +64,15 @@ public class PlayerManager : MonoBehaviour
 
         if(type == ClassType.DEMO)
         {
-            playerClass = new Demoman(specialAbilityPrefabs[(int)type]); 
+            playerClass = new Demoman(); 
         }
         else if (type == ClassType.SCOUT)
         {
-            playerClass = new Scout(specialAbilityPrefabs[(int)type]);
+            playerClass = new Scout();
         }
         else if (type == ClassType.HEAVY)
         {
-            playerClass = new Heavy(specialAbilityPrefabs[(int)type]);
+            playerClass = new Heavy();
         }
         else
         {

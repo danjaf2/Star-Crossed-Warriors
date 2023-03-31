@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class PlayerShip : ShipEntity {
 
+    public float maxHealth;
+    public float maxEnergy;
+    public float speed;
+    public float primaryFireRate;
+    public float lockOnRate;
 
     public void Maneuver(Maneuver maneuver) {
         throw new System.NotImplementedException();
