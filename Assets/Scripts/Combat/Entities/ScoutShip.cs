@@ -9,6 +9,8 @@ public class ScoutShip : PlayerShip {
     //primaryFireRate: (medium)
     //lockOnRate: 100
 
+    [SerializeField] HomingMissile _missilePrefab;
+
     protected override void HandleAbility(bool input) {
         // boost
     }
@@ -19,5 +21,8 @@ public class ScoutShip : PlayerShip {
 
     protected override void HandleMissile(bool input) {
         // strong homing missile
+
+        // on release
+        //HomingMissile.CreateFromPrefab(_missilePrefab, this.transform.position, this.transform.rotation, target);
     }
 }
