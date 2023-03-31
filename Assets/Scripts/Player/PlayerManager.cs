@@ -3,50 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
-
-public class Scout: PlayerShip
-{
-    public Scout()
-    {
-        maxHealth = 150;
-        maxEnergy = 300;
-        speed = 2;
-        primaryFireRate = 7;
-        lockOnRate = 100;
-       
-}
-}
-
-public class Demoman : PlayerShip
-{
-    public Demoman()
-    {
-        maxHealth = 225;
-        maxEnergy = 300;
-        speed = 1.0f;
-        primaryFireRate = 5;
-        lockOnRate = 100;
-        
-    }
-}
-
-public class Heavy : PlayerShip
-{
-    public Heavy()
-    {
-        maxHealth = 350;
-        maxEnergy = 400;
-        speed = 0.5f;
-        primaryFireRate = 5;
-        lockOnRate = 100;
-        
-    }
-}
-
-public enum ClassType { SCOUT, DEMO, HEAVY, NONE}; 
 public class PlayerManager : MonoBehaviour
 {
+    public enum ClassType { SCOUT, DEMO, HEAVY, NONE };
+
     // Start is called before the first frame update
     [SerializeField] public GameObject vehicle;
     [SerializeField] public float currentEnergyPercentage = 100;
@@ -64,15 +24,15 @@ public class PlayerManager : MonoBehaviour
 
         if(type == ClassType.DEMO)
         {
-            playerClass = new Demoman(); 
+            playerClass = new DemoShip(); 
         }
         else if (type == ClassType.SCOUT)
         {
-            playerClass = new Scout();
+            playerClass = new ScoutShip();
         }
         else if (type == ClassType.HEAVY)
         {
-            playerClass = new Heavy();
+            playerClass = new HeavyShip();
         }
         else
         {
@@ -95,6 +55,8 @@ public class PlayerManager : MonoBehaviour
         //transform.rotation = vehicle.transform.rotation;
     }
 
+
+    // Étienne: I don't think these will be necessary. They already exist on playeship class.
     public void Recharge(float amount)
     {
         currentEnergyPercentage += amount; 
