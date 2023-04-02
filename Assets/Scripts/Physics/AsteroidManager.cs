@@ -62,33 +62,26 @@ public class AsteroidManager : MonoBehaviour
     void CollisionResponce(Asteroid obj1, Asteroid obj2)
     {
         float m1, m2, x1, x2;
-        m1 = obj1.body.mass;
-        m2 = obj2.body.mass;
+        m1 = obj1.mass;
+        m2 = obj2.mass;
         Vector3 v1, v2, v1x, v2x, v1y, v2y;
         Vector3 x = (obj1.transform.position - obj2.transform.position);
 
         x= x.normalized;
-        v1 = obj1.body.velocity;
+        v1 = obj1.velocity;
         x1 = Vector3.Dot(x, v1);
         v1x = x * x1;
         v1y = v1 - v1x;
 
         x = x * -1;
-        v2 = obj2.body.velocity;
+        v2 = obj2.velocity;
         x2 = Vector3.Dot(x, v2);
         v2x = x * x2;   
         v2y = v2 - v2x;
 
         Vector3 velocity2 = (v1x * (m1 - m2) / (m1 + m2) + v2x * (2 * m2) / (m1 + m2) + v1y);
         Vector3 velocity1 = (v1x * (2 * m1) / (m1 + m2) + v2x * (m2 - m1) / (m1 + m2) + v2y);
-        obj1.initVelocity = velocity1;
-        obj1.body.velocity = velocity1*0.7f;
-        
-        obj2.initVelocity = velocity2;
-        obj2.body.velocity = -velocity2*0.8f;
-        
-
-        
-
+        obj1.velocity = velocity1;
+        obj2.velocity = -velocity2;
     }
 }

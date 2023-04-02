@@ -6,14 +6,21 @@ using UnityEngine;
 public class Asteroid : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Rigidbody body;
+    
     public Vector3 initVelocity;
+    public Vector3 velocity;
+    public float mass;
+
 
     public float radius = 0.5f;
 
     void Start()
-    {  
-        body = this.GetComponent<Rigidbody>();
-        body.velocity = initVelocity;
+    {
+        velocity = initVelocity;
+    }
+
+    private void Update()
+    {
+        this.transform.position += velocity * Time.deltaTime;
     }
 }
