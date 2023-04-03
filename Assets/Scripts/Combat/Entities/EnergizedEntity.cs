@@ -19,4 +19,9 @@ public class EnergizedEntity : Entity {
             _energy = _maxEnergy;
         }
     }
+
+    public float GetEnergyPercentage()
+    {
+        return (_energy/_maxEnergy)*100;
+    }
 }

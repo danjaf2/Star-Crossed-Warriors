@@ -59,7 +59,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc2a4beefb3800743804b8462699639a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _radius: 0
   _energyRecover: 0.1
+  waypoints: []
+  waypointMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &5730938999332359708
 GameObject:
   m_ObjectHideFlags: 0

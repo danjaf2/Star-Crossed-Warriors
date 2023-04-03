@@ -18,10 +18,20 @@ public class BaseEnemy: BehaviorTree.Tree
 
     public bool friendly;
 
+    public float energyRequirementPercentThreashold=10;
+    public float energyDesiredPercentageThreashold=90;
+
     protected override Node SetupTree()
     {
         Node root = new Selector(new List<Node>
         {
+            new Selector(new List<Node>
+            {
+                new Sequence(new List<Node>{
+                    new CheckLowOnEnergy(energyRequirementPercentThreashold),
+                    new WanderNearStar(energyDesiredPercentageThreashold)
+                })
+            }),
             new Selector(new List<Node>
             {
                 new Sequence(new List<Node>{ 

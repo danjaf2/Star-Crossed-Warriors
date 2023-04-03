@@ -18,12 +18,21 @@ public class BaseAlly: BehaviorTree.Tree
 
     public bool friendly;
 
+    public float energyRequirementPercentThreashold = 10;
+    public float energyDesiredPercentageThreashold = 90;
     protected override Node SetupTree()
     {
         Node root = new Selector(new List<Node>
         {
             new Selector(new List<Node>
             {
+                new Selector(new List<Node>
+            {
+                new Sequence(new List<Node>{
+                    new CheckLowOnEnergy(energyRequirementPercentThreashold),
+                    new WanderNearStar(energyDesiredPercentageThreashold)
+                })
+            }),
                 new CheckAllyIsInDanger(),
                 new Sequence(new List<Node>{ 
                 new CheckTargetCanBeAttacked(attackAngleThreshold, attackRange, attackMask),

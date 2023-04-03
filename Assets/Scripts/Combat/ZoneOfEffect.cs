@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ZoneOfEffect<T> : MonoBehaviour where T : Component {
 
-    [SerializeField] float _radius;
+    [SerializeField] public float _radius;
     protected List<T> _InRange;
 
     protected virtual void Awake() {
