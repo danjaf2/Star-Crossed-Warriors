@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -79,6 +80,27 @@ namespace BehaviorTree
             return false;
         }
 
+        public void ClearAllData()
+        {
+            Dictionary<string, object>.KeyCollection keys = _dataContext.Keys;
+            foreach (string key in keys) {
+            if (_dataContext.ContainsKey(key))
+            {
+                _dataContext.Remove(key);
+                 continue;
+            }
+
+            Node node = parent;
+            while (node != null)
+            {
+                bool cleared = node.ClearData(key);
+                    if (cleared)
+                        continue;
+                node = node.parent;
+            }
+                continue;
+        }
+        }
 
     }
 }

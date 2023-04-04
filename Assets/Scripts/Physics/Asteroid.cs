@@ -16,7 +16,7 @@ public class Asteroid : MonoBehaviour
 
     void Start()
     {
-        velocity = initVelocity;
+        //velocity = initVelocity;
     }
 
     private void Update()

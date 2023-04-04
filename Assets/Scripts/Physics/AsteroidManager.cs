@@ -8,9 +8,33 @@ public class AsteroidManager : MonoBehaviour
     // Start is called before the first frame update
     public List<Asteroid> others;
 
+    public int amountOfSpaceRocks;
+    public Transform bottomCornerWaypoint;
+    public Transform topCornerWaypoint;
+    public int minVelocityPerAxis=-6;
+    public int maxVelocityPerAxis = 6;
+    public GameObject prefab;
     void Start()
     {
         others = GameObject.FindObjectsOfType(typeof(Asteroid)).Cast<Asteroid>().Where(obj => obj.gameObject != this.gameObject).ToList();
+
+        for(int i = 0; i < amountOfSpaceRocks; i++)
+        {
+            float x = Random.Range(bottomCornerWaypoint.position.x, topCornerWaypoint.position.x);
+            float y = Random.Range(bottomCornerWaypoint.position.y, topCornerWaypoint.position.y);
+            float z = Random.Range(bottomCornerWaypoint.position.z, topCornerWaypoint.position.z);
+
+            float xVelocity = Random.Range(minVelocityPerAxis, maxVelocityPerAxis);
+            float yVelocity = Random.Range(minVelocityPerAxis, maxVelocityPerAxis);
+            float zVelocity = Random.Range(minVelocityPerAxis, maxVelocityPerAxis);
+
+            Asteroid newRock = Instantiate(prefab, new Vector3(x,y,z), Quaternion.identity).GetComponent<Asteroid>();
+            newRock.velocity = new Vector3(xVelocity,yVelocity,zVelocity);
+            others.Add(newRock);
+            newRock.transform.parent = transform;
+        }
+
+
     }
 
     private void FixedUpdate()

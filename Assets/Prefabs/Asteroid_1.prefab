@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1491581864617055383}
   - component: {fileID: 1491581864617055376}
   - component: {fileID: 1491581864617055377}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Asteroid_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1491581864617055369}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.43, y: 7.44, z: -3.24}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,10 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbbf4a9e652d82c45bc31bd536290705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initVelocity: {x: 0, y: -1, z: 0}
+  initVelocity: {x: 0, y: 0, z: 5}
   velocity: {x: 0, y: 0, z: 0}
-  mass: 2
-  radius: 1.43774
+  mass: 40
+  radius: 8.484474
 --- !u!135 &1491581864617055376
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -111,10 +111,10 @@ SphereCollider:
   m_GameObject: {fileID: 1491581864617055369}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.4377397
-  m_Center: {x: 0.18410891, y: -0.106006384, z: -0.046618104}
+  m_Radius: 1.4140794
+  m_Center: {x: 0.2077703, y: -0.10600582, z: -0.046617866}
 --- !u!114 &1491581864617055377
 MonoBehaviour:
   m_ObjectHideFlags: 0
