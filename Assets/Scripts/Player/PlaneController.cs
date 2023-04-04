@@ -43,8 +43,10 @@ public class PlaneController : MonoBehaviour
     [SerializeField] public LayerMask waypointMask;
 
 
-    [SerializeField] public float rotationSpeed = 1; 
+    [SerializeField] public float rotationSpeed = 1;
 
+
+    [SerializeField] public GameObject particlePrefab; 
 
     void Start()
     {
@@ -58,6 +60,9 @@ public class PlaneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      
+
+
         ControllerProcessing();
        
         if(Input.GetKeyDown(KeyCode.H))
@@ -174,6 +179,8 @@ public class PlaneController : MonoBehaviour
             {
                 throttle = maxThrottle; 
             }
+
+            particlePrefab.SetActive(true); 
         }
 
         else if (Input.GetButton(brakeKey))
@@ -185,6 +192,7 @@ public class PlaneController : MonoBehaviour
             {
                 throttle = 0;
             }
+            particlePrefab.SetActive(false);
         }
 
         else
@@ -195,6 +203,7 @@ public class PlaneController : MonoBehaviour
             {
                 throttle = 0;
             }
+            particlePrefab.SetActive(false);
         }
     }
 }
