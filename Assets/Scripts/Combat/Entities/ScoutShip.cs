@@ -14,16 +14,17 @@ public class ScoutShip : PlayerShip {
     [SerializeField] float _bulletDamage;
     [SerializeField] float _bulletSpeed;
     [SerializeField] float _bulletDelay;
+    [SerializeField] GameObject spawnPosition;
     float _fireTimer;
 
     [Header("Missile")]
     [SerializeField] HomingMissile _missilePrefab;
 
-    protected override void HandleAbility(bool input) {
+    public override void HandleAbility(bool input) {
         // boost
     }
 
-    protected override void HandleShoot(bool input) {
+    public override void HandleShoot(bool input) {
         if(_fireTimer > 0) { _fireTimer--; }
 
         if (input && _fireTimer <= 0) {
@@ -32,8 +33,8 @@ public class ScoutShip : PlayerShip {
 
             Bullet newBullet = Bullet.Create(
                 _bulletPrefab,
-                bulletAttack, 
-                this.transform.position, 
+                bulletAttack,
+                spawnPosition.transform.position, 
                 this.transform.forward * _bulletSpeed
             );
 
@@ -46,7 +47,7 @@ public class ScoutShip : PlayerShip {
         Debug.Log($"Scout knows that {hit.name} was hit for {atk.Damage} damage.\nApplied a fragile debuff.");
     }
 
-    protected override void HandleMissile(bool input) {
+    public override void HandleMissile(bool input) {
         // strong homing missile
 
         // on release

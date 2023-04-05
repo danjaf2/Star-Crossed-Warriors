@@ -23,13 +23,19 @@ public class Bullet : MonoBehaviour {
         // Check if there is anything in the bullet's path (if it is hitting anything).
         if(Physics.Raycast(this.transform.position, _velocity, out var hitInfo, _fixedUpateTravelDistance)) {
             // Check if what's hit is an entity.
-            if(hitInfo.collider.TryGetComponent<Entity>(out var entity)) {
+            if(hitInfo.collider.TryGetComponent<Entity>(out var entity))
+            {
                 // Deliver the attack to the hit entity.
                 entity.Hit(_toDeliver);
+                Destroy(this.gameObject);
             }
 
             // Destroy the bullet since it hit something.
-            Destroy(this.gameObject);
+            if (hitInfo.collider.gameObject.layer == 3)
+            {
+                 Destroy(this.gameObject);
+            }
+           
         }
         // Otherwise, move forwards.
         else { this.transform.position += _velocity; }

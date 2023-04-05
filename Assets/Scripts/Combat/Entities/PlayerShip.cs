@@ -16,9 +16,9 @@ public abstract class PlayerShip : ShipEntity {
     void SetAbilityInput(bool value) { _abilityInput = value; }
 
 
-    protected abstract void HandleShoot(bool input);
-    protected abstract void HandleMissile(bool input);
-    protected abstract void HandleAbility(bool input);
+    public abstract void HandleShoot(bool input);
+    public abstract void HandleMissile(bool input);
+   public abstract void HandleAbility(bool input);
 
 
 

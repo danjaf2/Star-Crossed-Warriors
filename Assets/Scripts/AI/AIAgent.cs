@@ -33,7 +33,7 @@ namespace AI
         #endregion
         #region Tracking
         [Header("Tracking Variables:")]
-        [SerializeField] private Transform trackedTarget;
+        [SerializeField] public Transform trackedTarget;
         [SerializeField] private Vector3 targetPosition;
         [SerializeField] private float thrustThreshold;
         #endregion

@@ -8,12 +8,16 @@ public class CheckTargetCanBeAttacked : Node
     // Start is called before the first frame update
     float attackAngleThreshold = 5f;
     float attackRange = 100f;//must be likely changed later
+    float projectileSpeed = 15000;
     LayerMask mask;
-    public CheckTargetCanBeAttacked(float attackAngle, float range, LayerMask m)
+    bool predictiveAiming = true;
+    public CheckTargetCanBeAttacked(float attackAngle, float range, LayerMask m, float projectilespeed, bool predictMovement)
     {
         attackAngleThreshold= attackAngle;
         attackRange= range; 
         mask = m;
+        projectileSpeed = projectilespeed;
+        predictiveAiming = predictMovement;
     }
     public CheckTargetCanBeAttacked()
     {
@@ -30,8 +34,17 @@ public class CheckTargetCanBeAttacked : Node
             //Is in range?
             if(Vector3.Distance(target.position, referenceTree.transform.position) < attackRange)
             {
+                Vector3 ev = Vector3.zero;
+                if (predictiveAiming)
+                {
+                    ev = GetPredictedPoint(target.position, target.GetComponent<Rigidbody>().velocity, referenceTree.transform.position, projectileSpeed) - referenceTree.transform.position;
+                }
+                else
+                {
+                    ev = toTarget;
+                }
                 //Is in shooting reticle?
-                if (Vector3.Angle(referenceTree.transform.forward, toTarget) <= attackAngleThreshold)
+                if (Vector3.Angle(referenceTree.transform.forward, ev) <= attackAngleThreshold)
                 {
                     //Can be seen? (might need to add layer mask later)
                     if (Physics.Raycast(referenceTree.transform.position, toTarget, out RaycastHit hit, Mathf.Infinity, mask))
@@ -52,5 +65,17 @@ public class CheckTargetCanBeAttacked : Node
         //Evaluation of state and apply transformation changes
         state = NodeState.FAILURE;
         return state;
+    }
+
+    Vector3 GetPredictedPoint(Vector3 targetPosition, Vector3 targetSpeed, Vector3 attackerPosition, float bulletSpeed)
+    {//Quadratic formula
+        Vector3 q = targetPosition - attackerPosition;
+        q.y = 0;
+        targetSpeed.y = 0;
+        float a = Vector3.Dot(targetSpeed, targetSpeed) - (bulletSpeed * bulletSpeed);
+        float b = 2 * Vector3.Dot(targetSpeed, q);
+        float c = Vector3.Dot(q, q);
+        Vector3 ret = targetPosition + targetSpeed;
+        return ret;
     }
 }

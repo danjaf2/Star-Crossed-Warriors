@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -481,6 +481,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20df6fcc83265cd4f9f913d190bc958a, type: 3}
+--- !u!1 &761246368 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6752861143345834605, guid: 245376170326b3448ac2b913d8a93834, type: 3}
+  m_PrefabInstance: {fileID: 6752861143362546100}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &763974649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,5 +1193,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScoutShip?
       objectReference: {fileID: 0}
+    - target: {fileID: 6752861143345834607, guid: 245376170326b3448ac2b913d8a93834, type: 3}
+      propertyPath: _bulletDelay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752861143345834607, guid: 245376170326b3448ac2b913d8a93834, type: 3}
+      propertyPath: spawnPosition
+      value: 
+      objectReference: {fileID: 761246368}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 245376170326b3448ac2b913d8a93834, type: 3}

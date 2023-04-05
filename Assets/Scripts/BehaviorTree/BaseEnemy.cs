@@ -12,6 +12,8 @@ public class BaseEnemy: BehaviorTree.Tree
     public float attackRange = 500;
     public float attackAngleThreshold = 10;
     public LayerMask attackMask;
+    public float projectileSpeed = 15000;
+    public bool predict = true;
 
     public float wanderStartNodeSearchRange;
     public LayerMask wanderMask;
@@ -20,6 +22,8 @@ public class BaseEnemy: BehaviorTree.Tree
 
     public float energyRequirementPercentThreashold=10;
     public float energyDesiredPercentageThreashold=90;
+
+    
 
     protected override Node SetupTree()
     {
@@ -35,7 +39,7 @@ public class BaseEnemy: BehaviorTree.Tree
             new Selector(new List<Node>
             {
                 new Sequence(new List<Node>{ 
-                new CheckTargetCanBeAttacked(attackAngleThreshold, attackRange, attackMask),
+                new CheckTargetCanBeAttacked(attackAngleThreshold, attackRange, attackMask, projectileSpeed, predict),
                 new Sequence(new List<Node>{
                     new FirePrimaryAttack(),
                      new Sequence(new List<Node>{

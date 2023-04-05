@@ -8,15 +8,15 @@ public class HeavyShip : PlayerShip {
     //primaryFireRate: (continuous)
     //lockOnRate: 100;
 
-    protected override void HandleShoot(bool input) {
+    public override void HandleShoot(bool input) {
         // LASER BEAM!!!
     }
 
-    protected override void HandleMissile(bool input) {
+    public override void HandleMissile(bool input) {
         // cluster missile / acid cloud missle
     }
 
-    protected override void HandleAbility(bool input) {
+    public override void HandleAbility(bool input) {
         //  replusion field / reflective shields
     }
 }

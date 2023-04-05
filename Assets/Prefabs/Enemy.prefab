@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &531561260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 531561261}
+  m_Layer: 6
+  m_Name: GunSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &531561261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531561260}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 5.76}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3186012602328856484}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2845480260140199198
 GameObject:
   m_ObjectHideFlags: 0
@@ -22,6 +53,7 @@ GameObject:
   - component: {fileID: 3151469609202224345}
   - component: {fileID: 235127231}
   - component: {fileID: 235127243}
+  - component: {fileID: 1683428806}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -38,9 +70,10 @@ Transform:
   m_GameObject: {fileID: 2845480260140199198}
   m_LocalRotation: {x: 0, y: 0, z: -0.0030717016, w: 0.9999953}
   m_LocalPosition: {x: -75, y: 139.1, z: -445.2}
-  m_LocalScale: {x: 3.008752, y: 3.008752, z: 3.008752}
+  m_LocalScale: {x: 3.0087526, y: 3.0087526, z: 3.008752}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 531561261}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.352}
@@ -204,6 +237,8 @@ MonoBehaviour:
   debug: 1
   weight: 1
   canPerform: 1
+  usePredictiveSeek: 1
+  projectileSpeed: 1000
 --- !u!114 &3151469609202224342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +254,8 @@ MonoBehaviour:
   debug: 1
   weight: 1
   canPerform: 1
+  usePredictiveAim: 1
+  projectileSpeed: 1000
 --- !u!114 &3151469609202224343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,16 +295,19 @@ MonoBehaviour:
     m_Bits: 64
   findRange: 500
   maxAggroRange: 800
-  attackRange: 400
+  attackRange: 800
   attackAngleThreshold: 10
   attackMask:
     serializedVersion: 2
     m_Bits: 72
+  projectileSpeed: 1000
   wanderStartNodeSearchRange: 600
   wanderMask:
     serializedVersion: 2
     m_Bits: 128
   friendly: 0
+  energyRequirementPercentThreashold: 10
+  energyDesiredPercentageThreashold: 90
 --- !u!114 &3151469609202224345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,3 +393,26 @@ MonoBehaviour:
     fillPass:
       shader: {fileID: 0}
       serializedProperties: []
+--- !u!114 &1683428806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2845480260140199198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 543ba8ef4e0660b44941b56706f35b67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 150
+  _maxEnergy: 300
+  _flightSpeed: 0
+  _fireRate: 0
+  _lockOnDelay: 0
+  _bulletPrefab: {fileID: 3900607670785296070, guid: 0c343a920678f694b89abcba5e870ba2, type: 3}
+  _bulletDamage: 1
+  _bulletSpeed: 1000
+  _bulletDelay: 40
+  spawnPosition: {fileID: 2845480260140199198}
+  _missilePrefab: {fileID: 7596523783035753511, guid: 20df6fcc83265cd4f9f913d190bc958a, type: 3}

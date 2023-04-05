@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using UnityEngine;
 
 public class KeyboardController : ShipController {
@@ -12,12 +12,12 @@ public class KeyboardController : ShipController {
     }
 
     protected override bool ShootInput() {
-        return Input.GetKey(KeyCode.Mouse0);
+        return Input.GetKey(KeyCode.Space);
     }
     protected override bool MissileInput() {
-        return Input.GetKey(KeyCode.Mouse1);
+        return Input.GetKey(KeyCode.LeftShift);
     }
     protected override bool AbilityInput() {
-        return Input.GetKey(KeyCode.Space);
+        return Input.GetKey(KeyCode.Tab);
     }
 }
