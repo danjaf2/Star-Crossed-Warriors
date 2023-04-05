@@ -16,10 +16,10 @@ public abstract class ShipController : MonoBehaviour {
     protected abstract bool AbilityInput();
 
     private void Update() {
-        GetManeuver.Invoke(ManeuverInputs());
-        GetShootInput.Invoke(ShootInput());
-        GetMissileInput.Invoke(MissileInput());
-        GetAbilityInput.Invoke(AbilityInput());
+        GetManeuver?.Invoke(ManeuverInputs());
+        GetShootInput?.Invoke(ShootInput());
+        GetMissileInput?.Invoke(MissileInput());
+        GetAbilityInput?.Invoke(AbilityInput());
     }
 }
 

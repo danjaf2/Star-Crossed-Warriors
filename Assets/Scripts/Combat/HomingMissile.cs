@@ -10,8 +10,7 @@ public class HomingMissile : Entity {
 
     [Header("Gameplay")]
     [SerializeField] float _blastRadius;
-    [SerializeField] float _damage;
-    [SerializeField] int _timer;
+    [SerializeField] int _lifetime;
 
     Entity _target;
     Entity _sender;
@@ -19,6 +18,8 @@ public class HomingMissile : Entity {
 
     //Vector3 _velocity;
     Rigidbody _rbody;
+
+    Attack _toDeliver;
 
     const float AIR_FRICTION = 0.95f;
 
@@ -40,7 +41,7 @@ public class HomingMissile : Entity {
     protected override void FixedUpdate() {
         base.FixedUpdate();
 
-        if (_timer-- <= 0) { OnDeath(); }
+        if (_lifetime-- <= 0) { OnDeath(); }
         if (_target == null) { return; }
 
         Vector3 delta = (_target.transform.position - this.transform.position);
@@ -67,7 +68,9 @@ public class HomingMissile : Entity {
             Physics.OverlapSphere(this.transform.position, _blastRadius),
             (entity) => {
                 if(entity == this) { return; }
-                entity.Hit(new Attack(_damage, _sender));
+                // Here, since there may be multiple targets hit, we want to create an attack copy and send one to each.
+                // Otherwise, an effect that modifies the attack's values will affect all entities hit.
+                entity.Hit(new Attack(_toDeliver));
             }
         );
     }

@@ -7,11 +7,13 @@ public class Effect {
 
     public Effect(Entity affecting) {
         _Target = affecting;
+        _Target.OnTick += Tick;
         _remainingDuration = Duration;
     }
 
     public virtual int Priority => 0;
     public virtual int Duration => 500;
+    public virtual bool Stacks => true;
     public virtual string Name => "Default Effect";
 
     protected Entity _Target;
@@ -24,12 +26,13 @@ public class Effect {
         }
     }
 
+    public void ResetDuration() { _remainingDuration = Duration; }
     public static int PrioritySort(Effect x, Effect y) => x.Priority - y.Priority;
 }
 
 public class FragileEffect : Effect {
     public override int Duration => 750;
-
+    public override bool Stacks => false;
 
     float _dmgMultiplier;
     public FragileEffect(Entity affecting, float dmgMultiplier = 2) : base(affecting) {
@@ -37,7 +40,7 @@ public class FragileEffect : Effect {
     }
 
     public override void ModifyHit(Attack toModify) {
-        toModify.Damage = (int)(toModify.Damage * _dmgMultiplier); 
+        toModify.Damage = (int)(toModify.Damage * _dmgMultiplier);
     }
 
     // A static function structured like this can be directly subscribed to an Attack's 'OnHit' event.

@@ -12,6 +12,7 @@ public class Entity : MonoBehaviour {
     float _health;
 
     public event Action<Attack> OnHit;
+    public event Action OnTick;
 
 
     public virtual void Hit(Attack atk) {
@@ -47,7 +48,7 @@ public class Entity : MonoBehaviour {
     }
 
     protected virtual void FixedUpdate() {
-        EffectsTick();
+        OnTick?.Invoke();
     }
     #endregion
 
@@ -56,8 +57,23 @@ public class Entity : MonoBehaviour {
     List<Effect> _activeEffects;
 
     public void AddEffect(Effect toApply) {
-        _activeEffects.Add(toApply);
+        // Ideally, effects that stack would instead have a counter to
+        // know how many there are instead of having actual duplicates.
+        if(toApply.Stacks && HasEffect(toApply, out var present)) { present.ResetDuration(); }
+        else { _activeEffects.Add(toApply); }
+
         _activeEffects.Sort(Effect.PrioritySort);
+    }
+
+    bool HasEffect(Effect check, out Effect present) {
+        foreach (var effect in _activeEffects) {
+            if(check.GetType() == effect.GetType()) {
+                present = effect;
+                return true;
+            }
+        }
+        present = null;
+        return false;
     }
 
     public void RemoveEffect(Effect toRemove) {
@@ -69,12 +85,6 @@ public class Entity : MonoBehaviour {
     protected void ApplyEffectsOnHit(Attack toModify) {
         foreach (var item in _activeEffects) {
             item.ModifyHit(toModify);
-        }
-    }
-
-    protected void EffectsTick() {
-        foreach (var effect in _activeEffects) {
-            effect.Tick();
         }
     }
     #endregion
