@@ -277,7 +277,7 @@ MonoBehaviour:
   avoidanceDistanceFactor: 1.5
   avoidanceDistanceMinimum: 50
   objectToAvoid: {fileID: 0}
-  avoidanceTime: 2
+  avoidanceTime: 3.5
 --- !u!114 &3151469609202224345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,6 +317,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 72
   projectileSpeed: 1000
+  predict: 1
   wanderStartNodeSearchRange: 600
   wanderMask:
     serializedVersion: 2

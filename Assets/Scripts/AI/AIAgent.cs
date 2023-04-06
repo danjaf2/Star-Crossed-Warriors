@@ -125,7 +125,7 @@ namespace AI
                 //TODO calculate sum 
                 currentPos += Velocity * Time.deltaTime;
                 currentRot = finalRotation;
-                Debug.DrawRay(transform.position, finalVelocity * 20, Color.cyan);
+                Debug.DrawRay(transform.position, finalVelocity * 100, Color.cyan);
                 //transform.rotation = currentRot;
                 if (Vector3.Dot(finalVelocity.normalized, transform.forward.normalized) > thrustThreshold)
                 {
