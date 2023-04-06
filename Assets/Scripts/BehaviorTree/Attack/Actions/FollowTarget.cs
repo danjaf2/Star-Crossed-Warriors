@@ -22,17 +22,19 @@ public class FollowTarget : Node
     public override NodeState Evaluate()
     {
         Transform target = (Transform)GetData("target");
-        if (target != null)
+        
+        if (target != null && GetData("Recharge")==null)
         {
             
             //TODO:INSERT CODE TO MAKE THE TREEREFERENCE TO COMMAND AGENT TO GET CLOSER TO THE TARGET
-            if(Vector3.Distance(target.position, referenceTree.transform.position)<goalRange) {
+            if(Vector3.Distance(target.position, referenceTree.transform.position)<goalRange && GetData("Recharge") == null) {
+               
                 referenceTree.GetComponent<AIAgent>().TrackTarget(target);
             }
             else
             {
                 root.ClearData("target");
-                referenceTree.GetComponent<AIAgent>().TrackTarget(null);
+                referenceTree.GetComponent<AIAgent>().UnTrackTarget();
             }
             
 

@@ -28,14 +28,12 @@ public class BaseAlly: BehaviorTree.Tree
         {
             new Selector(new List<Node>
             {
-                new Selector(new List<Node>
-            {
+                
+                new CheckAllyIsInDanger(),
                 new Sequence(new List<Node>{
                     new CheckLowOnEnergy(energyRequirementPercentThreashold),
                     new WanderNearStar(energyDesiredPercentageThreashold)
-                })
-            }),
-                new CheckAllyIsInDanger(),
+                }),
                 new Sequence(new List<Node>{ 
                 new CheckTargetCanBeAttacked(attackAngleThreshold, attackRange, attackMask, projectileSpeed, predict),
                 new Sequence(new List<Node>{

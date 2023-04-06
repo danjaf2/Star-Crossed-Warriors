@@ -14,6 +14,7 @@ public class ScoutShip : PlayerShip {
     [SerializeField] float _bulletDamage;
     [SerializeField] float _bulletSpeed;
     [SerializeField] float _bulletDelay;
+    [SerializeField] float _bulletCost;
     [SerializeField] GameObject spawnPosition;
     float _fireTimer;
 
@@ -28,6 +29,7 @@ public class ScoutShip : PlayerShip {
         if(_fireTimer > 0) { _fireTimer--; }
 
         if (input && _fireTimer <= 0) {
+            LoseEnergy(_bulletCost);
             Attack bulletAttack = new Attack(_bulletDamage, this);
             bulletAttack.OnHit += ReactToBulletHit;
 

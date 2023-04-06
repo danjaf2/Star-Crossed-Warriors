@@ -27,14 +27,21 @@ public class WanderNearStar : Node
 
     public override NodeState Evaluate()
     {
-        EnergyRecoverZone target = (EnergyRecoverZone)GetData("Recharge");
+        if(lights.Count == 0)
+        {
+            lights = GameObject.FindObjectsOfType(typeof(EnergyRecoverZone)).Cast<EnergyRecoverZone>().Where(obj => obj.waypoints.Count > 0).ToList();
+        }
+        EnergyRecoverZone target = (EnergyRecoverZone)root.GetData("Recharge");
         //Debug.Log(referenceTree.gameObject.name);
         if (target == null)
         {
             if (referenceTree.TryGetComponent<AIAgent>(out AIAgent agent))
             {
-                agent.goalWaypoint = null;
+                //agent.goalWaypoint = null;
+                root.ClearData("target");
                 agent.UnTrackTarget();
+                Debug.Log("Clearn");
+                
             }
             target = GetClosestStar();
             root.SetData("Recharge", target);
@@ -47,12 +54,13 @@ public class WanderNearStar : Node
                 {
                     if (ety.GetEnergyPercentage() >= GoalThreshold)
                     {
+                        Debug.Log("Bye");
                         root.ClearData("Recharge");
                         state = NodeState.FAILURE;
                         return state;
                     }
                 }
-
+                
                 if (agent.goalWaypoint == null)
                 {
                 int randomNumber = Random.Range(0, target.waypoints.Count - 1);

@@ -32,7 +32,7 @@ public class WanderRandomly : Node
     {
         Transform target = (Transform)GetData("target");
         //Debug.Log(referenceTree.gameObject.name);
-        if (target == null)
+        if (target == null&&GetData("Recharge")==null)
         {
             if (referenceTree.TryGetComponent<AIAgent>(out AIAgent agent))
             {

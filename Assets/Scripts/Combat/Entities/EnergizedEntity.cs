@@ -20,6 +20,15 @@ public class EnergizedEntity : Entity {
         }
     }
 
+    public void LoseEnergy(float amount)
+    {
+        _energy= _energy-amount;
+        if (_energy <= 0)
+        {
+            _energy = 0;
+        }
+    }
+
     public float GetEnergyPercentage()
     {
         return (_energy/_maxEnergy)*100;

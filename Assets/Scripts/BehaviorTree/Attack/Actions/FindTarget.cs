@@ -28,6 +28,12 @@ public class FindTarget : Node
     {
         Collider[] hitColliders;
         List<Collider> validTargets = new List<Collider>();
+        if (root.GetData("Recharge") != null)
+        {
+            state = NodeState.FAILURE;
+            return state;
+        }
+
         //Debug.Log("Searching for target");
         Transform target = (Transform)GetData("target");
         if (target ==null)
@@ -58,7 +64,7 @@ public class FindTarget : Node
            // Debug.Log("Already have target");
             return state;
         }
-        if (validTargets.Count == 0)
+        if (validTargets.Count == 0 || root.GetData("Recharge") != null)
         {
             state = NodeState.FAILURE;
            // Debug.Log("Nothing in area");
@@ -71,7 +77,7 @@ public class FindTarget : Node
             root.SetData("target", t);
             referenceTree.GetComponent<AIAgent>().TrackTarget(t);
             //Debug.Log(validTargets[0].transform.name);
-            //Debug.Log("Found Target");
+            Debug.Log("Found Target");
         }
 
         state = NodeState.SUCCESS;

@@ -27,7 +27,7 @@ public class EnergyRecoverZone : ZoneOfEffect<EnergizedEntity> {
     protected override void FixedUpdate() {
         base.FixedUpdate();
         foreach (var entity in _InRange) {
-            entity.RecoverEnergy(_energyRecover * Time.fixedDeltaTime);
+           entity.RecoverEnergy(_energyRecover * Time.fixedDeltaTime);
         }
     }
 }

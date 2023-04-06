@@ -21,10 +21,16 @@ public class CheckLowOnEnergy : Node
 
     public override NodeState Evaluate()
     {
-        EnergyRecoverZone recharge = (EnergyRecoverZone)GetData("Recharge");
+        
+        EnergyRecoverZone recharge = (EnergyRecoverZone)root.GetData("Recharge");
 
         if(recharge != null)
         {
+            if (referenceTree.TryGetComponent<EnergizedEntity>(out EnergizedEntity ety))
+            {
+                Debug.Log(ety.GetEnergyPercentage());
+            }
+
             state = NodeState.SUCCESS;
             return state;
         }
@@ -34,6 +40,7 @@ public class CheckLowOnEnergy : Node
             {
                 if (ety.GetEnergyPercentage() < threshold)
                 {
+                    Debug.Log(ety.GetEnergyPercentage());
                     state = NodeState.SUCCESS;
                     return state;
                 }

@@ -29,15 +29,13 @@ public class BaseEnemy: BehaviorTree.Tree
     {
         Node root = new Selector(new List<Node>
         {
+            
             new Selector(new List<Node>
             {
                 new Sequence(new List<Node>{
                     new CheckLowOnEnergy(energyRequirementPercentThreashold),
                     new WanderNearStar(energyDesiredPercentageThreashold)
-                })
-            }),
-            new Selector(new List<Node>
-            {
+                }),
                 new Sequence(new List<Node>{ 
                 new CheckTargetCanBeAttacked(attackAngleThreshold, attackRange, attackMask, projectileSpeed, predict),
                 new Sequence(new List<Node>{
