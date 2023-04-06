@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class Mothership : EnemyShip
 {
+    [Header("Bullet")]
+    [SerializeField] Bullet _bulletPrefab;
+    [SerializeField] float _bulletDamage;
+    [SerializeField] float _bulletSpeed;
+    [SerializeField] float _bulletDelay;
+    [SerializeField] GameObject spawnPosition;
+    float _fireTimer;
+
+    [Header("Missile")]
+    [SerializeField] HomingMissile _missilePrefab;
     public override void HandleAbility(bool input)
     {
         //Shields
