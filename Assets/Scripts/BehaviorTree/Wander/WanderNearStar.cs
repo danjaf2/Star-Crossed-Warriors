@@ -13,9 +13,13 @@ public class WanderNearStar : Node
     List<EnergyRecoverZone> lights;
 
     float GoalThreshold = 90f;
+    LayerMask waypointSearch;
+    public float waypointRangeSearch=600;
 
-    public WanderNearStar(float threshold)
+    public WanderNearStar(float threshold, float searchRange,LayerMask searchWaypoint)
     {
+        this.waypointSearch = searchWaypoint;
+        this.waypointRangeSearch = searchRange;
         this.GoalThreshold = threshold;
         lights = GameObject.FindObjectsOfType(typeof(EnergyRecoverZone)).Cast<EnergyRecoverZone>().Where(obj => obj.waypoints.Count > 0).ToList();
     }
@@ -63,10 +67,20 @@ public class WanderNearStar : Node
                 
                 if (agent.goalWaypoint == null)
                 {
-                int randomNumber = Random.Range(0, target.waypoints.Count - 1);
-                agent.goalWaypoint = target.waypoints[randomNumber];
-                state = NodeState.SUCCESS;
-                return state;
+                    Collider[] hitColliders = Physics.OverlapSphere(referenceTree.transform.position, waypointRangeSearch, waypointSearch);
+                    //Select closest hit waypoint
+                    if (hitColliders.Length > 0)
+                    {
+                        agent.mostRecentWaypoint = GetClosestWaypoint(hitColliders).GetComponent<Waypoint>();
+                        int randomNumber = Random.Range(0, target.waypoints.Count - 1);
+                        agent.goalWaypoint = target.waypoints[randomNumber];
+                        state = NodeState.SUCCESS;
+                        return state;
+                    }
+                    else
+                    {
+                        agent.goalWaypoint = agent.mostRecentWaypoint;
+                    }
                 }
             }
         }
@@ -80,6 +94,23 @@ public class WanderNearStar : Node
         float minDist = Mathf.Infinity;
         Vector3 currentPos = referenceTree.transform.position;
         foreach (EnergyRecoverZone t in lights)
+        {
+            float dist = Vector3.Distance(t.transform.position, currentPos);
+            if (dist < minDist)
+            {
+                tMin = t;
+                minDist = dist;
+            }
+        }
+        return tMin;
+    }
+
+    Collider GetClosestWaypoint(Collider[] points)
+    {
+        Collider tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = referenceTree.transform.position;
+        foreach (Collider t in points)
         {
             float dist = Vector3.Distance(t.transform.position, currentPos);
             if (dist < minDist)

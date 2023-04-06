@@ -32,7 +32,7 @@ public class BaseAlly: BehaviorTree.Tree
                 new CheckAllyIsInDanger(),
                 new Sequence(new List<Node>{
                     new CheckLowOnEnergy(energyRequirementPercentThreashold),
-                    new WanderNearStar(energyDesiredPercentageThreashold)
+                    new WanderNearStar(energyDesiredPercentageThreashold, wanderStartNodeSearchRange, wanderMask)
                 }),
                 new Sequence(new List<Node>{ 
                 new CheckTargetCanBeAttacked(attackAngleThreshold, attackRange, attackMask, projectileSpeed, predict),

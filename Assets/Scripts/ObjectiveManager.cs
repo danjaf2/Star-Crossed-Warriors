@@ -33,10 +33,21 @@ public class ObjectiveManager : Singleton<ObjectiveManager> {
         }
         return textList;
     }
+
+    public List<GameObject> GetObjectiveList()
+    {
+        List<GameObject> list = new List<GameObject>();
+        foreach (var objective in _objectiveList) {
+            list.Add(objective.Reference);
+        }
+        return list;
+    }
 }
 
 public interface IObjective {
     public string ObjectiveDescription { get; }
+    public GameObject Reference { get; }
+
     public event Action<IObjective> OnObjectiveComplete;
 
     protected void RegisterAsObjective() { ObjectiveManager.Instance.RegisterObjective(this); }

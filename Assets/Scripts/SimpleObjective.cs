@@ -8,6 +8,7 @@ public class SimpleObjective : MonoBehaviour, IObjective {
 
     public string ObjectiveText = "SAMPLE OBJECTIVE";
     public string ObjectiveDescription => ObjectiveText;
+    public GameObject Reference => this.gameObject;
 
     public event Action<IObjective> OnObjectiveComplete;
 
