@@ -55,7 +55,7 @@ public class BaseAlly: BehaviorTree.Tree
             }),
             new Selector(new List<Node>
             { 
-                
+                new WanderByStar(wanderStartNodeSearchRange, wanderMask),
                 new WanderRandomly(wanderStartNodeSearchRange, wanderMask)
             })
         }); ;
