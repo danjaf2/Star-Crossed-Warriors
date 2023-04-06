@@ -20,6 +20,14 @@ public class ScoutShip : PlayerShip {
 
     [Header("Missile")]
     [SerializeField] HomingMissile _missilePrefab;
+    [SerializeField] float _missileDamage;
+
+    [SerializeField] KeepTrackWithinArea<Entity> _missileRange;
+    [SerializeField] int _missileLockOnDelay;
+
+    bool _missileInputHeld;
+    int _lockOnTimer;
+    Entity _missileTarget;
 
     public override void HandleAbility(bool input) {
         // boost
@@ -33,7 +41,7 @@ public class ScoutShip : PlayerShip {
             Attack bulletAttack = new Attack(_bulletDamage, this);
             bulletAttack.OnHit += ReactToBulletHit;
 
-            Bullet newBullet = Bullet.Create(
+            Bullet.Create(
                 _bulletPrefab,
                 bulletAttack,
                 spawnPosition.transform.position, 
@@ -54,5 +62,33 @@ public class ScoutShip : PlayerShip {
 
         // on release
         //HomingMissile.CreateFromPrefab(_missilePrefab, this.transform.position, this.transform.rotation, target);
+        // When holding the key down.
+        if (input) {
+            if (_missileTarget != null && _missileRange.Contains(_missileTarget)) {
+                if (_lockOnTimer > 0) { _lockOnTimer--; }
+            }
+            else if (_missileRange.HasAny(out var inRange)) {
+                _missileTarget = inRange;
+                _lockOnTimer = _missileLockOnDelay;
+            }
+
+            _missileInputHeld = true;
+        }
+        // On releasing the key.
+        else if (_missileInputHeld) {
+            if (_lockOnTimer <= 0) {
+                HomingMissile.Create(
+                    _missilePrefab,
+                    this.transform.position,
+                    this.transform.rotation,
+                    _missileTarget,
+                    new Attack(_missileDamage, this)
+                );
+            }
+
+            _missileTarget = null;
+            _missileInputHeld = false;
+            _lockOnTimer = _missileLockOnDelay;
+        }
     }
 }

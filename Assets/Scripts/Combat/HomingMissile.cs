@@ -13,7 +13,6 @@ public class HomingMissile : Entity {
     [SerializeField] int _lifetime;
 
     Entity _target;
-    Entity _sender;
     bool _detonated;
 
     //Vector3 _velocity;
@@ -75,9 +74,9 @@ public class HomingMissile : Entity {
         );
     }
 
-    public static HomingMissile CreateFromPrefab(HomingMissile prefab, Vector3 position, Quaternion rotation, Entity sender, Entity target) {
+    public static HomingMissile Create(HomingMissile prefab, Vector3 position, Quaternion rotation, Entity target, Attack attack) {
         HomingMissile missile = Instantiate(prefab, position, rotation);
-        missile._sender = sender;
+        missile._toDeliver = attack;
         missile._target = target;
         return missile;
     }
