@@ -39,7 +39,7 @@ public class WanderTowardObjective : Node
         {
             if (GetData("CurrentObjective") != null)
             {
-                if (Vector3.Distance(referenceTree.transform.position, ((SimpleObjective)root.GetData("CurrentObjective")).gameObject.transform.position) < 1500)
+                if (Vector3.Distance(referenceTree.transform.position, ((SimpleObjective)root.GetData("CurrentObjective")).gameObject.transform.position) < 1000)
                 {
                     root.ClearData("CurrentObjective");
                     state = NodeState.FAILURE;
@@ -53,8 +53,7 @@ public class WanderTowardObjective : Node
         {
             if (referenceTree.TryGetComponent<AIAgent>(out AIAgent agent))
             {
-                if (agent.goalWaypoint == null)
-                {
+                
                     Collider[] hitColliders = Physics.OverlapSphere(referenceTree.transform.position, range, mask);
                     if (hitColliders.Length > 0)
                     {
@@ -66,7 +65,7 @@ public class WanderTowardObjective : Node
                              zone = findActiveObjective();
                             root.SetData("CurrentObjective", zone);
                         }
-                        if (zone != null && Vector3.Distance(referenceTree.transform.position, ((SimpleObjective)root.GetData("CurrentObjective")).gameObject.transform.position)>=1500)
+                        if (zone != null && Vector3.Distance(referenceTree.transform.position, ((SimpleObjective)root.GetData("CurrentObjective")).gameObject.transform.position)>=1000)
                         {
                             Debug.Log("Wandering Towards objective");
                             int randomNumber = Random.Range(0, zone.waypoints.Count - 1);
@@ -78,10 +77,10 @@ public class WanderTowardObjective : Node
                     else
                     {
                         agent.goalWaypoint = agent.mostRecentWaypoint;
-                        state = NodeState.FAILURE;
+                        state = NodeState.SUCCESS;
                         return state;
                     }
-                }
+                
             }
         }
         state = NodeState.FAILURE;

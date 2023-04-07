@@ -29,12 +29,7 @@ public class ObstacleCollisionAvoidance : AIMovement
         //Debug.Log(Vector3.Magnitude(rb.velocity)/avoidanceDistanceFactor);
         float distance;
         Vector3 checkDirection;
-        if(Vector3.Magnitude(rb.velocity)< 50)
-        {
-            distance = avoidanceDistanceMinimum;
-            checkDirection = rb.velocity;
-        }
-        else
+        
         {
             distance = Vector3.Magnitude(rb.velocity) * avoidanceDistanceFactor;
             checkDirection = rb.velocity;

@@ -52,6 +52,13 @@ public class FindTarget : Node
                 {
                     if (collider.transform.CompareTag("Enemy"))
                     {
+                        if(collider.TryGetComponent<SimpleObjective>(out SimpleObjective obj))
+                        {
+                            if (!obj.active)
+                            {
+                                continue;
+                            }
+                        }
                         validTargets.Add(collider);
                     }
                 }
@@ -61,7 +68,7 @@ public class FindTarget : Node
         else
         {
             state = NodeState.FAILURE;
-           // Debug.Log("Already have target");
+           //Debug.Log("Already have target");
             return state;
         }
         if (validTargets.Count == 0 || root.GetData("Recharge") != null)

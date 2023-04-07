@@ -25,6 +25,15 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
     {
         _objectiveList.Remove(completed);
         Debug.Log("Completed " + completed.ObjectiveDescription);
+        try
+        {
+            //kinda ugly but meh whatavah
+            _objectiveList[0].Reference.GetComponent<SimpleObjective>().SetActive();
+        }
+        catch(ArgumentOutOfRangeException e)
+        {
+            //Start final kill mothership phase
+        }
 
         if (_objectiveList.Count > 0)
         {

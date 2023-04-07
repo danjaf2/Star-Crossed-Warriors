@@ -44,10 +44,24 @@ public class CheckTargetCanBeAttacked : Node
                     ev = toTarget;
                 }
                 //Is in shooting reticle?
-                if (Vector3.Angle(referenceTree.transform.forward, ev) <= attackAngleThreshold)
+
+                //Can be seen? (might need to add layer mask later)
+                if (Physics.Raycast(referenceTree.transform.position, toTarget, out RaycastHit hit, Mathf.Infinity, mask))
                 {
-                    //Can be seen? (might need to add layer mask later)
-                    if (Physics.Raycast(referenceTree.transform.position, toTarget, out RaycastHit hit, Mathf.Infinity, mask))
+                    if(target.gameObject.layer == 8)
+                    {
+                        if (Vector3.Angle(referenceTree.transform.forward, toTarget) <= 60)
+                        {
+                            //Debug.Log("Hit");
+                            if (hit.transform.gameObject == target.gameObject)
+                            {
+                                //Debug.Log("Can fire");
+                                state = NodeState.SUCCESS;
+                                return state;
+                            }
+                        }
+                    }
+                    if (Vector3.Angle(referenceTree.transform.forward, ev) <= attackAngleThreshold)
                     {
                         //Debug.Log("Hit");
                         if (hit.transform.gameObject == target.gameObject)
@@ -58,6 +72,7 @@ public class CheckTargetCanBeAttacked : Node
                         }
                     }
                 }
+                
             }
             
         }

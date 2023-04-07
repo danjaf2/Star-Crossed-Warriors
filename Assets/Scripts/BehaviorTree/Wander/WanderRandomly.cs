@@ -43,7 +43,7 @@ public class WanderRandomly : Node
                     if (hitColliders.Length > 0)
                     {
                         agent.mostRecentWaypoint = GetClosestWaypoint(hitColliders).GetComponent<Waypoint>();
-
+                        Debug.Log("Wandering Randomly");
                         int randomNumber = Random.Range(0, waypoints.Count - 1);
                         agent.goalWaypoint = waypoints[randomNumber];
                         state = NodeState.SUCCESS;

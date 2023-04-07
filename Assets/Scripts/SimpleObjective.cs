@@ -20,7 +20,10 @@ public class SimpleObjective : MonoBehaviour, IObjective {
     public LayerMask waypointMask;
     public float objectiveRadius = 1000;
 
-    
+
+    public Material notActiveMat;
+    public Material ActiveMat;
+
 
 
 
@@ -28,8 +31,18 @@ public class SimpleObjective : MonoBehaviour, IObjective {
         ObjectiveManager.Instance.RegisterObjective(this);
     }
 
+    public void SetActive()
+    {
+        active = true;
+        this.GetComponent<MeshRenderer>().material = ActiveMat;
+    }
+
     private void Start()
     {
+        if(active)
+        {
+            SetActive();
+        }
         Collider[] points = Physics.OverlapSphere(this.transform.position, objectiveRadius, waypointMask);
         foreach (Collider c in points)
         {
