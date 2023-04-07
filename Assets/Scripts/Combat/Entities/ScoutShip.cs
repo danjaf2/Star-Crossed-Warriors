@@ -29,8 +29,36 @@ public class ScoutShip : PlayerShip {
     int _lockOnTimer;
     Entity _missileTarget;
 
+    [Header("SpecialAbility")]
+    [SerializeField] float _boostDelay;
+    [SerializeField] float _boostCoolDown;
+    [SerializeField] float _boostMultiplier = 5.0f;
+
     public override void HandleAbility(bool input) {
         // boost
+        if (_boostCoolDown > 0) { _boostCoolDown--; }
+
+        if (input && _boostCoolDown <= 0)
+        {
+            LoseEnergy(_bulletCost);
+           
+            _boostCoolDown = _boostDelay;
+
+  
+            if(transform.parent.tag == "Player")
+            {
+                Debug.Log("Player boosted");
+                transform.parent.GetComponent<PlaneController>().BoostForward(_boostMultiplier);
+            }
+            else
+            {
+                gameObject.GetComponent<Vehicle>().BoostForward(_boostMultiplier); 
+            }
+
+          
+            Debug.Log("Scout boosted"); 
+
+        }
     }
 
     public override void HandleShoot(bool input) {

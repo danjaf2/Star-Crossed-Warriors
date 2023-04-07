@@ -101,6 +101,18 @@ public class PlaneController : MonoBehaviour
     {
         return (rb.mass / sensitivityScale) * sensitivity;
     }
+    public void BoostForward(float boostMultiplier)
+    {
+        if(rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+        rb.AddForce(transform.forward * boostMultiplier * 10f, ForceMode.Impulse);
+
+        //throttle = boostMultiplier;
+        //Debug.Log("Throttle: " + throttle);
+        Debug.Log("Vehicle moved foward");
+    }
 
     public void callForHelp()
     {

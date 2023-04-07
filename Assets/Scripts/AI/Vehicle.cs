@@ -78,6 +78,16 @@ public class Vehicle : MonoBehaviour
         //Debug.Log(transform.position); 
     }
 
+    public void BoostForward(float boostMultiplier)
+    {
+        boostMultiplier = 100000;
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+        rb.AddForce(transform.forward * boostMultiplier * 10f, ForceMode.Impulse);
+    }
+
     public float getAdjustedSensitivity()
     {
         return (rb.mass / sensitivityScale) * sensitivity;

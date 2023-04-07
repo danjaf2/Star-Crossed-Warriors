@@ -42,7 +42,9 @@ public class Entity : MonoBehaviour {
             ObjectiveManager.Instance.OnObjectiveComplete(obj);
         }
 
-        Destroy(this.gameObject);
+        GameObject.FindObjectOfType<ParticleManager>().InstantiateExplosion(this.gameObject); 
+
+        Destroy(this.gameObject, 0.2f);
     }
 
 
