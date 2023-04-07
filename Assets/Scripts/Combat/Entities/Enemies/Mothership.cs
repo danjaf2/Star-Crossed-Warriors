@@ -17,17 +17,17 @@ public class Mothership : EnemyShip
     public override void HandleAbility(bool input)
     {
         //Shields
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public override void HandleMissile(bool input)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public override void HandleShoot(bool input)
     { //EMP
-        throw new System.NotImplementedException();
+       // throw new System.NotImplementedException();
     }
 
     // Start is called before the first frame update

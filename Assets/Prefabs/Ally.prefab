@@ -211,7 +211,7 @@ MonoBehaviour:
   thrust: 100
   maxThrust: 10000
   sensitivityScale: 10000
-  rotationMaxDegrees: 1.5
+  rotationMaxDegrees: 3
   rollAxis: Roll
   pitchlAxis: Pitch
   yawAxis: Yaw
@@ -274,7 +274,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 328
-  avoidanceDistanceFactor: 1.9
+  avoidanceDistanceFactor: 3
   avoidanceDistanceMinimum: 50
   objectToAvoid: {fileID: 0}
   avoidanceTime: 2.5
@@ -415,8 +415,8 @@ MonoBehaviour:
   _bulletDamage: 1
   _bulletSpeed: 1000
   _bulletDelay: 40
-  _bulletCost: 10
-  spawnPosition: {fileID: 2845480260140199198}
+  _bulletCost: 0
+  bulletSpawnPosition: {fileID: 555337690}
   _missilePrefab: {fileID: 7596523783035753511, guid: 20df6fcc83265cd4f9f913d190bc958a, type: 3}
   _missileDamage: 0
   _missileRange: {fileID: 0}

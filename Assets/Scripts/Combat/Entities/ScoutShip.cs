@@ -15,7 +15,7 @@ public class ScoutShip : PlayerShip {
     [SerializeField] float _bulletSpeed;
     [SerializeField] float _bulletDelay;
     [SerializeField] float _bulletCost;
-    [SerializeField] GameObject spawnPosition;
+    [SerializeField] GameObject bulletSpawnPosition;
     float _fireTimer;
 
     [Header("Missile")]
@@ -44,7 +44,7 @@ public class ScoutShip : PlayerShip {
             Bullet.Create(
                 _bulletPrefab,
                 bulletAttack,
-                spawnPosition.transform.position, 
+                bulletSpawnPosition.transform.position, 
                 this.transform.forward * _bulletSpeed
             );
 

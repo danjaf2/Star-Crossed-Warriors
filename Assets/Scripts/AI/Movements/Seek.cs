@@ -65,12 +65,16 @@ namespace AI
         Vector3 GetPredictedPoint(Vector3 targetPosition, Vector3 targetSpeed, Vector3 attackerPosition, float bulletSpeed)
         {//Quadratic formula
             Vector3 q = targetPosition - attackerPosition;
-            q.y = 0;
-            targetSpeed.y = 0;
             float a = Vector3.Dot(targetSpeed, targetSpeed) - (bulletSpeed * bulletSpeed);
             float b = 2 * Vector3.Dot(targetSpeed, q);
             float c = Vector3.Dot(q, q);
-            Vector3 ret = targetPosition + targetSpeed;
+
+            float D = Mathf.Sqrt((b * b) - 4 * a * c);
+
+            float t1 = (-b + D) / (2 * a);
+            float t2 = (-b - D) / (2 * a);
+            float time = Mathf.Max(t1, t2);
+            Vector3 ret = targetPosition + targetSpeed * time;
             return ret;
         }
     }
