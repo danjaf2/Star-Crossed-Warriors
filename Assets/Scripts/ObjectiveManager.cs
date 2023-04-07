@@ -1,34 +1,42 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectiveManager : Singleton<ObjectiveManager> {
+public class ObjectiveManager : Singleton<ObjectiveManager>
+{
 
     List<IObjective> _objectiveList;
 
-    protected override void Awake() {
+    protected override void Awake()
+    {
         Instance = this;
         _objectiveList = new List<IObjective>();
     }
 
-    public void RegisterObjective(IObjective newObjective) {
+    public void RegisterObjective(IObjective newObjective)
+    {
         _objectiveList.Add(newObjective);
         newObjective.OnObjectiveComplete += OnObjectiveComplete;
     }
 
-    void OnObjectiveComplete(IObjective completed) {
+    public void OnObjectiveComplete(IObjective completed)
+    {
         _objectiveList.Remove(completed);
         Debug.Log("Completed " + completed.ObjectiveDescription);
 
-        if(_objectiveList.Count > 0) {
+        if (_objectiveList.Count > 0)
+        {
             // win the level
         }
     }
 
-    public string GetObjectiveTextList() {
+    public string GetObjectiveTextList()
+    {
         string textList = "";
-        foreach (var objective in _objectiveList) {
+        foreach (var objective in _objectiveList)
+        {
             textList += $"- {objective.ObjectiveDescription}\n";
         }
         return textList;
@@ -37,18 +45,28 @@ public class ObjectiveManager : Singleton<ObjectiveManager> {
     public List<GameObject> GetObjectiveList()
     {
         List<GameObject> list = new List<GameObject>();
-        foreach (var objective in _objectiveList) {
-            list.Add(objective.Reference);
+        foreach (var objective in _objectiveList)
+        {
+            if (objective.Reference != null)
+            {
+                list.Add(objective.Reference);
+            }
         }
         return list;
     }
+
 }
 
-public interface IObjective {
+public interface IObjective
+{
     public string ObjectiveDescription { get; }
     public GameObject Reference { get; }
 
     public event Action<IObjective> OnObjectiveComplete;
+    public bool isActiveObjective { get; set; }
+    protected void RegisterAsObjective() { ObjectiveManager.Instance.RegisterObjective(this);
 
-    protected void RegisterAsObjective() { ObjectiveManager.Instance.RegisterObjective(this); }
+
+    
+    }
 }

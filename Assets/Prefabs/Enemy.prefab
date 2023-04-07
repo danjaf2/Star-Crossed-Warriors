@@ -273,7 +273,7 @@ MonoBehaviour:
   canPerform: 1
   layerMask:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 328
   avoidanceDistanceFactor: 1.8
   avoidanceDistanceMinimum: 50
   objectToAvoid: {fileID: 0}
@@ -292,14 +292,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   findMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   findRange: 500
   maxAggroRange: 800
   attackRange: 800
   attackAngleThreshold: 10
   attackMask:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 328
   projectileSpeed: 1000
   predict: 1
   wanderStartNodeSearchRange: 600
@@ -415,5 +415,9 @@ MonoBehaviour:
   _bulletDamage: 1
   _bulletSpeed: 1000
   _bulletDelay: 40
+  _bulletCost: 100
   spawnPosition: {fileID: 2845480260140199198}
   _missilePrefab: {fileID: 7596523783035753511, guid: 20df6fcc83265cd4f9f913d190bc958a, type: 3}
+  _missileDamage: 0
+  _missileRange: {fileID: 0}
+  _missileLockOnDelay: 0

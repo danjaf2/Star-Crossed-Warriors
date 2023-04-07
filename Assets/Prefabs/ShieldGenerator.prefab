@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 2340242268746757738}
   - component: {fileID: 8719435035960880432}
   - component: {fileID: 8957652191668060606}
-  m_Layer: 0
+  - component: {fileID: 1874149084}
+  m_Layer: 8
   m_Name: ShieldGenerator
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 452010035078397011}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 200.6893, y: 30.218, z: 163.44939}
-  m_LocalScale: {x: 26.437546, y: 26.437546, z: 26.437546}
+  m_LocalScale: {x: 229.93262, y: 229.93262, z: 229.93262}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -112,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db1c7b784ac58114da073f7667521ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 150
+  _maxHealth: 5000
 --- !u!114 &8957652191668060606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,3 +127,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectiveText: Destroy the shield generators to bring down the ship!
+  waypoints: []
+  waypointMask:
+    serializedVersion: 2
+    m_Bits: 128
+  objectiveRadius: 1000
+  active: 1
+--- !u!54 &1874149084
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452010035078397011}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

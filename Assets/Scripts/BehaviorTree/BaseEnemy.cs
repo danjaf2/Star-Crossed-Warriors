@@ -58,6 +58,7 @@ public class BaseEnemy: BehaviorTree.Tree
             new Selector(new List<Node>
             {
                 new WanderByStar(wanderStartNodeSearchRange, wanderMask),
+                new WanderTowardObjective(wanderStartNodeSearchRange, wanderMask),
                 new WanderRandomly(wanderStartNodeSearchRange, wanderMask)
             })
         }); ;

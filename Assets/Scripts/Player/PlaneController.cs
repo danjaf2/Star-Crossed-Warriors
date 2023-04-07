@@ -82,8 +82,8 @@ public class PlaneController : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward * 50, Color.magenta);
         Debug.DrawRay(transform.position, transform.right * 50, Color.red);
         Debug.DrawRay(transform.position, transform.up * 50, Color.green);
-        Debug.Log("Applying forces");
-        Debug.Log(transform.up * yaw * adjustedSensitivity);
+       // Debug.Log("Applying forces");
+        //Debug.Log(transform.up * yaw * adjustedSensitivity);
         rb.AddForce(transform.forward * throttle * adjustedSensitivity);
         rb.AddTorque(transform.up * yaw * adjustedSensitivity * rotationSpeed);
         rb.AddTorque(transform.right * pitch * adjustedSensitivity * rotationSpeed);
@@ -165,9 +165,9 @@ public class PlaneController : MonoBehaviour
         pitch = Input.GetAxis(pitchlAxis);
         yaw = Input.GetAxis(yawAxis);
 
-        Debug.Log(roll);
-        Debug.Log(pitch);
-        Debug.Log(yaw);
+       // Debug.Log(roll);
+        //Debug.Log(pitch);
+       // Debug.Log(yaw);
 
        
         if (Input.GetButton(throttleKey))

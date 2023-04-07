@@ -37,6 +37,11 @@ public class Entity : MonoBehaviour {
         }
     }
     protected virtual void OnDeath() {
+        if(TryGetComponent<SimpleObjective>(out SimpleObjective obj))
+        {
+            ObjectiveManager.Instance.OnObjectiveComplete(obj);
+        }
+
         Destroy(this.gameObject);
     }
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SimpleObjective : MonoBehaviour, IObjective {
@@ -9,11 +11,34 @@ public class SimpleObjective : MonoBehaviour, IObjective {
     public string ObjectiveText = "SAMPLE OBJECTIVE";
     public string ObjectiveDescription => ObjectiveText;
     public GameObject Reference => this.gameObject;
+    public bool active = false;
+    public bool isActiveObjective { get => active; set => active = value; }
 
     public event Action<IObjective> OnObjectiveComplete;
 
+    public List<Waypoint> waypoints;
+    public LayerMask waypointMask;
+    public float objectiveRadius = 1000;
+
+    
+
+
+
     private void Awake() {
         ObjectiveManager.Instance.RegisterObjective(this);
+    }
+
+    private void Start()
+    {
+        Collider[] points = Physics.OverlapSphere(this.transform.position, objectiveRadius, waypointMask);
+        foreach (Collider c in points)
+        {
+            //print(c);
+            if (c.GetComponent<Waypoint>().connectedTo.Count > 1)
+            {
+                waypoints.Add(c.GetComponent<Waypoint>());
+            }
+        }
     }
 
     public void CompleteObjective() {

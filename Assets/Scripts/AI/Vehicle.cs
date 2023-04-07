@@ -120,7 +120,7 @@ public class Vehicle : MonoBehaviour
 
     public void Throttle()
     {
-        Debug.Log("Throttle on");
+        //Debug.Log("Throttle on");
         throttle += throttleIncrement;
 
         if (throttle >= maxThrottle)
@@ -131,7 +131,7 @@ public class Vehicle : MonoBehaviour
 
     public void Brake()
     {
-        Debug.Log("Brakes on");
+        //Debug.Log("Brakes on");
         throttle -= brakeIncrement;
 
         if (throttle < 0)

@@ -32,7 +32,7 @@ public class ObstacleCollisionAvoidance : AIMovement
         if(Vector3.Magnitude(rb.velocity)< 50)
         {
             distance = avoidanceDistanceMinimum;
-            checkDirection = transform.forward;
+            checkDirection = rb.velocity;
         }
         else
         {

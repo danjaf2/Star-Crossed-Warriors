@@ -119,7 +119,7 @@ public class WaypointLinker : EditorWindow
                 if (Physics.Raycast(ray3, out hit, (w.position - current.position).magnitude))
                 {
 
-                    if ((hit.transform.gameObject.layer !=3 &&hit.transform.gameObject == w.gameObject) && !inside)
+                    if (((hit.transform.gameObject.layer !=3 && hit.transform.gameObject.layer != 8) &&hit.transform.gameObject == w.gameObject) && !inside)
 
                     {
                         if(hit.distance < distanceLimit) { 
