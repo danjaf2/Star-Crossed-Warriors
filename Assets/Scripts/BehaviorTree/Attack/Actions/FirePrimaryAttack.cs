@@ -24,14 +24,14 @@ public class FirePrimaryAttack : Node
         if (target != null)
         {
             //Add check for ammo maybe?
-            Debug.Log("Pew");
+            //Debug.Log("Pew");
             if(referenceTree.TryGetComponent<PlayerShip>(out PlayerShip ship))
             {
                 ship.HandleShoot(true);
             }
             else
             {
-                Debug.Log("No PLayerShipComponent");
+                //Debug.Log("No PLayerShipComponent");
             }
             state = NodeState.SUCCESS;
             return state;

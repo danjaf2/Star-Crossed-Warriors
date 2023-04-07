@@ -9,14 +9,14 @@ public class FollowVehicle : MonoBehaviour
     public Vector3 offset; 
     void Start()
     {
-        vehicle = GameObject.FindGameObjectWithTag("Plane");
-        offset = vehicle.transform.position - transform.position; 
+        //vehicle = GameObject.FindGameObjectWithTag("Plane");
+        //offset = vehicle.transform.position - transform.position; 
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = vehicle.transform.position - offset;
-        transform.rotation = Quaternion.LookRotation(vehicle.transform.forward);
+        //transform.position = vehicle.transform.position - offset;
+        //transform.rotation = Quaternion.LookRotation(vehicle.transform.forward);
     }
 }

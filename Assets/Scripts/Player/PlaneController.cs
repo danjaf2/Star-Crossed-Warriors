@@ -172,7 +172,7 @@ public class PlaneController : MonoBehaviour
        
         if (Input.GetButton(throttleKey))
         {
-           Debug.Log("Throttle on"); 
+           //Debug.Log("Throttle on"); 
             throttle += throttleIncrement; 
 
             if(throttle >=maxThrottle)
@@ -185,7 +185,7 @@ public class PlaneController : MonoBehaviour
 
         else if (Input.GetButton(brakeKey))
         {
-           Debug.Log("Brakes on");
+           //Debug.Log("Brakes on");
             throttle -= throttleIncrement;
 
             if (throttle < 0)
