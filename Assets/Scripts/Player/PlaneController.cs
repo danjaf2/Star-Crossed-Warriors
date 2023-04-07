@@ -111,7 +111,7 @@ public class PlaneController : MonoBehaviour
 
         //throttle = boostMultiplier;
         //Debug.Log("Throttle: " + throttle);
-        Debug.Log("Vehicle moved foward");
+        //Debug.Log("Vehicle moved foward");
     }
 
     public void callForHelp()
