@@ -22,7 +22,7 @@ public class ScoutShip : PlayerShip {
     [SerializeField] HomingMissile _missilePrefab;
     [SerializeField] float _missileDamage;
 
-    [SerializeField] KeepTrackWithinArea<Entity> _missileRange;
+    [SerializeField] TrackEntitiesInArea _missileRange;
     [SerializeField] int _missileLockOnDelay;
 
     bool _missileInputHeld;
@@ -85,11 +85,8 @@ public class ScoutShip : PlayerShip {
         Debug.Log($"Scout knows that {hit.name} was hit for {atk.Damage} damage.\nApplied a fragile debuff.");
     }
 
+    // strong homing missile
     public override void HandleMissile(bool input) {
-        // strong homing missile
-
-        // on release
-        //HomingMissile.CreateFromPrefab(_missilePrefab, this.transform.position, this.transform.rotation, target);
         // When holding the key down.
         if (input) {
             if (_missileTarget != null && _missileRange.Contains(_missileTarget)) {
