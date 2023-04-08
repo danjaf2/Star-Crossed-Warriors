@@ -37,7 +37,7 @@ public class WanderByStar : Node
 
         if(referenceTree.TryGetComponent<EnergizedEntity>(out EnergizedEntity ety))
         {
-            if (ety.GetEnergyPercentage() >= 99)
+            if (ety.GetEnergyPercentage() >= 60)
             {
                 state = NodeState.FAILURE;
                 return state;
