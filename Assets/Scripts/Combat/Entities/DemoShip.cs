@@ -16,7 +16,7 @@ public class DemoShip : PlayerShip {
     [SerializeField] float _bulletSpeed;
     [SerializeField] float _bulletDelay;
     [SerializeField] GameObject spawnPosition;
-    float _fireTimer = 5.0f;
+    public float _fireTimer = 5.0f;
 
     [Header("Missile")]
     [SerializeField] HomingMissile _missilePrefab;
@@ -31,7 +31,7 @@ public class DemoShip : PlayerShip {
     public override void HandleShoot(bool input) {
         // charged shot
 
-        if (_fireTimer > 0 && input) { _fireTimer--; }
+        if (_fireTimer > 0) { _fireTimer--; }
 
 
         if (charging && !input && _fireTimer <= 0)
@@ -63,6 +63,8 @@ public class DemoShip : PlayerShip {
 
 
     }
+
+ 
 
     public override void HandleAbility(bool input) {
         // EMP (will require defining a 'stun' method to call on enemies in range)

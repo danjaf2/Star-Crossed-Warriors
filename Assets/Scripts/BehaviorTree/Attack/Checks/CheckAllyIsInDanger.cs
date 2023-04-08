@@ -51,7 +51,7 @@ public class CheckAllyIsInDanger : Node
                     }
                 }
             }
-            if (Vector3.Distance(referenceTree.transform.position, target.transform.position) < referenceTree.GetComponent<BaseAlly>().findRange)
+            if (Vector3.Distance(referenceTree.transform.position, target.transform.position) < 1000)
             {
                 root.ClearData("AllyPingedLocation");
             }

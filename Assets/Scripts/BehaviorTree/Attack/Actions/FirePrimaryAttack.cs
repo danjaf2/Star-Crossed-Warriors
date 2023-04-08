@@ -27,11 +27,27 @@ public class FirePrimaryAttack : Node
             //Debug.Log("Pew");
             if(referenceTree.TryGetComponent<PlayerShip>(out PlayerShip ship))
             {
-                ship.SetShootInput(true);
+                if (referenceTree.TryGetComponent<ScoutShip>(out ScoutShip s))
+                {
+                    ship.SetShootInput(true);
+                }
+                
+                if (referenceTree.TryGetComponent<DemoShip>(out DemoShip d))
+                {
+                    if(d.currentCharge == 1)
+                    {
+                        ship.SetShootInput(false);
+                    }
+                    else
+                    {
+                        ship.SetShootInput(true);
+                    }
+                }
+                
             }
             else
             {
-                //Debug.Log("No PLayerShipComponent");
+               Debug.Log("No PLayerShipComponent");
             }
             state = NodeState.SUCCESS;
             return state;
