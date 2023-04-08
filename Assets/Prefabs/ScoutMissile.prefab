@@ -231,10 +231,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 2
-  _turnSpeed: 150
+  _turnSpeed: 400
   _speed: 125
   _blastRadius: 2
-  _lifetime: 500
+  _lifetime: 100
 --- !u!136 &4818404360374707405
 CapsuleCollider:
   m_ObjectHideFlags: 0

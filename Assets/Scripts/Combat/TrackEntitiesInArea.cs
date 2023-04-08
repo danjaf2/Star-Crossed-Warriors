@@ -20,7 +20,6 @@ public class TrackEntitiesInArea : MonoBehaviour
     public bool HasAny(out Entity pick)
     {
         pick = _inRange.GetRandom();
-        Debug.Log(pick.gameObject.transform);
         return HasAny();
     }
 
@@ -30,32 +29,37 @@ public class TrackEntitiesInArea : MonoBehaviour
     {//Triggers seemed to slow the bullets and was too hard to run
         if (ally)
         {
+
             foreach (GameObject enemy in TeamManager.enemyList)
             {
-                if (enemy.TryGetComponent<Entity>(out var ent))
+                if (enemy != null)
                 {
-                    if (Vector3.Dot(this.transform.forward.normalized, (enemy.transform.position - this.transform.position).normalized) > sensitivity)
+                    if (enemy.TryGetComponent<Entity>(out var ent))
                     {
-
-                        RaycastHit hit;
-                        if (Physics.Raycast(transform.position, enemy.transform.position - this.transform.position, out hit, range, LayerMask.GetMask("Character", "Obstacle")))
+                        if (Vector3.Dot(this.transform.forward.normalized, (enemy.transform.position - this.transform.position).normalized) > sensitivity)
                         {
-                            if (hit.transform.gameObject == enemy)
+
+                            RaycastHit hit;
+                            if (Physics.Raycast(transform.position, enemy.transform.position - this.transform.position, out hit, range, LayerMask.GetMask("Character", "Obstacle")))
                             {
-                                _inRange.AddUnique(enemy.GetComponent<Entity>());
-                                continue;
+                                if (hit.transform.gameObject == enemy)
+                                {
+                                    _inRange.AddUnique(enemy.GetComponent<Entity>());
+                                    continue;
+                                }
                             }
                         }
+                        _inRange.Remove(enemy.GetComponent<Entity>());
                     }
-                    _inRange.Remove(enemy.GetComponent<Entity>());
-                }
 
+                }
             }
 
         }else if (!ally)
         {
             foreach (GameObject enemy in TeamManager.alliesList)
             {
+                if (enemy != null) {
                 if (enemy.TryGetComponent<Entity>(out var ent))
                 {
                     if (Vector3.Dot(this.transform.forward.normalized, (enemy.transform.position - this.transform.position).normalized) > sensitivity)
@@ -75,7 +79,7 @@ public class TrackEntitiesInArea : MonoBehaviour
                 }
 
             }
-
+            }
         }
     }
 

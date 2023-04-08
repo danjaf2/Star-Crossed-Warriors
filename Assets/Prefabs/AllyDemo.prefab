@@ -194,7 +194,7 @@ MonoBehaviour:
   thrust: 100
   maxThrust: 10000
   sensitivityScale: 10000
-  rotationMaxDegrees: 1
+  rotationMaxDegrees: 2
   rollAxis: Roll
   pitchlAxis: Pitch
   yawAxis: Yaw

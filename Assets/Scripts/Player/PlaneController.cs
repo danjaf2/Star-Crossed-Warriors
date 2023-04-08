@@ -128,8 +128,12 @@ public class PlaneController : MonoBehaviour
                 {
                     if (ally.TryGetComponent<BaseAlly>(out BaseAlly friend))
                     {
+                        if (ally != null)
+                        {
                         friend._root.SetData("AllyPingedLocation", point);
                         Debug.Log("Alerted Ally");
+
+                        }
                     }
                 }
             }

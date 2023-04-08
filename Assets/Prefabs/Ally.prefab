@@ -244,7 +244,7 @@ MonoBehaviour:
   thrust: 100
   maxThrust: 10000
   sensitivityScale: 10000
-  rotationMaxDegrees: 1.5
+  rotationMaxDegrees: 2
   rollAxis: Roll
   pitchlAxis: Pitch
   yawAxis: Yaw
@@ -386,7 +386,7 @@ MonoBehaviour:
   drawingMode: 1
   outlineLayer: 0
   outlineTargets:
-  - IsVisible: 0
+  - IsVisible: 1
     CutoutMask: 8
     edgeDilateAmount: 5
     frontEdgeDilateAmount: 5
@@ -453,6 +453,7 @@ MonoBehaviour:
   _missileBaseSpeed: 0
   _missileRange: {fileID: 0}
   _missileLockOnDelay: 0
+  _missileTarget: {fileID: 0}
   _boostDelay: 10
   _boostCoolDown: 0
   _boostMultiplier: 10000
