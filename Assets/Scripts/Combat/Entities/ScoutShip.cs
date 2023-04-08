@@ -105,16 +105,15 @@ public class ScoutShip : PlayerShip {
         }
         // On releasing the key.
         else if (_missileInputHeld) {
-            if (_lockOnTimer <= 0) {
-                if(_missileTarget != null) {
-                HomingMissile.Create(
+            if (_lockOnTimer <= 0 && _missileTarget != null) {
+                    HomingMissile.Create(
                     _missilePrefab,
                     bulletSpawnPosition.transform.position,
                     this.transform.rotation,
                     _missileTarget,
                     new Attack(_missileDamage, this)
                 );
-                }
+                
             }
 
             _missileTarget = null;
