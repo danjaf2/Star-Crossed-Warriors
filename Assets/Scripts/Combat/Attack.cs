@@ -18,7 +18,12 @@ public class Attack {
     public Attack(float damage, Entity sender) : this(damage, sender, Vector3.zero) { }
     
     /// <summary> Copy constructor. </summary>
-    public Attack(Attack atk) : this(atk.Damage, atk.Sender, atk.Force) { OnHit += atk.OnHit.Invoke; }
+    public Attack(Attack atk) : this(atk.Damage, atk.Sender, atk.Force) { 
+        // If this attack hits, raise the copied attack's OnHit as well.
+        OnHit += (atk, ent) => { 
+            atk.OnHit.Invoke(this, ent); 
+        };
+    }
 
     /// <summary> Raised when the attack is passed onto an entity. </summary>
     public event Action<Attack, Entity> OnHit;
