@@ -21,19 +21,25 @@ public class ScoutShip : PlayerShip {
     [Header("Missile")]
     [SerializeField] HomingMissile _missilePrefab;
     [SerializeField] float _missileDamage;
-
+    [SerializeField] GameObject missileSpawnPosition;
+    [SerializeField] float _missileBaseSpeed;
     [SerializeField] TrackEntitiesInArea _missileRange;
     [SerializeField] int _missileLockOnDelay;
 
     bool _missileInputHeld;
     int _lockOnTimer;
-    Entity _missileTarget;
+    public Entity _missileTarget;
 
     [Header("SpecialAbility")]
     [SerializeField] float _boostDelay;
     [SerializeField] float _boostCoolDown;
     [SerializeField] float _boostMultiplier = 5.0f;
 
+
+    private void Start()
+    {
+       
+    }
     public override void HandleAbility(bool input) {
         // boost
         if (_boostCoolDown > 0) { 
@@ -59,7 +65,7 @@ public class ScoutShip : PlayerShip {
             }
 
           
-            Debug.Log(this.gameObject.name); 
+            //Debug.Log(this.gameObject.name); 
 
         }
     }
@@ -92,11 +98,19 @@ public class ScoutShip : PlayerShip {
     // strong homing missile
     public override void HandleMissile(bool input) {
         // When holding the key down.
+        
+
         if (input) {
+            if (_missileRange == null)
+            {
+                _missileRange = this.GetComponent<TrackEntitiesInArea>();
+            }
+
             if (_missileTarget != null && _missileRange.Contains(_missileTarget)) {
                 if (_lockOnTimer > 0) { _lockOnTimer--; }
             }
-            else if (_missileRange.HasAny(out var inRange)) {
+            else if (_missileRange.HasAny(out Entity inRange)) {
+                Debug.Log(inRange);
                 _missileTarget = inRange;
                 _lockOnTimer = _missileLockOnDelay;
             }
@@ -106,12 +120,27 @@ public class ScoutShip : PlayerShip {
         // On releasing the key.
         else if (_missileInputHeld) {
             if (_lockOnTimer <= 0 && _missileTarget != null) {
+                float speed =0;
+                
+                if(transform.parent.TryGetComponent(out Rigidbody rb))
+                {
+                    speed = rb.velocity.magnitude+_missileBaseSpeed;
+                }
+                else
+                {
+                    if (transform.TryGetComponent(out Rigidbody rb2))
+                    {
+                        speed = rb2.velocity.magnitude + _missileBaseSpeed;
+                    }
+                }
+
                     HomingMissile.Create(
                     _missilePrefab,
-                    bulletSpawnPosition.transform.position,
+                    missileSpawnPosition.transform.position,
                     this.transform.rotation,
                     _missileTarget,
-                    new Attack(_missileDamage, this)
+                    new Attack(_missileDamage, this),
+                    speed
                 );
                 
             }

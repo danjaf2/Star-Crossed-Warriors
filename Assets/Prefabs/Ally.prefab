@@ -31,6 +31,37 @@ Transform:
   m_Father: {fileID: 3186012602328856484}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1668444266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1668444267}
+  m_Layer: 6
+  m_Name: MissileSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1668444267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668444266}
+  m_LocalRotation: {x: -0, y: -0, z: 0.003071777, w: 0.9999953}
+  m_LocalPosition: {x: 0, y: 0, z: 15.3}
+  m_LocalScale: {x: 0.66472733, y: 0.997091, z: 0.9970912}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3186012602328856484}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2845480260140199198
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,6 +85,7 @@ GameObject:
   - component: {fileID: 680532569}
   - component: {fileID: 680532570}
   - component: {fileID: 2074845095}
+  - component: {fileID: 3552369794289570577}
   m_Layer: 6
   m_Name: Ally
   m_TagString: Plane
@@ -74,6 +106,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 555337691}
+  - {fileID: 1668444267}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.352}
@@ -353,7 +386,7 @@ MonoBehaviour:
   drawingMode: 1
   outlineLayer: 0
   outlineTargets:
-  - IsVisible: 1
+  - IsVisible: 0
     CutoutMask: 8
     edgeDilateAmount: 5
     frontEdgeDilateAmount: 5
@@ -416,8 +449,26 @@ MonoBehaviour:
   bulletSpawnPosition: {fileID: 555337690}
   _missilePrefab: {fileID: 7596523783035753511, guid: 20df6fcc83265cd4f9f913d190bc958a, type: 3}
   _missileDamage: 0
+  missileSpawnPosition: {fileID: 1668444266}
+  _missileBaseSpeed: 0
   _missileRange: {fileID: 0}
   _missileLockOnDelay: 0
   _boostDelay: 10
   _boostCoolDown: 0
   _boostMultiplier: 10000
+--- !u!114 &3552369794289570577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2845480260140199198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3022870dd6e2fb0418326636a406e8ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inRange: []
+  ally: 1
+  range: 5000
+  sensitivity: 0.5

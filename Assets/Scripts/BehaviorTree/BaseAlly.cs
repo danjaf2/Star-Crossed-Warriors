@@ -39,6 +39,7 @@ public class BaseAlly: BehaviorTree.Tree
                 new Sequence(new List<Node>{
                     new FirePrimaryAttack(),
                      new Sequence(new List<Node>{
+                         new FireSecondaryAttack()
                    //Secondary attack stuff here
                 })
 

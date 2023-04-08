@@ -211,7 +211,7 @@ Transform:
   m_GameObject: {fileID: 7790267289813192893}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2797846445254495328}
@@ -234,8 +234,7 @@ MonoBehaviour:
   _turnSpeed: 150
   _speed: 125
   _blastRadius: 2
-  _damage: 40
-  _timer: 1000
+  _lifetime: 500
 --- !u!136 &4818404360374707405
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -265,4 +264,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &292851016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 292851017}
+  m_Layer: 6
+  m_Name: MissileSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &292851017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292851016}
+  m_LocalRotation: {x: -0, y: -0, z: 0.003071777, w: 0.9999953}
+  m_LocalPosition: {x: 0, y: 0, z: 15.3}
+  m_LocalScale: {x: 0.66472733, y: 0.997091, z: 0.9970912}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3186012602328856484}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &531561260
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,6 +85,7 @@ GameObject:
   - component: {fileID: 235127231}
   - component: {fileID: 235127243}
   - component: {fileID: 1683428806}
+  - component: {fileID: 8819334828189467492}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -74,6 +106,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 531561261}
+  - {fileID: 292851017}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.352}
@@ -142,7 +175,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!64 &3151469609202224429
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -416,8 +449,26 @@ MonoBehaviour:
   bulletSpawnPosition: {fileID: 531561260}
   _missilePrefab: {fileID: 7596523783035753511, guid: 20df6fcc83265cd4f9f913d190bc958a, type: 3}
   _missileDamage: 0
+  missileSpawnPosition: {fileID: 292851016}
+  _missileBaseSpeed: 0
   _missileRange: {fileID: 0}
   _missileLockOnDelay: 0
   _boostDelay: 10
   _boostCoolDown: 0
   _boostMultiplier: 10000
+--- !u!114 &8819334828189467492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2845480260140199198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3022870dd6e2fb0418326636a406e8ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inRange: []
+  ally: 0
+  range: 5000
+  sensitivity: 0.5

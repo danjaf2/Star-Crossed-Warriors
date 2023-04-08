@@ -41,7 +41,7 @@ public class BaseEnemy: BehaviorTree.Tree
                 new Sequence(new List<Node>{
                     new FirePrimaryAttack(),
                      new Sequence(new List<Node>{
-                   //Secondary attack stuff here if any
+                      new FireSecondaryAttack()
                 })
 
                 })

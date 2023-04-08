@@ -2186,7 +2186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectiveText: Destroy the shield generators to bring down the ship!
-  active: 0
+  active: 1
   waypoints: []
   waypointMask:
     serializedVersion: 2
@@ -2194,6 +2194,7 @@ MonoBehaviour:
   objectiveRadius: 1000
   notActiveMat: {fileID: 2100000, guid: 5353a0fdb9776f946a5031fc41ccf563, type: 2}
   ActiveMat: {fileID: 2100000, guid: 55bfd20e3b510dc499c6d05e6f0b2446, type: 2}
+  finalObjective: 0
 --- !u!114 &9066981863847562700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2222,4 +2223,4 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2

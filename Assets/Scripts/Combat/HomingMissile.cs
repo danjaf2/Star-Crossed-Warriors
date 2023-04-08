@@ -55,7 +55,11 @@ public class HomingMissile : Entity {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        OnDeath();
+        if (collision.gameObject.layer != 2)
+        {
+            Debug.Log(collision.gameObject.name);
+            OnDeath();
+        }
     }
 
     protected override void OnDeath() {
@@ -74,10 +78,11 @@ public class HomingMissile : Entity {
         );
     }
 
-    public static HomingMissile Create(HomingMissile prefab, Vector3 position, Quaternion rotation, Entity target, Attack attack) {
+    public static HomingMissile Create(HomingMissile prefab, Vector3 position, Quaternion rotation, Entity target, Attack attack, float speed) {
         HomingMissile missile = Instantiate(prefab, position, rotation);
         missile._toDeliver = attack;
         missile._target = target;
+        missile._speed = speed;
         return missile;
     }
 }
