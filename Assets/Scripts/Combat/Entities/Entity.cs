@@ -47,7 +47,7 @@ public class Entity : MonoBehaviour {
             ObjectiveManager.Instance.OnObjectiveComplete(obj);
         }
 
-        GameObject.FindObjectOfType<ParticleManager>().InstantiateExplosion(this.gameObject); 
+        ParticleManager.Instance.InstantiateExplosion(this.gameObject); 
 
         Destroy(this.gameObject, 0.2f);
     }
@@ -71,7 +71,7 @@ public class Entity : MonoBehaviour {
     public void AddEffect(Effect toApply) {
         // Ideally, effects that stack would instead have a counter to
         // know how many there are instead of having actual duplicates.
-        if(toApply.Stacks && HasEffect(toApply, out var present)) { present.ResetDuration(); }
+        if(!toApply.Stacks && HasEffect(toApply, out var present)) { present.ResetDuration(); }
         else { _activeEffects.Add(toApply); }
 
         _activeEffects.Sort(Effect.PrioritySort);
@@ -89,9 +89,7 @@ public class Entity : MonoBehaviour {
     }
 
     public void RemoveEffect(Effect toRemove) {
-        if(!_activeEffects.Remove(toRemove)) {
-            Debug.LogWarning($"Trying to remove an effect ({toRemove.Name}), that doesn't exist on this entity ({this.name})!", this);
-        }
+        _activeEffects.Remove(toRemove);
     }
 
     protected void ApplyEffectsOnHit(Attack toModify) {

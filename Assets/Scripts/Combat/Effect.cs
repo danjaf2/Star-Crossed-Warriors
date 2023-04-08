@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-
+[System.Serializable] // Allows displaying in editor debug mode.
 public class Effect {
     int _remainingDuration;
 
@@ -13,7 +13,7 @@ public class Effect {
 
     public virtual int Priority => 0;
     public virtual int Duration => 500;
-    public virtual bool Stacks => true;
+    public virtual bool Stacks => false;
     public virtual string Name => "Default Effect";
 
     protected Entity _Target;
@@ -32,7 +32,6 @@ public class Effect {
 
 public class FragileEffect : Effect {
     public override int Duration => 750;
-    public override bool Stacks => false;
 
     float _dmgMultiplier;
     public FragileEffect(Entity affecting, float dmgMultiplier = 2) : base(affecting) {
