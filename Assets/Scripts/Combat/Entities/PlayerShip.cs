@@ -19,12 +19,46 @@ public abstract class PlayerShip : ShipEntity {
     #region UNITY LIFETIME
 
     protected override void FixedUpdate() {
+
+        if (isStunned)
+        {
+            return; 
+        }
+
         base.FixedUpdate();
         HandleShoot(_shootInput);
         HandleMissile(_missileInput);
         HandleAbility(_abilityInput);
     }
 
+    private void Update()
+    {
+        if (isStunned)
+        {
+            _stunTimer += Time.deltaTime; 
+        }
+
+        if(_stunTimer > 2f) //Reset stun after 2 seconds
+        {
+            isStunned = false;
+            _stunTimer = 0; 
+        }
+    }
+
     #endregion
 
+
+    #region EMPSTUN
+    [SerializeField] public bool isStunned = false;
+    float _stunTimer = 0f; 
+
+    public void BeStunned()
+    {
+        isStunned = true;
+        _stunTimer = 0;
+
+        //Deal shield damage
+
+    }
+    #endregion
 }

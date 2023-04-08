@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
+public enum BulletVariant { REGULAR, EMP}; 
 public class Bullet : MonoBehaviour {
 
     const int DEFAULT_LIFETIME = 100;
@@ -13,10 +15,14 @@ public class Bullet : MonoBehaviour {
     Vector3 _velocity;
     Attack _toDeliver;
 
+    public BulletVariant _variant = BulletVariant.REGULAR;
+    public float _EMPRange = 100f; 
+
 
     private void FixedUpdate() {
-        if(_lifetime-- <= 0) { 
-            Destroy(this.gameObject);
+        if(_lifetime-- <= 0) {
+            //Destroy(this.gameObject);
+            PerformActionOnCollision(_variant); 
             return;
         }
 
@@ -27,13 +33,15 @@ public class Bullet : MonoBehaviour {
             {
                 // Deliver the attack to the hit entity.
                 entity.Hit(_toDeliver);
-                Destroy(this.gameObject);
+                PerformActionOnCollision(_variant);
+                //Destroy(this.gameObject);
             }
 
             // Destroy the bullet since it hit something.
             if (hitInfo.collider.gameObject.layer == 3)
             {
-                 Destroy(this.gameObject);
+                PerformActionOnCollision(_variant);
+                //Destroy(this.gameObject);
             }
            
         }
@@ -71,4 +79,41 @@ public class Bullet : MonoBehaviour {
         _velocity *= Time.fixedDeltaTime;
         _fixedUpateTravelDistance = _velocity.magnitude;
     }
+
+    public void PerformActionOnCollision(BulletVariant type)
+    {
+        switch(type)
+        {
+            case BulletVariant.REGULAR:
+                Destroy(this.gameObject);
+                break;
+            case BulletVariant.EMP:
+                PerformEMPBlast(); 
+                Destroy(this.gameObject, 3f);
+                break; 
+            default:
+                Destroy(this.gameObject);
+                break; //Do nothing
+        }
+    }
+
+    public void PerformEMPBlast()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _EMPRange);
+        foreach (var hitCollider in hitColliders)
+        {
+            PlayerShip ship = hitCollider.gameObject.GetComponent<PlayerShip>();
+            if (ship != null)
+            {
+                ship.BeStunned();
+                Debug.Log("Ship was stunned"); 
+            }
+        }
+
+        //Instantiate EMP effect
+
+        GameObject.FindObjectOfType<ParticleManager>().InstantiateEMP(gameObject); 
+
+    }
+    
 }

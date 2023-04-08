@@ -17,12 +17,17 @@ public class DemoShip : PlayerShip {
     [SerializeField] float _bulletDelay;
     [SerializeField] GameObject spawnPosition;
     public float _fireTimer = 5.0f;
+    public float currentCharge = 0.0f;
+    public bool charging = false;
 
     [Header("Missile")]
     [SerializeField] HomingMissile _missilePrefab;
 
-    public float currentCharge = 0.0f;
-    public bool charging = false; 
+    [Header("EMP")]
+    [SerializeField] Bullet _EMPBulletPrefab;
+    [SerializeField] float _empCost; 
+
+   
 
     public override void HandleMissile(bool input) {
         // flocking missiles -- or just many missiles with poor tracking
@@ -68,6 +73,35 @@ public class DemoShip : PlayerShip {
 
     public override void HandleAbility(bool input) {
         // EMP (will require defining a 'stun' method to call on enemies in range)
+        if (_fireTimer > 0) { _fireTimer--; }
+
+        float currentSpeed = 800; 
+        if (input && _fireTimer <= 0)
+        {
+            Vector3 forward = this.transform.forward;
+            if(transform.parent.tag == "Player")
+            {
+                forward = transform.parent.transform.forward;
+                currentSpeed += transform.parent.GetComponent<Rigidbody>().velocity.magnitude; 
+            }
+            else
+            {
+                currentSpeed += gameObject.GetComponent<Rigidbody>().velocity.magnitude; 
+            }
+            LoseEnergy(_empCost);
+            Attack bulletAttack = new Attack(0, this);
+            bulletAttack.OnHit += ReactToBulletHit;
+
+            Bullet.Create(
+                _EMPBulletPrefab,
+                bulletAttack,
+                spawnPosition.transform.position,
+                forward * currentSpeed
+            );
+
+            _fireTimer = _bulletDelay;
+        }
+
     }
 
     private void ReactToBulletHit(Attack atk, Entity hit)

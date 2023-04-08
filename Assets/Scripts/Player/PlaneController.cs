@@ -46,14 +46,18 @@ public class PlaneController : MonoBehaviour
     [SerializeField] public float rotationSpeed = 1;
 
 
-    [SerializeField] public GameObject particlePrefab; 
+    [SerializeField] public GameObject particlePrefab;
+
+    [SerializeField] public PlayerManager manager; 
 
     void Start()
     {
 
         rb = GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
-       
+        manager = GetComponent<PlayerManager>(); 
+
+
 
     }
 
@@ -61,6 +65,19 @@ public class PlaneController : MonoBehaviour
     void Update()
     {
       
+       if(manager != null)
+        {
+            if(manager.playerClass != null)
+            {
+                if(manager.playerClass.isStunned)
+                {
+                    rb.velocity = Vector3.zero;
+                    throttle = 0;
+                    Debug.Log("Player is stunned"); 
+                    return; 
+                }
+            }
+        }
 
 
         ControllerProcessing();

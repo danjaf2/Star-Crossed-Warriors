@@ -40,7 +40,10 @@ public class PlayerManager : MonoBehaviour
         }
 
         vehicles[(int)type].SetActive(true); //Set correct vehicle to active
-        
+
+        playerClass = vehicles[(int)type].GetComponent<PlayerShip>();
+
+
     }
 
     public void AdjustVehicleBasedOnType()
