@@ -2,36 +2,17 @@
 using UnityEngine;
 
 public abstract class ShipController : MonoBehaviour {
+    protected PlayerShip _Controlling;
 
-    PlayerShip _controlling;
-
-    protected bool _ShootInput;
-    protected bool _MissileInput;
-    protected bool _AbilityInput;
-
-
-    private void Awake() {
-        Setup();
-    }
+    private void Awake() { Setup(); }
 
     public void Setup() {
-        if (TryGetComponent<PlayerShip>(out var ship)) { _controlling = ship; }
+        if (TryGetComponent<PlayerShip>(out var ship)) { _Controlling = ship; }
         else {
             this.enabled = false;
             Debug.Log($"Ship controller expected a {nameof(PlayerShip)} on this GameObject!", this);
         }
     }
-
-    protected virtual void FixedUpdate() {
-        _controlling.SetAbilityInput(_AbilityInput);
-        _controlling.SetMissileInput(_MissileInput);
-        _controlling.SetShootInput(_ShootInput);
-    }
-
-
-
-    // This isn't used since the flying part of ships is on another component.
-    protected abstract Maneuver GetManeuverInputs();
 }
 
 // Old implementation
