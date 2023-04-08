@@ -44,7 +44,15 @@ public class ObstacleCollisionAvoidance : AIMovement
                 return output;
             }
 
-            desiredVelocity = Vector3.Cross(hit.normal, transform.forward);
+            if(rb.velocity.magnitude < 50)
+            {
+                desiredVelocity = -1*transform.forward;
+            }
+            else
+            {
+                desiredVelocity = Vector3.Cross(hit.normal, transform.forward);
+            }
+            
             objectToAvoid = hit.transform.gameObject;
             output.linear = desiredVelocity * weight;
             output.angular = Quaternion.LookRotation(desiredVelocity);

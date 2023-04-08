@@ -31,12 +31,29 @@ public class WanderTowardObjective : Node
     public override NodeState Evaluate()
     {
 
-        if (objectives.Count == 0)
+        
+        if (referenceTree.TryGetComponent<ScoutShip>(out ScoutShip scout))
         {
-            
+            if (referenceTree.TryGetComponent<PlayerShip>(out PlayerShip ship))
+            {
+                if (referenceTree.gameObject.GetComponent<AIAgent>().goalWaypoint != null)
+                {
+                    if (Vector3.Dot((referenceTree.transform.forward).normalized, (referenceTree.gameObject.GetComponent<AIAgent>().goalWaypoint.transform.position - referenceTree.transform.position).normalized) > 0.98f)
+                    {
+                        RaycastHit hit;
+                        LayerMask mask = LayerMask.GetMask("Obstacle");
+                        if (!Physics.Raycast(referenceTree.transform.position, referenceTree.transform.forward, out hit, 2000, mask))
+                        {
+                            ship.SetAbilityInput(true);
+                        }
+                    }
+                }
+            }
         }
+
         if (((SimpleObjective)GetData("CurrentObjective")) != null)
         {
+            
             if (GetData("CurrentObjective") != null)
             {
                 if (Vector3.Distance(referenceTree.transform.position, ((SimpleObjective)root.GetData("CurrentObjective")).gameObject.transform.position) < 500|| Vector3.Distance(referenceTree.transform.position, ((SimpleObjective)root.GetData("CurrentObjective")).gameObject.transform.position) > 2500)

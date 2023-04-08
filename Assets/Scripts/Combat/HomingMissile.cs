@@ -42,7 +42,7 @@ public class HomingMissile : Entity {
 
         if (_lifetime-- <= 0) { OnDeath(); }
         if (_target == null) { return; }
-
+        //Debug.Log(_target.name);
         Vector3 delta = (_target.transform.position - this.transform.position);
         this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, Quaternion.LookRotation(delta), _turnSpeed);
 

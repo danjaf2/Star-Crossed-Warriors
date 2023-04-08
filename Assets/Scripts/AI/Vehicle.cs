@@ -80,7 +80,7 @@ public class Vehicle : MonoBehaviour
 
     public void BoostForward(float boostMultiplier)
     {
-        boostMultiplier = 100000;
+        
         if (rb == null)
         {
             rb = GetComponent<Rigidbody>();

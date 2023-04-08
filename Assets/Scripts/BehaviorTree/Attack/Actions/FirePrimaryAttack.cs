@@ -27,7 +27,7 @@ public class FirePrimaryAttack : Node
             //Debug.Log("Pew");
             if(referenceTree.TryGetComponent<PlayerShip>(out PlayerShip ship))
             {
-                ship.HandleShoot(true);
+                ship.SetShootInput(true);
             }
             else
             {

@@ -65,4 +65,19 @@ public class BaseAlly: BehaviorTree.Tree
         setTreeRef(root.children, this);
         return root;
     }
+
+    private void Update()
+    {
+        if (_root != null)
+        {
+            if (this.TryGetComponent<PlayerShip>(out PlayerShip ship))
+            {
+                ship.SetShootInput(false);
+                ship.SetMissileInput(false);
+                ship.SetAbilityInput(false);
+            }
+            _root.Evaluate();
+        }
+
+    }
 }

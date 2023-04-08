@@ -24,11 +24,16 @@ public class SimpleObjective : MonoBehaviour, IObjective {
     public Material notActiveMat;
     public Material ActiveMat;
 
+    public bool finalObjective = false;
+
 
 
 
     private void Awake() {
-        ObjectiveManager.Instance.RegisterObjective(this);
+        if (!finalObjective)
+        {
+            ObjectiveManager.Instance.RegisterObjective(this);
+        }
     }
 
     public void SetActive()
@@ -39,10 +44,15 @@ public class SimpleObjective : MonoBehaviour, IObjective {
 
     private void Start()
     {
-        if(active)
+        if (finalObjective)
+        {
+            ObjectiveManager.Instance.RegisterObjective(this);
+        }
+        if (active)
         {
             SetActive();
         }
+        
         Collider[] points = Physics.OverlapSphere(this.transform.position, objectiveRadius, waypointMask);
         foreach (Collider c in points)
         {

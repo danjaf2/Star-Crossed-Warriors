@@ -36,7 +36,10 @@ public class ScoutShip : PlayerShip {
 
     public override void HandleAbility(bool input) {
         // boost
-        if (_boostCoolDown > 0) { _boostCoolDown--; }
+        if (_boostCoolDown > 0) { 
+            _boostCoolDown-= Time.deltaTime;
+            return;
+        }
 
         if (input && _boostCoolDown <= 0)
         {
@@ -47,7 +50,7 @@ public class ScoutShip : PlayerShip {
   
             if(transform.parent.tag == "Player")
             {
-                Debug.Log("Player boosted");
+                //Debug.Log("Player boosted");
                 transform.parent.GetComponent<PlaneController>().BoostForward(_boostMultiplier);
             }
             else
@@ -56,7 +59,7 @@ public class ScoutShip : PlayerShip {
             }
 
           
-            Debug.Log("Scout boosted"); 
+            Debug.Log(this.gameObject.name); 
 
         }
     }
@@ -102,13 +105,15 @@ public class ScoutShip : PlayerShip {
         // On releasing the key.
         else if (_missileInputHeld) {
             if (_lockOnTimer <= 0) {
+                if(_missileTarget != null) {
                 HomingMissile.Create(
                     _missilePrefab,
-                    this.transform.position,
+                    bulletSpawnPosition.transform.position,
                     this.transform.rotation,
                     _missileTarget,
                     new Attack(_missileDamage, this)
                 );
+                }
             }
 
             _missileTarget = null;

@@ -21,6 +21,7 @@ public class CheckAllyIsInDanger : Node
         Waypoint target = (Waypoint)GetData("AllyPingedLocation");
         if (target == null)
         {
+           
             state = NodeState.FAILURE;
             return state;
         }
@@ -33,7 +34,24 @@ public class CheckAllyIsInDanger : Node
                     agent.goalWaypoint = target;
                 }
             }
-            if(Vector3.Distance(referenceTree.transform.position, target.transform.position) < referenceTree.GetComponent<BaseAlly>().findRange)
+
+            if (referenceTree.TryGetComponent<ScoutShip>(out ScoutShip scout))
+            {
+                if (referenceTree.TryGetComponent<PlayerShip>(out PlayerShip ship))
+                {
+                   
+                    if(Vector3.Dot((referenceTree.transform.forward).normalized, (((Waypoint)GetData("AllyPingedLocation")).gameObject.transform.position - referenceTree.transform.position).normalized) > 0.98f)
+                    {
+                        RaycastHit hit;
+                        LayerMask mask = LayerMask.GetMask("Obstacle");
+                        if (!Physics.Raycast(referenceTree.transform.position, referenceTree.transform.forward , out hit, 2000, mask))
+                        {
+                            ship.SetAbilityInput(true);
+                        }
+                    }
+                }
+            }
+            if (Vector3.Distance(referenceTree.transform.position, target.transform.position) < referenceTree.GetComponent<BaseAlly>().findRange)
             {
                 root.ClearData("AllyPingedLocation");
             }

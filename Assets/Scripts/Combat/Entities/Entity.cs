@@ -25,6 +25,11 @@ public class Entity : MonoBehaviour {
 
             OnDeath();
         }
+        else
+        {
+            if (atk.Sender == null) { Debug.Log(this.name + " was shoot!"); }
+            else { Debug.Log(this.name + $" was shoot by {atk.Sender.name}!"); }
+        }
 
         atk.Hit(this);
         OnHit?.Invoke(atk);

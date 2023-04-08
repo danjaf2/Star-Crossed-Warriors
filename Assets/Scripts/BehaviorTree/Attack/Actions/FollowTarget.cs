@@ -30,16 +30,35 @@ public class FollowTarget : Node
             if(Vector3.Distance(target.position, referenceTree.transform.position)<goalRange && GetData("Recharge") == null) {
                
                 referenceTree.GetComponent<AIAgent>().TrackTarget(target);
+
+                if (referenceTree.TryGetComponent<ScoutShip>(out ScoutShip scout))
+                {
+                    if (referenceTree.TryGetComponent<PlayerShip>(out PlayerShip ship))
+                    {
+
+                        if (Vector3.Dot((referenceTree.transform.forward).normalized, (target.transform.position - referenceTree.transform.position).normalized) > 0.80f)
+                        {
+                            RaycastHit hit;
+                            LayerMask mask = LayerMask.GetMask("Obstacle", "Character");
+                            if (!Physics.Raycast(referenceTree.transform.position, referenceTree.transform.forward, out hit, 1000, mask))
+                            {
+                                ship.SetAbilityInput(true);
+                            }
+                        }
+                    }
+                }
             }
             else
             {
                 root.ClearData("target");
                 referenceTree.GetComponent<AIAgent>().UnTrackTarget();
             }
+
             
 
 
-            
+
+
             state = NodeState.SUCCESS;
             return state;
             //Is in range?
