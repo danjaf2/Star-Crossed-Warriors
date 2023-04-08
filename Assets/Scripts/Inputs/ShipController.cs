@@ -2,25 +2,36 @@
 using UnityEngine;
 
 public abstract class ShipController : MonoBehaviour {
-    // Ship controllers continuously raise events that the ships themselves can subscribe to.
-    // This way, a ship that doesn't have missiles doesn't need to subscibe to the missile input event.
 
-    public event Action<Maneuver> GetManeuver;
-    public event Action<bool> GetShootInput;
-    public event Action<bool> GetMissileInput;
-    public event Action<bool> GetAbilityInput;
+    PlayerShip _controlling;
 
-    protected abstract Maneuver ManeuverInputs();
-    protected abstract bool ShootInput();
-    protected abstract bool MissileInput();
-    protected abstract bool AbilityInput();
+    protected bool _ShootInput;
+    protected bool _MissileInput;
+    protected bool _AbilityInput;
 
-    private void Update() {
-        GetManeuver?.Invoke(ManeuverInputs());
-        GetShootInput?.Invoke(ShootInput());
-        GetMissileInput?.Invoke(MissileInput());
-        GetAbilityInput?.Invoke(AbilityInput());
+
+    private void Awake() {
+        Setup();
     }
+
+    public void Setup() {
+        if (TryGetComponent<PlayerShip>(out var ship)) { _controlling = ship; }
+        else {
+            this.enabled = false;
+            Debug.Log($"Ship controller expected a {nameof(PlayerShip)} on this GameObject!", this);
+        }
+    }
+
+    protected virtual void FixedUpdate() {
+        _controlling.SetAbilityInput(_AbilityInput);
+        _controlling.SetMissileInput(_MissileInput);
+        _controlling.SetShootInput(_ShootInput);
+    }
+
+
+
+    // This isn't used since the flying part of ships is on another component.
+    protected abstract Maneuver GetManeuverInputs();
 }
 
 // Old implementation
