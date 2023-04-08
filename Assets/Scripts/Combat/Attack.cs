@@ -7,23 +7,20 @@ public class Attack {
     public Vector3 Force;
 
     /// <summary> Full constructor. </summary>
-    public Attack(float damage, Entity sender, Vector3 force) {
+    public Attack(float damage, Entity sender, Vector3 force, Action<Attack, Entity> onHit) {
         Damage = damage;
         Sender = sender;
         Force = force;
-        OnHit = null;
+        OnHit = onHit;
     }
 
     /// <summary> Limited constructor. </summary>
-    public Attack(float damage, Entity sender) : this(damage, sender, Vector3.zero) { }
-    
+    public Attack(float damage, Entity sender) : this(damage, sender, Vector3.zero, null) { }
+    /// <summary> Less limited constructor. </summary>
+    public Attack(float damage, Entity sender, Vector3 force) : this(damage, sender, force, null) { }
+
     /// <summary> Copy constructor. </summary>
-    public Attack(Attack atk) : this(atk.Damage, atk.Sender, atk.Force) { 
-        // If this attack hits, raise the copied attack's OnHit as well.
-        OnHit += (atk, ent) => { 
-            atk.OnHit.Invoke(this, ent); 
-        };
-    }
+    public Attack(Attack atk) : this(atk.Damage, atk.Sender, atk.Force, atk.OnHit) { }
 
     /// <summary> Raised when the attack is passed onto an entity. </summary>
     public event Action<Attack, Entity> OnHit;
