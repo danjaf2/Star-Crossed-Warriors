@@ -107,7 +107,7 @@ static class Utility {
     public static T GetRandom<T>(this IList<T> list) {
         int maxIndex = list.Count;
 
-        if (maxIndex < 0) return default(T);
+        if (maxIndex <= 0) return default(T);
         return list[Random.Range(0, maxIndex)];
     }
 
