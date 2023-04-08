@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using AI;
+using System.Collections;
 using UnityEngine;
 
 
@@ -46,6 +47,44 @@ public class FragileEffect : Effect {
     // A static function structured like this can be directly subscribed to an Attack's 'OnHit' event.
     public static void ApplyEffect(Attack atk, Entity applyTo) {
         applyTo.AddEffect(new FragileEffect(applyTo));
+    }
+}
+
+public class ResetAggroEffect : Effect
+{
+    public override int Duration => 1;
+    public override bool Stacks => false;
+
+    float _dmgMultiplier;
+    public ResetAggroEffect(Entity affecting) : base(affecting)
+    {
+        if (affecting.gameObject.TryGetComponent<AIAgent>(out AIAgent agent))
+        {
+            if (affecting.gameObject.TryGetComponent<BehaviorTree.Tree>(out BehaviorTree.Tree tree))
+            {
+                
+                tree._root.ClearData("target");
+                agent.UnTrackTarget();
+            }
+
+        }
+    }
+
+    public override void ModifyHit(Attack toModify)
+    {
+       
+    }
+
+    public void resetAggro(Attack atk,Entity affecting)
+    {
+        
+
+    }
+
+    // A static function structured like this can be directly subscribed to an Attack's 'OnHit' event.
+    public static void ApplyEffect(Attack atk, Entity applyTo)
+    {
+        applyTo.AddEffect(new ResetAggroEffect(applyTo));
     }
 }
 
