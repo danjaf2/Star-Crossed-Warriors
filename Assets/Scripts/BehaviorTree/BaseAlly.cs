@@ -73,6 +73,10 @@ public class BaseAlly: BehaviorTree.Tree
         {
             if (this.TryGetComponent<PlayerShip>(out PlayerShip ship))
             {
+                if(ship.isStunned)
+                {
+                    return;
+                }
                 ship.SetShootInput(false);
                 ship.SetMissileInput(false);
                 ship.SetAbilityInput(false);

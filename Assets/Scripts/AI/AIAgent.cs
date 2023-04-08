@@ -90,6 +90,13 @@ namespace AI
             Vector3 currentPos = this.transform.position;
             Quaternion currentRot = this.transform.rotation;
 
+            if(TryGetComponent(out PlayerShip ship))
+            {
+                if (ship.isStunned)
+                {
+                    return;
+                }
+            }
             //Pathfinding logic 
             if (trackedTarget == null && (path.Count == 0|| goalWaypoint != currentGoalWaypoint) && (goalWaypoint!=null||goalWaypoint!=currentGoalWaypoint))
             {

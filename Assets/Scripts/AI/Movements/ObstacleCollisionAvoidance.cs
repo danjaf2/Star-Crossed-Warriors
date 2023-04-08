@@ -51,19 +51,36 @@ public class ObstacleCollisionAvoidance : AIMovement
             if(rb.velocity.magnitude < 50)
             {
                 desiredVelocity = -1*transform.forward;
+                objectToAvoid = hit.transform.gameObject;
+                output.linear = desiredVelocity * weight;
+                output.angular = Quaternion.LookRotation(desiredVelocity);
+                prevRotation = output.angular;
+                prevDirection = desiredVelocity;
+                StartCoroutine(Avoiding(8));
             }
             else
             {
                 desiredVelocity = Vector3.Cross(hit.normal, transform.forward);
+                objectToAvoid = hit.transform.gameObject;
+                output.linear = desiredVelocity * weight;
+                output.angular = Quaternion.LookRotation(desiredVelocity);
+                prevRotation = output.angular;
+                prevDirection = desiredVelocity;
+                StartCoroutine(Avoiding());
             }
-            
-            objectToAvoid = hit.transform.gameObject;
-            output.linear = desiredVelocity * weight;
-            output.angular = Quaternion.LookRotation(desiredVelocity);
-            prevRotation = output.angular; 
-            prevDirection = desiredVelocity;
-            StartCoroutine(Avoiding());
+
+
             //Debug.Log(hit.transform.name);
+        }
+        else
+        {
+            if (avoiding)
+            {
+                output.linear = prevDirection;
+                output.angular = prevRotation;
+                Debug.DrawRay(transform.position, output.linear * 20, Color.green);
+                return output;
+            }
         }
      
         Debug.DrawRay(transform.position, output.linear * 20, Color.magenta);
@@ -91,6 +108,20 @@ public class ObstacleCollisionAvoidance : AIMovement
         yield return new WaitForSeconds(avoidanceTime);
         objectToAvoid= null;
         avoiding= false;
+        GetComponent<Seek>().canPerform = true;
+        GetComponent<FaceTarget>().canPerform = true;
+        prevRotation = Quaternion.identity;
+        prevDirection = Vector3.zero;
+    }
+
+    IEnumerator Avoiding(float av)
+    {
+        avoiding = true;
+        GetComponent<Seek>().canPerform = false;
+        GetComponent<FaceTarget>().canPerform = false;
+        yield return new WaitForSeconds(av);
+        objectToAvoid = null;
+        avoiding = false;
         GetComponent<Seek>().canPerform = true;
         GetComponent<FaceTarget>().canPerform = true;
         prevRotation = Quaternion.identity;

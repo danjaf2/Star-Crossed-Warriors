@@ -36,6 +36,8 @@ public class ScoutShip : PlayerShip {
     [SerializeField] float _boostMultiplier = 5.0f;
 
 
+
+
     private void Start()
     {
        

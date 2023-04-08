@@ -25,7 +25,11 @@ public class DemoShip : PlayerShip {
 
     [Header("EMP")]
     [SerializeField] Bullet _EMPBulletPrefab;
-    [SerializeField] float _empCost; 
+    [SerializeField] float _empCost;
+    public float _EmpTimer = 5f;
+    public float _EmpDelay = 30f;
+
+    public static float currentProjectileSpeed = 400;
 
    
 
@@ -73,10 +77,10 @@ public class DemoShip : PlayerShip {
 
     public override void HandleAbility(bool input) {
         // EMP (will require defining a 'stun' method to call on enemies in range)
-        if (_fireTimer > 0) { _fireTimer--; }
+        if (_EmpTimer > 0) { _EmpTimer-=Time.fixedDeltaTime; }
 
         float currentSpeed = 800; 
-        if (input && _fireTimer <= 0)
+        if (input && _EmpTimer <= 0)
         {
             Vector3 forward = this.transform.forward;
             if(transform.parent.tag == "Player")
@@ -87,6 +91,7 @@ public class DemoShip : PlayerShip {
             else
             {
                 currentSpeed += gameObject.GetComponent<Rigidbody>().velocity.magnitude; 
+
             }
             LoseEnergy(_empCost);
             Attack bulletAttack = new Attack(0, this);
@@ -99,7 +104,7 @@ public class DemoShip : PlayerShip {
                 forward * currentSpeed
             );
 
-            _fireTimer = _bulletDelay;
+            _EmpTimer = _EmpDelay;
         }
 
     }
