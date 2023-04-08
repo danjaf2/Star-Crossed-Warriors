@@ -309,7 +309,7 @@ MonoBehaviour:
   findMask:
     serializedVersion: 2
     m_Bits: 320
-  findRange: 1000
+  findRange: 1300
   maxAggroRange: 1300
   attackRange: 1000
   attackAngleThreshold: 10

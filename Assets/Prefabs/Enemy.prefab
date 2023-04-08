@@ -293,8 +293,8 @@ MonoBehaviour:
   findMask:
     serializedVersion: 2
     m_Bits: 320
-  findRange: 500
-  maxAggroRange: 800
+  findRange: 1300
+  maxAggroRange: 1300
   attackRange: 800
   attackAngleThreshold: 10
   attackMask:
@@ -353,7 +353,7 @@ MonoBehaviour:
   drawingMode: 1
   outlineLayer: 0
   outlineTargets:
-  - IsVisible: 0
+  - IsVisible: 1
     CutoutMask: 8
     edgeDilateAmount: 5
     frontEdgeDilateAmount: 5

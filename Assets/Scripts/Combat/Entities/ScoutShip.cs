@@ -85,6 +85,7 @@ public class ScoutShip : PlayerShip {
 
     private void ReactToBulletHit(Attack atk, Entity hit) {
         hit.AddEffect(new FragileEffect(hit));
+        hit.AddEffect(new ResetAggroEffect(hit));
         Debug.Log($"Scout knows that {hit.name} was hit for {atk.Damage} damage.\nApplied a fragile debuff.");
     }
 

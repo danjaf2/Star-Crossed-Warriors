@@ -56,7 +56,7 @@ public class DemoShip : PlayerShip {
             charging = true; 
             currentCharge += 0.1f;
             currentCharge = Mathf.Clamp01(currentCharge);   
-            Debug.Log("Charging" + currentCharge); 
+            //Debug.Log("Charging" + currentCharge); 
         }
        
       
@@ -73,6 +73,7 @@ public class DemoShip : PlayerShip {
     private void ReactToBulletHit(Attack atk, Entity hit)
     {
         hit.AddEffect(new FragileEffect(hit));
+        hit.AddEffect(new ResetAggroEffect(hit));
         Debug.Log($"Demoman knows that {hit.name} was hit for {atk.Damage} damage.\nApplied a fragile debuff.");
     }
 }
