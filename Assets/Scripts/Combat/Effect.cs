@@ -69,17 +69,6 @@ public class ResetAggroEffect : Effect
         }
     }
 
-    public override void ModifyHit(Attack toModify)
-    {
-       
-    }
-
-    public void resetAggro(Attack atk,Entity affecting)
-    {
-        
-
-    }
-
     // A static function structured like this can be directly subscribed to an Attack's 'OnHit' event.
     public static void ApplyEffect(Attack atk, Entity applyTo)
     {
