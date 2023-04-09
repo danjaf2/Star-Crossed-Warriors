@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerModel : MonoBehaviour
+public class PlayerModel : NetworkBehaviour
 {
     public Quaternion originalRot;
     public Vector3 eulerRot = Vector3.zero;
@@ -16,6 +17,7 @@ public class PlayerModel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         if (transform.tag == "Player" || transform.tag == "Plane")
         {
             transform.position = transform.parent.position;

@@ -1,9 +1,12 @@
+using Cinemachine;
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : NetworkBehaviour
 {
     public enum ClassType { SCOUT, DEMO, HEAVY, NONE };
 
@@ -18,30 +21,64 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] public List<GameObject> vehicles;
 
-    void Start()
-    {
+    public CinemachineVirtualCamera virtualCamera;
+
+    public GameObject dCamF;
+    public GameObject dCamL;
+    public GameObject sCamF;
+    public GameObject sCamL;
+    public GameObject hCamF;
+    public GameObject hCamL;
+
+    public override void OnNetworkSpawn()
+    { // This is basically a Start method
+        if (IsOwner)
+        {
+            virtualCamera.gameObject.SetActive(true);
+        }
         vehicle = GameObject.FindGameObjectWithTag("Plane");
 
-        if(type == ClassType.DEMO)
+        if (type == ClassType.DEMO)
         {
-            playerClass = new DemoShip(); 
+            if (IsOwner)
+            {
+                virtualCamera.LookAt = dCamL.transform;
+                virtualCamera.Follow = dCamF.transform;
+            }
+            playerClass = new DemoShip();
         }
         else if (type == ClassType.SCOUT)
         {
+            if (IsOwner)
+            {
+                virtualCamera.LookAt = sCamL.transform;
+                virtualCamera.Follow = sCamF.transform;
+            }
             playerClass = new ScoutShip();
         }
         else if (type == ClassType.HEAVY)
         {
+            if (IsOwner)
+            {
+                virtualCamera.LookAt = hCamL.transform;
+                virtualCamera.Follow = hCamF.transform;
+            }
             playerClass = new HeavyShip();
         }
         else
         {
-            playerClass = null; 
+            playerClass = null;
         }
 
         vehicles[(int)type].SetActive(true); //Set correct vehicle to active
 
         playerClass = vehicles[(int)type].GetComponent<PlayerShip>();
+        base.OnNetworkSpawn(); // Not sure if this is needed though, but good to have it.
+    }
+    void Start()
+    { 
+
+        
 
 
     }

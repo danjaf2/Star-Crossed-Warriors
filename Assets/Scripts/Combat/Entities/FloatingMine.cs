@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Globalization;
 using UnityEngine;
 
 [RequireComponent(typeof(ShipEntity))]

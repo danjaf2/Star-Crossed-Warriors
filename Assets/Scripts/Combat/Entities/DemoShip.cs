@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Net.NetworkInformation;
+using Unity.Netcode;
 using UnityEngine;
 
 public class DemoShip : PlayerShip {
@@ -39,6 +41,13 @@ public class DemoShip : PlayerShip {
 
     public override void HandleShoot(bool input) {
         // charged shot
+        if (transform.parent.gameObject.GetComponent<NetworkBehaviour>()!=null)
+        {
+            if (!transform.parent.gameObject.GetComponent<NetworkBehaviour>().IsOwner)
+            {
+                return;
+            }
+        }
 
         if (_fireTimer > 0) { _fireTimer--; }
 
@@ -77,6 +86,14 @@ public class DemoShip : PlayerShip {
 
     public override void HandleAbility(bool input) {
         // EMP (will require defining a 'stun' method to call on enemies in range)
+        if (transform.parent.gameObject.GetComponent<NetworkBehaviour>() != null)
+        {
+            if (!transform.parent.gameObject.GetComponent<NetworkBehaviour>().IsOwner)
+            {
+                return;
+            }
+        }
+
         if (_EmpTimer > 0) { _EmpTimer-=Time.fixedDeltaTime; }
 
         float currentSpeed = 800; 

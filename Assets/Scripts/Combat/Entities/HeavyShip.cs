@@ -21,7 +21,7 @@ public class HeavyShip : PlayerShip {
 
     public override void HandleShoot(bool input) {
         // LASER BEAM!!!
-
+      
         if (_fireTimer > 0) { _fireTimer--; }
 
         if (input && _fireTimer <= 0)

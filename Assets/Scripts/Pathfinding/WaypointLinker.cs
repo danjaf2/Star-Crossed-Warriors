@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
@@ -176,4 +176,4 @@ public class WaypointLinker : EditorWindow
 
         Debug.Log("The function ran.");
     }
-}
+}*/

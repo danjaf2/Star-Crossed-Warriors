@@ -1,11 +1,12 @@
 using AI;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PlaneController : MonoBehaviour
+public class PlaneController : NetworkBehaviour
 {
     // Start is called before the first frame update
 
@@ -52,7 +53,10 @@ public class PlaneController : MonoBehaviour
 
     void Start()
     {
-
+        if (!IsOwner)
+        {
+            return;
+        }
         rb = GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         manager = GetComponent<PlayerManager>(); 
@@ -64,8 +68,12 @@ public class PlaneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
-       if(manager != null)
+
+        if (!IsOwner)
+        {
+            return;
+        }
+        if (manager != null)
         {
             if(manager.playerClass != null)
             {

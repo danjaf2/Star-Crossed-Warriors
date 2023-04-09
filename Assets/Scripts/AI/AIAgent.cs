@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.Rendering.CameraUI;
+//using static UnityEditor.Rendering.CameraUI;
 
 namespace AI
 {

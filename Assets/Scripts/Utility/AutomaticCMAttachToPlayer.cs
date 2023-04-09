@@ -11,8 +11,15 @@ public class AutomaticCMAttachToPlayer : MonoBehaviour
     void Start()
     {
        virtualCamera = GetComponent<CinemachineVirtualCamera>();
-        virtualCamera.Follow = GameObject.FindGameObjectWithTag("PlayerFollowCamera").transform;
-        virtualCamera.LookAt = GameObject.FindGameObjectWithTag("PlayerCockpit").transform;
+        try
+        {
+            //virtualCamera.Follow = GameObject.FindGameObjectWithTag("PlayerFollowCamera").transform;
+            //virtualCamera.LookAt = GameObject.FindGameObjectWithTag("PlayerCockpit").transform;
+        }
+        catch (NullReferenceException ex)
+        {
+            Debug.Log("Player hasn't been spawned yet");
+        }
     }
 
     // Update is called once per frame
@@ -20,16 +27,16 @@ public class AutomaticCMAttachToPlayer : MonoBehaviour
     {
         try
         {
-            virtualCamera.Follow = GameObject.FindGameObjectWithTag("PlayerFollowCamera").transform;
-            virtualCamera.LookAt = GameObject.FindGameObjectWithTag("PlayerCockpit").transform;
+            //virtualCamera.Follow = GameObject.FindGameObjectWithTag("PlayerFollowCamera").transform;
+            //virtualCamera.LookAt = GameObject.FindGameObjectWithTag("PlayerCockpit").transform;
         }catch(NullReferenceException ex)
         {
             Debug.Log("Player hasn't been spawned yet");
         }
 
-        if (virtualCamera.Follow != null)
+        //if (virtualCamera.Follow != null)
         {
-            virtualCamera.transform.rotation = virtualCamera.Follow.rotation;
+            //virtualCamera.transform.rotation = virtualCamera.Follow.rotation;
         }
 
         

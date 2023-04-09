@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 // An entity is an object in 3D world-space that can be hit.
-public class Entity : MonoBehaviour {
+public class Entity : NetworkBehaviour {
 
     [Header("Gameplay")]
     [SerializeField] int _maxHealth = 150;
