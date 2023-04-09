@@ -86,6 +86,9 @@ GameObject:
   - component: {fileID: 7275190077286067799}
   - component: {fileID: 7275190077286067792}
   - component: {fileID: 2236427987189946583}
+  - component: {fileID: 1637596423}
+  - component: {fileID: 1637596422}
+  - component: {fileID: 8656677808707988616}
   m_Layer: 6
   m_Name: AllyDemo
   m_TagString: Plane
@@ -334,15 +337,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 400
   _maxEnergy: 300
+  isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 099f89479c5ac774b870d04859a2eca9, type: 3}
   _bulletDamage: 4
   _bulletSpeed: 400
   _bulletDelay: 60
   spawnPosition: {fileID: 627333376138807179}
   _fireTimer: 5
-  _missilePrefab: {fileID: 7596523783035753511, guid: 10008cea032da04409a6aa32bb5b5ef7, type: 3}
   currentCharge: 0
   charging: 0
+  _missilePrefab: {fileID: 7596523783035753511, guid: 10008cea032da04409a6aa32bb5b5ef7, type: 3}
+  _EMPBulletPrefab: {fileID: 3900607670785296070, guid: f8b514c48b7a27f4b8fc08e0979d3622, type: 3}
+  _empCost: 0
+  _EmpTimer: 5
+  _EmpDelay: 30
+  playerControlled: 0
 --- !u!33 &7275190077286067798
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -413,7 +422,7 @@ MonoBehaviour:
   drawingMode: 1
   outlineLayer: 0
   outlineTargets:
-  - IsVisible: 0
+  - IsVisible: 1
     CutoutMask: 8
     edgeDilateAmount: 5
     frontEdgeDilateAmount: 5
@@ -429,7 +438,7 @@ MonoBehaviour:
     cutoutTextureName: 
     DilateRenderingMode: 0
     cutoutTextureIndex: 0
-  - IsVisible: 0
+  - IsVisible: 1
     CutoutMask: 8
     edgeDilateAmount: 5
     frontEdgeDilateAmount: 5
@@ -445,7 +454,7 @@ MonoBehaviour:
     cutoutTextureName: 
     DilateRenderingMode: 0
     cutoutTextureIndex: 0
-  - IsVisible: 0
+  - IsVisible: 1
     CutoutMask: 8
     edgeDilateAmount: 5
     frontEdgeDilateAmount: 5
@@ -461,7 +470,7 @@ MonoBehaviour:
     cutoutTextureName: 
     DilateRenderingMode: 0
     cutoutTextureIndex: 0
-  - IsVisible: 0
+  - IsVisible: 1
     CutoutMask: 8
     edgeDilateAmount: 5
     frontEdgeDilateAmount: 5
@@ -477,7 +486,7 @@ MonoBehaviour:
     cutoutTextureName: 
     DilateRenderingMode: 0
     cutoutTextureIndex: 0
-  - IsVisible: 0
+  - IsVisible: 1
     CutoutMask: 8
     edgeDilateAmount: 5
     frontEdgeDilateAmount: 5
@@ -534,3 +543,57 @@ MonoBehaviour:
   ally: 1
   range: 5000
   sensitivity: 0.5
+--- !u!114 &1637596423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3443443204099353935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1
+--- !u!114 &1637596422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3443443204099353935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &8656677808707988616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3443443204099353935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace BehaviorTree
 {
-    public abstract class Tree : MonoBehaviour
+    public abstract class Tree : NetworkBehaviour
     {
 
         public Node _root = null;

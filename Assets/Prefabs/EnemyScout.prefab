@@ -18,6 +18,8 @@ GameObject:
   - component: {fileID: 3544637754175008260}
   - component: {fileID: 3544637754175008766}
   - component: {fileID: 3544637754175008767}
+  - component: {fileID: 9207398352395566004}
+  - component: {fileID: -6747615780429386193}
   m_Layer: 6
   m_Name: EnemyScout
   m_TagString: Enemy
@@ -136,10 +138,17 @@ MonoBehaviour:
   maxDegreesDelta: 360
   lockY: 0
   debug: 0
-  AIAgentTarget: {fileID: 0}
-  SeekerPrefab: {fileID: 0}
   vehicle: {fileID: 0}
   behaviorType: 0
+  pathfinding: {fileID: 0}
+  path: []
+  mostRecentWaypoint: {fileID: 0}
+  goalWaypoint: {fileID: 0}
+  currentGoalWaypoint: {fileID: 0}
+  pathIndex: 0
+  skipNodeMask:
+    serializedVersion: 2
+    m_Bits: 0
   trackedTarget: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   thrustThreshold: 0.3
@@ -193,6 +202,8 @@ MonoBehaviour:
   debug: 1
   weight: 1
   canPerform: 1
+  usePredictiveSeek: 1
+  projectileSpeed: 3900
 --- !u!114 &3544637754175008766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,6 +219,8 @@ MonoBehaviour:
   debug: 1
   weight: 1
   canPerform: 1
+  usePredictiveAim: 1
+  projectileSpeed: 3900
 --- !u!114 &3544637754175008767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,3 +243,45 @@ MonoBehaviour:
   avoidanceDistanceMinimum: 50
   objectToAvoid: {fileID: 0}
   avoidanceTime: 5
+--- !u!114 &9207398352395566004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4463204189630156342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &-6747615780429386193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4463204189630156342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1

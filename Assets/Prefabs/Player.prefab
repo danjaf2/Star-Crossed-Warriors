@@ -1309,10 +1309,11 @@ MonoBehaviour:
   currentCharge: 0
   charging: 0
   _missilePrefab: {fileID: 7596523783035753511, guid: 10008cea032da04409a6aa32bb5b5ef7, type: 3}
-  _EMPBulletPrefab: {fileID: 0}
+  _EMPBulletPrefab: {fileID: 3900607670785296070, guid: f8b514c48b7a27f4b8fc08e0979d3622, type: 3}
   _empCost: 0
   _EmpTimer: 5
   _EmpDelay: 30
+  playerControlled: 0
 --- !u!114 &394470084
 MonoBehaviour:
   m_ObjectHideFlags: 0
