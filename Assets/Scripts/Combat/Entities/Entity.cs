@@ -7,10 +7,10 @@ using UnityEngine;
 public class Entity : NetworkBehaviour {
 
     [Header("Gameplay")]
-    [SerializeField] int _maxHealth = 150;
+    [SerializeField] public int _maxHealth = 150;
 
     public float Health { get => _health; }
-    float _health;
+    public float _health;
 
     public event Action<Attack> OnHit;
     public event Action OnTick;
@@ -33,6 +33,11 @@ public class Entity : NetworkBehaviour {
         }
 
         atk.Hit(this);
+        OnHit?.Invoke(atk);
+    }
+
+    public void InvokeAttack(Attack atk)
+    {
         OnHit?.Invoke(atk);
     }
 
