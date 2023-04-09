@@ -473,6 +473,7 @@ GameObject:
   - component: {fileID: 2126581154}
   - component: {fileID: 2126581155}
   - component: {fileID: 2126581153}
+  - component: {fileID: 1073919337352313491}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -589,6 +590,23 @@ MonoBehaviour:
     m_Bits: 128
   rotationSpeed: 1000
   particlePrefab: {fileID: 304996235}
+  manager: {fileID: 0}
+--- !u!114 &1073919337352313491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7842001558655534676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &7842001558759904888
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,15 +917,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 150
   _maxEnergy: 300
-  _flightSpeed: 0
-  _fireRate: 0
-  _lockOnDelay: 0
+  isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 0c343a920678f694b89abcba5e870ba2, type: 3}
   _bulletDamage: 1
   _bulletSpeed: 2000
   _bulletDelay: 40
-  spawnPosition: {fileID: 164558410}
+  _bulletCost: 0
+  bulletSpawnPosition: {fileID: 0}
   _missilePrefab: {fileID: 7596523783035753511, guid: 20df6fcc83265cd4f9f913d190bc958a, type: 3}
+  _missileDamage: 0
+  missileSpawnPosition: {fileID: 0}
+  _missileBaseSpeed: 0
+  _missileRange: {fileID: 0}
+  _missileLockOnDelay: 0
+  _missileTarget: {fileID: 0}
+  _boostDelay: 0
+  _boostCoolDown: 0
+  _boostMultiplier: 5
 --- !u!114 &7842001557062757205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1056,20 +1082,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6753080948411181400, guid: cb734624a7333fd498a7ec6e64ace7c6, type: 3}
   m_PrefabInstance: {fileID: 4441332464778607685}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1857615726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6923452164040316189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a5edde3dbc56044eada6804d568c109, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalRot: {x: 0, y: 0, z: 0, w: 0}
-  eulerRot: {x: 0, y: 0, z: 0}
 --- !u!136 &394470091
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1098,17 +1110,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 150
   _maxEnergy: 300
-  _flightSpeed: 0
-  _fireRate: 0
-  _lockOnDelay: 0
+  isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 099f89479c5ac774b870d04859a2eca9, type: 3}
   _bulletDamage: 4
   _bulletSpeed: 400
   _bulletDelay: 60
   spawnPosition: {fileID: 1489654486}
-  _missilePrefab: {fileID: 7596523783035753511, guid: 10008cea032da04409a6aa32bb5b5ef7, type: 3}
+  _fireTimer: 5
   currentCharge: 0
   charging: 0
+  _missilePrefab: {fileID: 7596523783035753511, guid: 10008cea032da04409a6aa32bb5b5ef7, type: 3}
+  _EMPBulletPrefab: {fileID: 0}
+  _empCost: 0
+  _EmpTimer: 5
+  _EmpDelay: 30
 --- !u!114 &394470084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1121,6 +1136,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d92e976420af3546a31801282f07b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1857615726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6923452164040316189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5edde3dbc56044eada6804d568c109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalRot: {x: 0, y: 0, z: 0, w: 0}
+  eulerRot: {x: 0, y: 0, z: 0}
 --- !u!4 &7736862703862943655 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6267906751345062882, guid: cb734624a7333fd498a7ec6e64ace7c6, type: 3}
@@ -1443,20 +1472,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 7fea2db65062cc645a42de560c2e6d8c, type: 3}
   m_PrefabInstance: {fileID: 8554425759712395458}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5290528613896041492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8554425759712298594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a5edde3dbc56044eada6804d568c109, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalRot: {x: 0, y: 0, z: 0, w: 0}
-  eulerRot: {x: 0, y: 0, z: 0}
 --- !u!54 &2050530967
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1515,9 +1530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 150
   _maxEnergy: 300
-  _flightSpeed: 0
-  _fireRate: 0
-  _lockOnDelay: 0
+  isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 00062493a749a6e48941d65d95e801fd, type: 3}
   _bulletDamage: 1
   _bulletSpeed: 10000000
@@ -1536,6 +1549,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d92e976420af3546a31801282f07b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5290528613896041492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8554425759712298594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5edde3dbc56044eada6804d568c109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalRot: {x: 0, y: 0, z: 0, w: 0}
+  eulerRot: {x: 0, y: 0, z: 0}
 --- !u!1 &8554425759712298598 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100004, guid: 7fea2db65062cc645a42de560c2e6d8c, type: 3}

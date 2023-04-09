@@ -5,10 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: fcc91d19158c8d648b7b67768811f755
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/LevelDuplicate Multiplayer.unity
+    guid: 0564fac68cd212a4ebdae02c241a7bd4
   m_configObjects: {}

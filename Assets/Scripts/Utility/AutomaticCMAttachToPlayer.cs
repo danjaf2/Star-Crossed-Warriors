@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AutomaticCMAttachToPlayer : MonoBehaviour
 {
@@ -17,7 +18,25 @@ public class AutomaticCMAttachToPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        virtualCamera.transform.rotation = virtualCamera.Follow.rotation; 
+        try
+        {
+            virtualCamera.Follow = GameObject.FindGameObjectWithTag("PlayerFollowCamera").transform;
+            virtualCamera.LookAt = GameObject.FindGameObjectWithTag("PlayerCockpit").transform;
+        }catch(NullReferenceException ex)
+        {
+            Debug.Log("Player hasn't been spawned yet");
+        }
+
+        if (virtualCamera.Follow != null)
+        {
+            virtualCamera.transform.rotation = virtualCamera.Follow.rotation;
+        }
+
+        
+
+
+        
+        
         
     }
 }
