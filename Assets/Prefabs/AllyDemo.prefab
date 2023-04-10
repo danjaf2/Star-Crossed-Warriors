@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fbadff0565b24949b3e443945c9590e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 400
+  _maxHealth: 225
   _health:
     m_InternalValue: 0
   _maxEnergy: 300
@@ -383,19 +383,22 @@ MonoBehaviour:
   _fireTimer: 5
   _currentCharge: 0
   _charging: 0
+  _bulletCost: 3
   _missilePrefab: {fileID: 7596523783035753511, guid: 10008cea032da04409a6aa32bb5b5ef7, type: 3}
   _missileSpawnPositions:
   - {fileID: 2022637076}
   - {fileID: 6262697027250499198}
   _missileRange: {fileID: 2236427987189946583}
   _missileLockAngle: 0
-  _missileDamage: 0
+  _missileDamage: 20
   _missileLockOnDelay: 0
+  _missileCost: 15
   _missileTarget: {fileID: 0}
   _EMPBulletPrefab: {fileID: 3900607670785296070, guid: f8b514c48b7a27f4b8fc08e0979d3622, type: 3}
-  _empCost: 0
+  _empCost: 10
   _EmpTimer: 5
   _EmpDelay: 30
+  _abilityCost: 10
 --- !u!33 &7275190077286067798
 MeshFilter:
   m_ObjectHideFlags: 0

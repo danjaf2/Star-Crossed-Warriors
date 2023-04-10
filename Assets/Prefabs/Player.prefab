@@ -1693,10 +1693,10 @@ MonoBehaviour:
   respawnPosition: {fileID: 0}
   isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 0c343a920678f694b89abcba5e870ba2, type: 3}
-  _bulletDamage: 1
+  _bulletDamage: 5
   _bulletSpeed: 2000
   _bulletDelay: 40
-  _bulletCost: 0
+  _bulletCost: 1
   bulletSpawnPosition: {fileID: 164558410}
   _missilePrefab: {fileID: 7596523783035753511, guid: 20df6fcc83265cd4f9f913d190bc958a, type: 3}
   _missileDamage: 0
@@ -1704,10 +1704,12 @@ MonoBehaviour:
   _missileBaseSpeed: 0
   _missileRange: {fileID: 3557284679464829889}
   _missileLockOnDelay: 0
+  _missileCost: 15
   _missileTarget: {fileID: 0}
   _boostDelay: 0
   _boostCoolDown: 0
   _boostMultiplier: 100000
+  _abilityCost: 10
 --- !u!114 &7842001557062757205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1882,7 +1884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fbadff0565b24949b3e443945c9590e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 150
+  _maxHealth: 225
   _health:
     m_InternalValue: 0
   _maxEnergy: 300
@@ -1899,19 +1901,22 @@ MonoBehaviour:
   _fireTimer: 5
   _currentCharge: 0
   _charging: 0
+  _bulletCost: 3
   _missilePrefab: {fileID: 7596523783035753511, guid: 10008cea032da04409a6aa32bb5b5ef7, type: 3}
   _missileSpawnPositions:
   - {fileID: 8028378739862533786}
   - {fileID: 712678965647206689}
   _missileRange: {fileID: 2156759961831288173}
   _missileLockAngle: 0
-  _missileDamage: 0
+  _missileDamage: 20
   _missileLockOnDelay: 0
+  _missileCost: 15
   _missileTarget: {fileID: 0}
   _EMPBulletPrefab: {fileID: 3900607670785296070, guid: f8b514c48b7a27f4b8fc08e0979d3622, type: 3}
-  _empCost: 0
+  _empCost: 10
   _EmpTimer: 5
   _EmpDelay: 30
+  _abilityCost: 10
 --- !u!114 &394470084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2508,23 +2513,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cbe99add425f6c46b15cfdfcd9dbdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 150
+  _maxHealth: 350
   _health:
     m_InternalValue: 0
-  _maxEnergy: 300
+  _maxEnergy: 400
   _energy:
     m_InternalValue: 0
   playerControlled: 1
   respawnPosition: {fileID: 0}
   isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 00062493a749a6e48941d65d95e801fd, type: 3}
-  _bulletDamage: 1
+  _bulletDamage: 4
   _bulletSpeed: 10000
   _bulletDelay: 5
   spawnPosition: {fileID: 2354432662377684805}
+  _bulletCost: 3
   _missilePrefab: {fileID: 9204454656491265301, guid: 8959a0aea7a10ef46982af87fbc35d0e, type: 3}
   _missileSpawnPos: {fileID: 5210688782792294347}
-  _missileCost: 0
+  _missileCost: 10
   _missileDelay: 0
   _missileTimer: 5
   shieldIsActive: 0
@@ -2534,6 +2540,7 @@ MonoBehaviour:
   _shieldResetTimer: 0
   shieldWeak: {fileID: 3846510974895481539}
   shieldStrong: {fileID: 5205463465247083372}
+  _abilityCost: 40
 --- !u!114 &2050530968
 MonoBehaviour:
   m_ObjectHideFlags: 0

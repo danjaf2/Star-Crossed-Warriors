@@ -16,11 +16,12 @@ public class HeavyShip : PlayerShip {
     [SerializeField] float _bulletDelay;
     [SerializeField] GameObject spawnPosition;
     float _fireTimer = 5.0f;
+    [SerializeField] float _bulletCost = 3f;
 
     [Header("Missile")]
     [SerializeField] PayloadMissile _missilePrefab;
     [SerializeField] Transform _missileSpawnPos;
-    [SerializeField] float _missileCost;
+    [SerializeField] float _missileCost = 15f;
     [SerializeField] float _missileDelay;
     bool _missileInputHeld;
     public float _missileTimer = 5.0f;
@@ -33,13 +34,18 @@ public class HeavyShip : PlayerShip {
     [SerializeField] float _shieldResetTimer;
     [SerializeField] GameObject shieldWeak;
     [SerializeField] GameObject shieldStrong;
+    [SerializeField] float _abilityCost = 10f;
 
 
-   
+
 
     public override void HandleShoot(bool input) {
         // LASER BEAM!!!
         if (_fireTimer > 0) { _fireTimer--; }
+        if(_energy.Value <= 0)
+        {
+            return; 
+        }
         float currentSpeed = 800;
         Vector3 forward = this.transform.forward;
         if (transform.parent.tag == "Player")
@@ -54,6 +60,7 @@ public class HeavyShip : PlayerShip {
         }
         if (input && _fireTimer <= 0)
         {
+            LoseEnergy(_bulletCost);
             Attack bulletAttack = new Attack(_bulletDamage, this);
             bulletAttack.OnHit += ReactToBulletHit;
 
@@ -71,6 +78,10 @@ public class HeavyShip : PlayerShip {
     public override void HandleMissile(bool input) {
         // cluster missile / acid cloud missle
         if (_missileTimer > 0) { _missileTimer-= Time.fixedDeltaTime; }
+        if (_energy.Value <= 0)
+        {
+            return;
+        }
         if (input) {
             _missileInputHeld = true;
         }
@@ -87,10 +98,14 @@ public class HeavyShip : PlayerShip {
         
 
         if (_shieldResetTimer > 0) {_shieldResetTimer--; }
+        if (_energy.Value <= 0)
+        {
+            return;
+        }
 
         if (input && _shieldResetTimer <= 0 && !shieldIsActive)
         {
-            LoseEnergy(100);
+            LoseEnergy(_abilityCost);
             shieldIsActive = true;
             _shieldCurrentHP = _shieldHPBase; 
 

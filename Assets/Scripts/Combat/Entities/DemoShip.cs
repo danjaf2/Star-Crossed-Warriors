@@ -22,6 +22,7 @@ public class DemoShip : PlayerShip {
     public float _fireTimer = 5.0f;
     public float _currentCharge = 0.0f;
     public bool _charging = false;
+    [SerializeField] float _bulletCost;
 
     [Header("Missile")]
     [SerializeField] HomingMissile _missilePrefab;
@@ -30,6 +31,7 @@ public class DemoShip : PlayerShip {
     [SerializeField, Range(0f, 360f)] float _missileLockAngle;
     [SerializeField] float _missileDamage;
     [SerializeField] int _missileLockOnDelay;
+    [SerializeField] float _missileCost = 15f;
 
     bool _missileInputHeld;
     int _lockOnTimer;
@@ -40,6 +42,7 @@ public class DemoShip : PlayerShip {
     [SerializeField] float _empCost;
     public float _EmpTimer = 5f;
     public float _EmpDelay = 30f;
+    [SerializeField] float _abilityCost = 10f;
 
     public static float currentProjectileSpeed = 400;
 
@@ -47,6 +50,10 @@ public class DemoShip : PlayerShip {
 
     public override void HandleMissile(bool input) {
         // flocking missiles -- or just many missiles with poor tracking
+        if (_energy.Value <= 0)
+        {
+            return;
+        }
 
         if (input) {
             if (_missileRange == null) {
@@ -75,6 +82,7 @@ public class DemoShip : PlayerShip {
                         new Attack(_missileDamage, this)
                     );
                 }
+                LoseEnergy(_missileCost);
             }
 
             _missileTarget = null;
@@ -88,6 +96,10 @@ public class DemoShip : PlayerShip {
 
         if (_fireTimer > 0) { _fireTimer--; }
 
+        if (_energy.Value <= 0)
+        {
+            return;
+        }
 
         if (_charging && !input && _fireTimer <= 0)
         {
@@ -102,7 +114,7 @@ public class DemoShip : PlayerShip {
             );
 
             _fireTimer = _bulletDelay;
-
+            LoseEnergy(_bulletCost);
             _currentCharge = 0.0f;
             _charging = false; 
         }
@@ -121,7 +133,10 @@ public class DemoShip : PlayerShip {
         // EMP (will require defining a 'stun' method to call on enemies in range)
 
         if (_EmpTimer > 0) { _EmpTimer-=Time.fixedDeltaTime; }
-
+        if (_energy.Value <= 0)
+        {
+            return;
+        }
         float currentSpeed = 800; 
         if (input && _EmpTimer <= 0)
         {
@@ -146,6 +161,8 @@ public class DemoShip : PlayerShip {
                 _bulletSpawnPos.transform.position,
                 forward * currentSpeed
             );
+
+            LoseEnergy(_abilityCost);
 
             _EmpTimer = _EmpDelay;
         }

@@ -451,21 +451,23 @@ MonoBehaviour:
   respawnPosition: {fileID: 0}
   isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 0c343a920678f694b89abcba5e870ba2, type: 3}
-  _bulletDamage: 1
+  _bulletDamage: 5
   _bulletSpeed: 1000
   _bulletDelay: 40
-  _bulletCost: 0
+  _bulletCost: 1
   bulletSpawnPosition: {fileID: 555337690}
   _missilePrefab: {fileID: 7596523783035753511, guid: 20df6fcc83265cd4f9f913d190bc958a, type: 3}
-  _missileDamage: 0
+  _missileDamage: 15
   missileSpawnPosition: {fileID: 1668444266}
   _missileBaseSpeed: 0
   _missileRange: {fileID: 3552369794289570577}
   _missileLockOnDelay: 0
+  _missileCost: 15
   _missileTarget: {fileID: 0}
   _boostDelay: 10
   _boostCoolDown: 0
   _boostMultiplier: 10000
+  _abilityCost: 10
 --- !u!114 &3552369794289570577
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ public class ScoutShip : PlayerShip {
     [SerializeField] float _missileBaseSpeed;
     [SerializeField] TrackEntitiesInArea _missileRange;
     [SerializeField] int _missileLockOnDelay;
+    [SerializeField] float _missileCost = 15f;
 
     bool _missileInputHeld;
     int _lockOnTimer;
@@ -34,10 +35,11 @@ public class ScoutShip : PlayerShip {
     [SerializeField] float _boostDelay;
     [SerializeField] float _boostCoolDown;
     [SerializeField] float _boostMultiplier = 5.0f;
+    [SerializeField] float _abilityCost = 10f;
 
 
 
-   
+
 
     private void Start()
     {
@@ -50,9 +52,14 @@ public class ScoutShip : PlayerShip {
             return;
         }
 
+        if (_energy.Value <= 0)
+        {
+            return;
+        }
+
         if (input && _boostCoolDown <= 0)
         {
-            LoseEnergy(_bulletCost);
+            LoseEnergy(_abilityCost);
            
             _boostCoolDown = _boostDelay;
 
@@ -75,7 +82,10 @@ public class ScoutShip : PlayerShip {
 
     public override void HandleShoot(bool input) {
         if(_fireTimer > 0) { _fireTimer--; }
-
+        if (_energy.Value <= 0)
+        {
+            return;
+        }
         if (input && _fireTimer <= 0) {
             LoseEnergy(_bulletCost);
             Attack bulletAttack = new Attack(_bulletDamage, this);
@@ -101,8 +111,11 @@ public class ScoutShip : PlayerShip {
     // strong homing missile
     public override void HandleMissile(bool input) {
         // When holding the key down.
-        
 
+        if (_energy.Value <= 0)
+        {
+            return;
+        }
         if (input) {
             if (_missileRange == null)
             {
@@ -123,6 +136,8 @@ public class ScoutShip : PlayerShip {
         // On releasing the key.
         else if (_missileInputHeld) {
             if (_lockOnTimer <= 0 && _missileTarget != null) {
+
+                LoseEnergy(_missileCost);
 
                 HomingMissile.Create(
                     _missilePrefab,
