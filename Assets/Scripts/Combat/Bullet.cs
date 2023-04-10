@@ -59,7 +59,7 @@ public class Bullet : MonoBehaviour {
 
         Bullet newBullet = gameObj.AddComponent<Bullet>();
         newBullet.InitValues(attack, velocity, DEFAULT_LIFETIME, layer);
-
+        GameObject.FindObjectOfType<AudioManager>().playAudio(AudioCategory.SHOOT, 0);
         return newBullet;
     }
 
@@ -67,6 +67,7 @@ public class Bullet : MonoBehaviour {
         Bullet newBullet = Instantiate(prefab, position, Quaternion.identity);
         newBullet.InitValues(attack, velocity, DEFAULT_LIFETIME, layer);
 
+        GameObject.FindObjectOfType<AudioManager>().playAudio(AudioCategory.SHOOT, 0); 
         return newBullet;
     }
 
