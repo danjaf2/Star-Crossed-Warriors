@@ -22,8 +22,8 @@ public class EnergizedEntity : Entity {
     }
     
     public void RecoverEnergy(float amount) {
-        print("Recover?");
-        print(_energy.Value);
+        //print("Recover?");
+        //print(_energy.Value);
         if (IsOwner)
         {
             _energy.Value += amount;

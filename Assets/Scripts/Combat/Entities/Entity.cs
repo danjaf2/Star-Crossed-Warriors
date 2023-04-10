@@ -89,17 +89,9 @@ public class Entity : NetworkBehaviour {
                 {
                     body.velocity = Vector3.zero;
                     body.transform.position = new Vector3(0,0,0);
-                    Debug.Log("Teleported Player");
-                if (IsOwner)
-                {
-                    _health.Value = ship._maxHealth;
-                    //Set the UI?
+
+                Debug.Log(_health.Value);
                 }
-                else
-                {
-                    SetServerRpc(ship._maxHealth);
-                }
-            }
                 else
                 {
                     if (ship.transform.TryGetComponent(out Rigidbody body2))
@@ -108,19 +100,10 @@ public class Entity : NetworkBehaviour {
                     {
                         body2.velocity = Vector3.zero;
                         body2.transform.position = ship.respawnPosition.transform.position;
-                        if (IsOwner)
-                        {
-                            _health.Value = ship._maxHealth;
-                        }
-                        else
-                        {
-                            SetServerRpc(ship._maxHealth);
-                        }
-                       
                     }
                     }
                 }
-            
+            ship.GetComponent<Entity>().Repair(1000);
         }
         else
         {
