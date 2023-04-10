@@ -15,6 +15,7 @@ public class PlayerManager : NetworkBehaviour
     [SerializeField] public float currentEnergyPercentage = 100;
 
     [SerializeField] public ClassType type;
+    private NetworkVariable<int> classNum = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] public PlayerShip playerClass;
 
     //[SerializeField] public List<GameObject> specialAbilityPrefabs;
@@ -45,6 +46,7 @@ public class PlayerManager : NetworkBehaviour
             {
                 virtualCamera.LookAt = dCamL.transform;
                 virtualCamera.Follow = dCamF.transform;
+                classNum.Value = (int) type;
             }
             playerClass = new DemoShip();
         }
@@ -54,6 +56,7 @@ public class PlayerManager : NetworkBehaviour
             {
                 virtualCamera.LookAt = sCamL.transform;
                 virtualCamera.Follow = sCamF.transform;
+                classNum.Value = (int)type;
             }
             playerClass = new ScoutShip();
         }
@@ -63,6 +66,7 @@ public class PlayerManager : NetworkBehaviour
             {
                 virtualCamera.LookAt = hCamL.transform;
                 virtualCamera.Follow = hCamF.transform;
+                classNum.Value = (int)type;
             }
             playerClass = new HeavyShip();
         }
@@ -71,9 +75,9 @@ public class PlayerManager : NetworkBehaviour
             playerClass = null;
         }
 
-        vehicles[(int)type].SetActive(true); //Set correct vehicle to active
+        vehicles[classNum.Value].SetActive(true); //Set correct vehicle to active
 
-        playerClass = vehicles[(int)type].GetComponent<PlayerShip>();
+        playerClass = vehicles[classNum.Value].GetComponent<PlayerShip>();
         base.OnNetworkSpawn(); // Not sure if this is needed though, but good to have it.
     }
     void Start()

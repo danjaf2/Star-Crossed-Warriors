@@ -73,7 +73,7 @@ public class DemoShip : PlayerShip {
                     HomingMissile.Create(
                         _missilePrefab,
                         spawnPos.position,
-                        _Rbody.velocity,
+                        _Rbody.velocity*5,
                         _missileTarget,
                         new Attack(_missileDamage, this)
                     );

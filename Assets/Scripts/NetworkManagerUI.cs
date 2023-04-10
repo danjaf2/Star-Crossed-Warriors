@@ -6,7 +6,7 @@ using Unity.Netcode;
 using Unity.Collections.LowLevel.Unsafe;
 using TMPro;
 
-public class NetworkManagerUI : MonoBehaviour
+public class NetworkManagerUI : NetworkBehaviour
 {
     [SerializeField] private Button serverBtn;
     [SerializeField] private Button hostBtn;

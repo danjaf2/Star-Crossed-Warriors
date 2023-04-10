@@ -34,7 +34,7 @@ public class FirePrimaryAttack : Node
                 
                 if (referenceTree.TryGetComponent<DemoShip>(out DemoShip d))
                 {
-                    if(d.currentCharge == 1)
+                    if(d._currentCharge == 1)
                     {
                         ship.SetShootInput(false);
                     }

@@ -60,7 +60,7 @@ public class HeavyShip : PlayerShip {
                 _bulletPrefab,
                 bulletAttack,
                 spawnPosition.transform.position,
-                this.transform.forward *( _bulletSpeed+currentSpeed)
+                this.transform.forward *( _bulletSpeed)
             );
 
             _fireTimer = _bulletDelay;
@@ -74,7 +74,7 @@ public class HeavyShip : PlayerShip {
         }
         else if(_missileInputHeld) {
             _missileInputHeld = false;
-            PayloadMissile.Create(_missilePrefab, _missileSpawnPos.position, _Rbody.velocity);
+            PayloadMissile.Create(_missilePrefab, _missileSpawnPos.position, _Rbody.velocity*5);
             LoseEnergy(_missileCost);
         }
     }

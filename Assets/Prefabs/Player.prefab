@@ -94,6 +94,68 @@ Transform:
   m_Father: {fileID: 7736862703862943655}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &415226725201625014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5210688782792294347}
+  m_Layer: 6
+  m_Name: MissileSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5210688782792294347
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415226725201625014}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.47, z: 7.46}
+  m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0.6666667}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8554425759712533058}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &464040265716631157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8028378739862533786}
+  m_Layer: 6
+  m_Name: MissileSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8028378739862533786
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464040265716631157}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.25, y: 0, z: 5.51}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7736862703862943655}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &602609619872181275
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +307,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2354432662377684805}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.61, z: 5.98}
+  m_LocalPosition: {x: 0, y: -0.47, z: 7.33}
   m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0.6666667}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -350,6 +412,37 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &4066256758211062962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 712678965647206689}
+  m_Layer: 6
+  m_Name: MissileSpawn (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &712678965647206689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4066256758211062962}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.25, y: 0, z: 5.51}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7736862703862943655}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4231403553305378211
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +668,37 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5213219861188412166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2971366037456704}
+  m_Layer: 6
+  m_Name: GunSpawn (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2971366037456704
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5213219861188412166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 7.934}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7736862703126664964}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7842001558135291969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,6 +1617,22 @@ CapsuleCollider:
   m_Height: 11.259186
   m_Direction: 2
   m_Center: {x: -0.18280268, y: 0.010762851, z: -0.47139233}
+--- !u!114 &3557284679464829889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6923452163845066174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3022870dd6e2fb0418326636a406e8ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inRange: []
+  ally: 1
+  range: 5000
+  sensitivity: 0.5
 --- !u!114 &7842001557062757193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1526,12 +1666,12 @@ MonoBehaviour:
   _bulletSpeed: 2000
   _bulletDelay: 40
   _bulletCost: 0
-  bulletSpawnPosition: {fileID: 0}
+  bulletSpawnPosition: {fileID: 164558410}
   _missilePrefab: {fileID: 7596523783035753511, guid: 20df6fcc83265cd4f9f913d190bc958a, type: 3}
   _missileDamage: 0
-  missileSpawnPosition: {fileID: 0}
+  missileSpawnPosition: {fileID: 5213219861188412166}
   _missileBaseSpeed: 0
-  _missileRange: {fileID: 0}
+  _missileRange: {fileID: 3557284679464829889}
   _missileLockOnDelay: 0
   _missileTarget: {fileID: 0}
   _boostDelay: 0
@@ -1719,11 +1859,19 @@ MonoBehaviour:
   _bulletDamage: 4
   _bulletSpeed: 400
   _bulletDelay: 60
-  spawnPosition: {fileID: 1489654486}
+  _bulletSpawnPos: {fileID: 1489654487}
   _fireTimer: 5
-  currentCharge: 0
-  charging: 0
+  _currentCharge: 0
+  _charging: 0
   _missilePrefab: {fileID: 7596523783035753511, guid: 10008cea032da04409a6aa32bb5b5ef7, type: 3}
+  _missileSpawnPositions:
+  - {fileID: 8028378739862533786}
+  - {fileID: 712678965647206689}
+  _missileRange: {fileID: 2156759961831288173}
+  _missileLockAngle: 0
+  _missileDamage: 0
+  _missileLockOnDelay: 0
+  _missileTarget: {fileID: 0}
   _EMPBulletPrefab: {fileID: 3900607670785296070, guid: f8b514c48b7a27f4b8fc08e0979d3622, type: 3}
   _empCost: 0
   _EmpTimer: 5
@@ -1755,6 +1903,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalRot: {x: 0, y: 0, z: 0, w: 0}
   eulerRot: {x: 0, y: 0, z: 0}
+--- !u!114 &2156759961831288173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6923452164040316189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3022870dd6e2fb0418326636a406e8ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inRange: []
+  ally: 1
+  range: 5000
+  sensitivity: 0.5
 --- !u!4 &7736862703862943655 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6267906751345062882, guid: cb734624a7333fd498a7ec6e64ace7c6, type: 3}
@@ -2299,16 +2463,12 @@ MonoBehaviour:
   isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 00062493a749a6e48941d65d95e801fd, type: 3}
   _bulletDamage: 1
-  _bulletSpeed: 10000000
-  _bulletDelay: 0
-  spawnPosition: {fileID: 1489654486}
-  _missilePrefab: {fileID: 7596523783035753511, guid: 10008cea032da04409a6aa32bb5b5ef7, type: 3}
-  _missileDamage: 10
-  missileSpawnPosition: {fileID: 2354432662377684805}
-  _missileBaseSpeed: 400
-  _missileRange: {fileID: 0}
-  _missileLockOnDelay: 0
-  _missileTarget: {fileID: 0}
+  _bulletSpeed: 10000
+  _bulletDelay: 5
+  spawnPosition: {fileID: 2354432662377684805}
+  _missilePrefab: {fileID: 9204454656491265301, guid: 8959a0aea7a10ef46982af87fbc35d0e, type: 3}
+  _missileSpawnPos: {fileID: 5210688782792294347}
+  _missileCost: 0
   shieldIsActive: 0
   _shieldHPBase: 400
   _shieldCurrentHP: 400
@@ -2342,6 +2502,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalRot: {x: 0, y: 0, z: 0, w: 0}
   eulerRot: {x: 0, y: 0, z: 0}
+--- !u!114 &8139604642846717686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8554425759712298594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3022870dd6e2fb0418326636a406e8ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inRange: []
+  ally: 1
+  range: 5000
+  sensitivity: 0.5
 --- !u!1 &8554425759712298598 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100004, guid: 7fea2db65062cc645a42de560c2e6d8c, type: 3}

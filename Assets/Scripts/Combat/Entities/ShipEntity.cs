@@ -9,8 +9,25 @@ public class ShipEntity : EnergizedEntity {
 
     protected override void Awake() {
         base.Awake();
-        _Rbody = GetComponent<Rigidbody>();
+        try { 
+        if (transform.parent.TryGetComponent(out Rigidbody rb))
+        {
+            _Rbody = rb;
+        }
+        else
+        {
+            if (transform.TryGetComponent(out Rigidbody rb2))
+            {
+                _Rbody = rb2;
+            }
+        }
+        }catch(System.Exception ex)
+        {
+            Debug.Log(this.gameObject.name);
+        }
+
     }
+
 
 
     public override void Hit(Attack atk) {
