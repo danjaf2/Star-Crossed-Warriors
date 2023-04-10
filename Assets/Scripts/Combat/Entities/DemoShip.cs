@@ -43,8 +43,6 @@ public class DemoShip : PlayerShip {
 
     public static float currentProjectileSpeed = 400;
 
-    public bool playerControlled = false;
-
     
 
     public override void HandleMissile(bool input) {
@@ -68,7 +66,6 @@ public class DemoShip : PlayerShip {
         // On releasing the key.
         else if (_missileInputHeld) {
             if (_lockOnTimer <= 0 && _missileTarget != null) {
-
                 foreach(var spawnPos in _missileSpawnPositions) {
                     HomingMissile.Create(
                         _missilePrefab,
@@ -88,15 +85,6 @@ public class DemoShip : PlayerShip {
 
     public override void HandleShoot(bool input) {
         // charged shot
-        if(playerControlled) {
-        if (transform.parent.gameObject.GetComponent<NetworkBehaviour>()!=null)
-        {
-            if (!transform.parent.gameObject.GetComponent<NetworkBehaviour>().IsOwner)
-            {
-                return;
-            }
-        }
-        }
 
         if (_fireTimer > 0) { _fireTimer--; }
 
@@ -131,17 +119,6 @@ public class DemoShip : PlayerShip {
 
     public override void HandleAbility(bool input) {
         // EMP (will require defining a 'stun' method to call on enemies in range)
-
-        if (playerControlled)
-        {
-            if (transform.parent.gameObject.GetComponent<NetworkBehaviour>() != null)
-            {
-                if (!transform.parent.gameObject.GetComponent<NetworkBehaviour>().IsOwner)
-                {
-                    return;
-                }
-            }
-        }
 
         if (_EmpTimer > 0) { _EmpTimer-=Time.fixedDeltaTime; }
 

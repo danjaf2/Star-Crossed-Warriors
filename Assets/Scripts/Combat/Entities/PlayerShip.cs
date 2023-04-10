@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -6,6 +7,8 @@ public abstract class PlayerShip : ShipEntity {
     bool _shootInput;
     bool _missileInput;
     bool _abilityInput;
+
+    public bool playerControlled = false;
 
     //public bool playerControlled; 
     public void SetShootInput(bool value) { _shootInput = value; }
@@ -31,6 +34,16 @@ public abstract class PlayerShip : ShipEntity {
         }
 
         base.FixedUpdate();
+        if (playerControlled)
+        {
+            if (transform.parent.gameObject.GetComponent<NetworkBehaviour>() != null)
+            {
+                if (!transform.parent.gameObject.GetComponent<NetworkBehaviour>().IsOwner)
+                {
+                    return;
+                }
+            }
+        }
         HandleShoot(_shootInput);
         HandleMissile(_missileInput);
         HandleAbility(_abilityInput);

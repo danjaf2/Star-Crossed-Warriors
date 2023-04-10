@@ -34,9 +34,20 @@ public class FireSecondaryAttack : Node
 
                 if (referenceTree.TryGetComponent<DemoShip>(out DemoShip d))
                 {
+                    Debug.Log("Here");
                     ship.SetMissileInput(true);
 
                     if(Vector3.Distance(target.transform.position, referenceTree.transform.position) >= 1000)
+                    {
+                        ship.SetAbilityInput(true);
+                    }
+                }
+
+                if (referenceTree.TryGetComponent<HeavyShip>(out HeavyShip h))
+                {
+                    ship.SetMissileInput(true);
+
+                    if (Vector3.Distance(target.transform.position, referenceTree.transform.position) < 600)
                     {
                         ship.SetAbilityInput(true);
                     }

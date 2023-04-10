@@ -338,6 +338,7 @@ MonoBehaviour:
   _maxHealth: 400
   _health: 0
   _maxEnergy: 300
+  playerControlled: 0
   isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 099f89479c5ac774b870d04859a2eca9, type: 3}
   _bulletDamage: 4
@@ -349,8 +350,8 @@ MonoBehaviour:
   _charging: 0
   _missilePrefab: {fileID: 7596523783035753511, guid: 10008cea032da04409a6aa32bb5b5ef7, type: 3}
   _missileSpawnPositions:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 650881816}
+  - {fileID: 3804816385750316903}
   _missileRange: {fileID: 6332679786977559130}
   _missileLockAngle: 0
   _missileDamage: 0
@@ -360,7 +361,6 @@ MonoBehaviour:
   _empCost: 0
   _EmpTimer: 5
   _EmpDelay: 30
-  playerControlled: 0
 --- !u!114 &6170748290774144880
 MonoBehaviour:
   m_ObjectHideFlags: 0

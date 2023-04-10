@@ -30,7 +30,7 @@ public class TrackEntitiesInArea : MonoBehaviour
         if (ally)
         {
 
-            foreach (GameObject enemy in TeamManager.enemyList)
+            foreach (GameObject enemy in TeamManager.Instance.enemyList)
             {
                 if (enemy != null)
                 {
@@ -57,7 +57,7 @@ public class TrackEntitiesInArea : MonoBehaviour
 
         }else if (!ally)
         {
-            foreach (GameObject enemy in TeamManager.alliesList)
+            foreach (GameObject enemy in TeamManager.Instance.alliesList)
             {
                 if (enemy != null) {
                 if (enemy.TryGetComponent<Entity>(out var ent))

@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TeamManager : MonoBehaviour
+public class TeamManager : Singleton<TeamManager>
 {
-    public static List<GameObject> alliesList = new List<GameObject>();
-    public static List<GameObject> enemyList = new List<GameObject>();
+    public  List<GameObject> alliesList = new List<GameObject>();
+    public  List<GameObject> enemyList = new List<GameObject>();
     // Start is called before the first frame update
+
+    protected override void Awake()
+    {
+        Instance = this;
+        alliesList = new List<GameObject>();
+        enemyList = new List<GameObject>();
+    }
     void Start()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -27,5 +34,10 @@ public class TeamManager : MonoBehaviour
         }
     }
 
+    public void AddToListAllies(GameObject obj)
+    {
+        alliesList.Add (obj);
+    }
 
+   
 }

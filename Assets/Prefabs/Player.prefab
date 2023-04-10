@@ -1402,7 +1402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7763519383590768967, guid: f4fcf495e3f8ef0418516ab311a2019e, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 383
+      value: 1919
       objectReference: {fileID: 0}
     - target: {fileID: 7763519383590768967, guid: f4fcf495e3f8ef0418516ab311a2019e, type: 3}
       propertyPath: m_projectionMatrixMode
@@ -1660,6 +1660,7 @@ MonoBehaviour:
   _maxHealth: 150
   _health: 0
   _maxEnergy: 300
+  playerControlled: 1
   isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 0c343a920678f694b89abcba5e870ba2, type: 3}
   _bulletDamage: 1
@@ -1854,6 +1855,7 @@ MonoBehaviour:
   _maxHealth: 150
   _health: 0
   _maxEnergy: 300
+  playerControlled: 1
   isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 099f89479c5ac774b870d04859a2eca9, type: 3}
   _bulletDamage: 4
@@ -1876,7 +1878,6 @@ MonoBehaviour:
   _empCost: 0
   _EmpTimer: 5
   _EmpDelay: 30
-  playerControlled: 0
 --- !u!114 &394470084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2460,6 +2461,7 @@ MonoBehaviour:
   _maxHealth: 150
   _health: 0
   _maxEnergy: 300
+  playerControlled: 1
   isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 00062493a749a6e48941d65d95e801fd, type: 3}
   _bulletDamage: 1

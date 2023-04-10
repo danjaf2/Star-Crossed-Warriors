@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum ClassType { SCOUT, DEMO, HEAVY, NONE };
@@ -38,7 +39,8 @@ public class PlayerManager : NetworkBehaviour
             virtualCamera.gameObject.SetActive(true);
             type = GameObject.FindObjectOfType<NetworkManagerUI>().type;
         }
-        vehicle = GameObject.FindGameObjectWithTag("Plane");
+        
+        //vehicle = GameObject.FindGameObjectWithTag("Plane");
 
         if (type == ClassType.DEMO)
         {
@@ -76,8 +78,8 @@ public class PlayerManager : NetworkBehaviour
         }
 
         vehicles[classNum.Value].SetActive(true); //Set correct vehicle to active
-
         playerClass = vehicles[classNum.Value].GetComponent<PlayerShip>();
+        TeamManager.Instance.AddToListAllies(vehicles[classNum.Value]);
         base.OnNetworkSpawn(); // Not sure if this is needed though, but good to have it.
     }
     void Start()

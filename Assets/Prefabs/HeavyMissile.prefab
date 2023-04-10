@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2910610476185241121}
   - component: {fileID: 2858033445754743546}
   - component: {fileID: 1999855701794622983}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Render
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,8 @@ GameObject:
   - component: {fileID: 6525871780077569509}
   - component: {fileID: 5528934078517445003}
   - component: {fileID: 6075836437288471761}
-  m_Layer: 0
+  - component: {fileID: 2531302796728991867}
+  m_Layer: 10
   m_Name: HeavyMissile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,3 +291,29 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.16617763, y: 0.15900148, z: 0.55563974}
   m_Center: {x: -0.0018912476, y: 0.007804617, z: 0.16885278}
+--- !u!114 &2531302796728991867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3498181507104624013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1
