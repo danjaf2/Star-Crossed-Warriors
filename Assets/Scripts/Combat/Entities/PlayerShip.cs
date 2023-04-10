@@ -10,6 +10,8 @@ public abstract class PlayerShip : ShipEntity {
 
     public bool playerControlled = false;
 
+    public GameObject respawnPosition;
+
     //public bool playerControlled; 
     public void SetShootInput(bool value) { _shootInput = value; }
     public void SetMissileInput(bool value) { _missileInput = value; }

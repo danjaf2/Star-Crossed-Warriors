@@ -54,6 +54,12 @@ public class Entity : NetworkBehaviour {
         _health.Value -= damage;
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    private void SetServerRpc(float health)
+    {
+        _health.Value = health;
+    }
+
     public void InvokeAttack(Attack atk)
     {
         OnHit?.Invoke(atk);
@@ -77,8 +83,52 @@ public class Entity : NetworkBehaviour {
             ObjectiveManager.Instance.OnObjectiveComplete(obj);
         }
 
-        ParticleManager.Instance.InstantiateExplosion(this.gameObject);
-        Destroy(this.gameObject, 0.01f);
+        if(TryGetComponent(out PlayerShip ship))
+        {
+                if(ship.transform.parent.TryGetComponent(out Rigidbody body))
+                {
+                    body.velocity = Vector3.zero;
+                    body.transform.position = new Vector3(0,0,0);
+                    Debug.Log("Teleported Player");
+                if (IsOwner)
+                {
+                    _health.Value = ship._maxHealth;
+                    //Set the UI?
+                }
+                else
+                {
+                    SetServerRpc(ship._maxHealth);
+                }
+            }
+                else
+                {
+                    if (ship.transform.TryGetComponent(out Rigidbody body2))
+                    {
+                    if (ship.respawnPosition != null)
+                    {
+                        body2.velocity = Vector3.zero;
+                        body2.transform.position = ship.respawnPosition.transform.position;
+                        if (IsOwner)
+                        {
+                            _health.Value = ship._maxHealth;
+                        }
+                        else
+                        {
+                            SetServerRpc(ship._maxHealth);
+                        }
+                       
+                    }
+                    }
+                }
+            
+        }
+        else
+        {
+            ParticleManager.Instance.InstantiateExplosion(this.gameObject);
+            Destroy(this.gameObject, 0.01f);
+        }
+
+        
     }
 
 
@@ -89,7 +139,7 @@ public class Entity : NetworkBehaviour {
     }
 
     protected virtual void FixedUpdate() {
-        Debug.Log(_health.Value);
+        
         if (_health.Value < 0)
         {
             OnDeath();

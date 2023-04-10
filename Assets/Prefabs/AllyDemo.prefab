@@ -119,7 +119,6 @@ GameObject:
   - component: {fileID: 2236427987189946583}
   - component: {fileID: 1637596423}
   - component: {fileID: 1637596422}
-  - component: {fileID: 8656677808707988616}
   m_Layer: 6
   m_Name: AllyDemo
   m_TagString: Plane
@@ -222,7 +221,7 @@ MonoBehaviour:
   pitch: 0
   yaw: 0
   throttle: 0
-  throttleIncrement: 50
+  throttleIncrement: 500
   brakeIncrement: 500
   maxThrottle: 60000
   sensitivity: 10
@@ -368,15 +367,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 400
-  _health: 0
+  _health:
+    m_InternalValue: 0
   _maxEnergy: 300
+  _energy:
+    m_InternalValue: 0
   playerControlled: 0
+  respawnPosition: {fileID: 0}
   isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 099f89479c5ac774b870d04859a2eca9, type: 3}
   _bulletDamage: 4
   _bulletSpeed: 400
   _bulletDelay: 60
-  _bulletSpawnPos: {fileID: 0}
+  _bulletSpawnPos: {fileID: 627333376138807178}
   _fireTimer: 5
   _currentCharge: 0
   _charging: 0
@@ -602,9 +605,9 @@ MonoBehaviour:
   SyncRotAngleX: 1
   SyncRotAngleY: 1
   SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
@@ -626,15 +629,3 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &8656677808707988616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3443443204099353935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

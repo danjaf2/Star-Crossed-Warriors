@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ObjectiveManager : Singleton<ObjectiveManager>
 {
@@ -32,7 +33,8 @@ public class ObjectiveManager : Singleton<ObjectiveManager>
         }
         catch(ArgumentOutOfRangeException e)
         {
-            //Start final kill mothership phase
+            Debug.Log("GameOver");
+            SceneManager.LoadScene(0);
         }
 
         if (_objectiveList.Count > 0)

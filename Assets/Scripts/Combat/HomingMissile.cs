@@ -56,7 +56,7 @@ public class HomingMissile : Entity {
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.layer != 2)
         {
-            Debug.Log(collision.gameObject.name);
+            //Debug.Log(collision.gameObject.name);
             OnDeath();
         }
     }

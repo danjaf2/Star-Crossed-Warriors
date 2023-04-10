@@ -28,7 +28,7 @@ public class CheckLowOnEnergy : Node
         {
             if (referenceTree.TryGetComponent<EnergizedEntity>(out EnergizedEntity ety))
             {
-                Debug.Log(ety.GetEnergyPercentage());
+                //Debug.Log(ety.GetEnergyPercentage());
             }
 
             state = NodeState.SUCCESS;
