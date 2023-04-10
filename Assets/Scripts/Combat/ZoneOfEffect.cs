@@ -11,19 +11,7 @@ public class ZoneOfEffect<T> : MonoBehaviour where T : Component {
         _InRange = new List<T>();
     }
 
-    //private void OnTriggerEnter(Collider other) {
-    //    if(other.TryGetComponent<T>(out var ship)) {
-    //        _InRange.AddUnique(ship);
-    //    }
-    //}
 
-    //private void OnTriggerExit(Collider other) {
-    //    if (other.TryGetComponent<T>(out var ship)) {
-    //        _InRange.Remove(ship);
-    //    }
-    //}
-
-    static bool IsNull(T entity) => entity == null;
     void AddToList(T newEntity) {
         if (newEntity.gameObject != this.gameObject) { _InRange.Add(newEntity); }
     }
@@ -36,4 +24,18 @@ public class ZoneOfEffect<T> : MonoBehaviour where T : Component {
     private void OnDrawGizmosSelected() {
         Gizmos.DrawWireSphere(transform.position, _radius);
     }
+
+
+    // Not useful anymore, now using overlap sphere check on fixedupdate.
+    //private void OnTriggerEnter(Collider other) {
+    //    if(other.TryGetComponent<T>(out var ship)) {
+    //        _InRange.AddUnique(ship);
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other) {
+    //    if (other.TryGetComponent<T>(out var ship)) {
+    //        _InRange.Remove(ship);
+    //    }
+    //}
 }

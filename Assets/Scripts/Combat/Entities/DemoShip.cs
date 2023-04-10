@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using Unity.Netcode;
 using UnityEngine;
@@ -17,13 +18,22 @@ public class DemoShip : PlayerShip {
     [SerializeField] float _bulletDamage;
     [SerializeField] float _bulletSpeed;
     [SerializeField] float _bulletDelay;
-    [SerializeField] GameObject spawnPosition;
+    [SerializeField] Transform _bulletSpawnPos;
     public float _fireTimer = 5.0f;
-    public float currentCharge = 0.0f;
-    public bool charging = false;
+    public float _currentCharge = 0.0f;
+    public bool _charging = false;
 
     [Header("Missile")]
     [SerializeField] HomingMissile _missilePrefab;
+    [SerializeField, Tooltip("This will also affect how many missiles are spawned.")] List<Transform> _missileSpawnPositions;
+    [SerializeField] TrackEntitiesInArea _missileRange;
+    [SerializeField, Range(0f, 360f)] float _missileLockAngle;
+    [SerializeField] float _missileDamage;
+    [SerializeField] int _missileLockOnDelay;
+
+    bool _missileInputHeld;
+    int _lockOnTimer;
+    public Entity _missileTarget;
 
     [Header("EMP")]
     [SerializeField] Bullet _EMPBulletPrefab;
@@ -37,10 +47,43 @@ public class DemoShip : PlayerShip {
 
     
 
-   
-
     public override void HandleMissile(bool input) {
         // flocking missiles -- or just many missiles with poor tracking
+
+        if (input) {
+            if (_missileRange == null) {
+                _missileRange = this.GetComponent<TrackEntitiesInArea>();
+            }
+
+            if (_missileTarget != null && _missileRange.Contains(_missileTarget)) {
+                if (_lockOnTimer > 0) { _lockOnTimer--; }
+            }
+            else if (_missileRange.HasAny(out Entity inRange)) {
+                _missileTarget = inRange;
+                _lockOnTimer = _missileLockOnDelay;
+            }
+
+            _missileInputHeld = true;
+        }
+        // On releasing the key.
+        else if (_missileInputHeld) {
+            if (_lockOnTimer <= 0 && _missileTarget != null) {
+
+                foreach(var spawnPos in _missileSpawnPositions) {
+                    HomingMissile.Create(
+                        _missilePrefab,
+                        spawnPos.position,
+                        _Rbody.velocity,
+                        _missileTarget,
+                        new Attack(_missileDamage, this)
+                    );
+                }
+            }
+
+            _missileTarget = null;
+            _missileInputHeld = false;
+            _lockOnTimer = _missileLockOnDelay;
+        }
     }
 
     public override void HandleShoot(bool input) {
@@ -58,34 +101,30 @@ public class DemoShip : PlayerShip {
         if (_fireTimer > 0) { _fireTimer--; }
 
 
-        if (charging && !input && _fireTimer <= 0)
+        if (_charging && !input && _fireTimer <= 0)
         {
-            Attack bulletAttack = new Attack(_bulletDamage * (1 + currentCharge), this);
+            Attack bulletAttack = new Attack(_bulletDamage * (1 + _currentCharge), this);
             bulletAttack.OnHit += ReactToBulletHit;
 
             Bullet newBullet = Bullet.Create(
                 _bulletPrefab,
                 bulletAttack,
-                spawnPosition.transform.position,
-                this.transform.forward * _bulletSpeed
+                _bulletSpawnPos.transform.position,
+                this.transform.forward * _bulletSpeed + _Rbody.velocity
             );
 
             _fireTimer = _bulletDelay;
 
-            currentCharge = 0.0f;
-            charging = false; 
+            _currentCharge = 0.0f;
+            _charging = false; 
         }
         else if (input)
         {
-            charging = true; 
-            currentCharge += 0.1f;
-            currentCharge = Mathf.Clamp01(currentCharge);   
+            _charging = true; 
+            _currentCharge += 0.1f;
+            _currentCharge = Mathf.Clamp01(_currentCharge);   
             //Debug.Log("Charging" + currentCharge); 
         }
-       
-      
-
-
     }
 
  
@@ -122,12 +161,12 @@ public class DemoShip : PlayerShip {
             }
             LoseEnergy(_empCost);
             Attack bulletAttack = new Attack(0, this);
-            bulletAttack.OnHit += ReactToBulletHit;
+            bulletAttack.OnHit += ResetAggroEffect.ApplyEffect; // Use this as shorthand to apply an effect on hit.
 
             Bullet.Create(
                 _EMPBulletPrefab,
                 bulletAttack,
-                spawnPosition.transform.position,
+                _bulletSpawnPos.transform.position,
                 forward * currentSpeed
             );
 
@@ -139,7 +178,6 @@ public class DemoShip : PlayerShip {
     private void ReactToBulletHit(Attack atk, Entity hit)
     {
         hit.AddEffect(new FragileEffect(hit));
-        hit.AddEffect(new ResetAggroEffect(hit));
         Debug.Log($"Demoman knows that {hit.name} was hit for {atk.Damage} damage.\nApplied a fragile debuff.");
     }
 

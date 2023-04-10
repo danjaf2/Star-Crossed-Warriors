@@ -4,12 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ShipEntity : EnergizedEntity {
 
-    Rigidbody _rbody;
+    protected Rigidbody _Rbody;
     protected Vector3 _Direction;
 
     protected override void Awake() {
         base.Awake();
-        _rbody = GetComponent<Rigidbody>();
+        _Rbody = GetComponent<Rigidbody>();
     }
 
 
@@ -17,7 +17,7 @@ public class ShipEntity : EnergizedEntity {
         base.Hit(atk);
 
         // Compute knockback.
-        _rbody.AddForce(atk.Force, ForceMode.Impulse);
+        _Rbody.AddForce(atk.Force, ForceMode.Impulse);
     }
 
     // Not sure if any of this will come in useful.
