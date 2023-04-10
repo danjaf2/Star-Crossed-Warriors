@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public abstract class PlayerShip : ShipEntity {
 
@@ -15,6 +16,8 @@ public abstract class PlayerShip : ShipEntity {
     public abstract void HandleShoot(bool input);
     public abstract void HandleMissile(bool input);
     public abstract void HandleAbility(bool input);
+
+    
 
 
 
@@ -45,6 +48,15 @@ public abstract class PlayerShip : ShipEntity {
             isStunned = false;
             _stunTimer = 0; 
         }
+    }
+
+    public virtual float GetPrimaryFireStatus()
+    {
+        return 0;
+    }
+    public virtual float GetSpecialFireStatus()
+    {
+        return 0;
     }
 
     #endregion

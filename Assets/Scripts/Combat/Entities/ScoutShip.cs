@@ -35,8 +35,7 @@ public class ScoutShip : PlayerShip {
     [SerializeField] float _boostCoolDown;
     [SerializeField] float _boostMultiplier = 5.0f;
 
-
-
+   
 
     private void Start()
     {
@@ -151,5 +150,15 @@ public class ScoutShip : PlayerShip {
             _missileInputHeld = false;
             _lockOnTimer = _missileLockOnDelay;
         }
+    }
+
+    public override float GetPrimaryFireStatus()
+    {
+        return _fireTimer;
+    }
+
+    public override float GetSpecialFireStatus()
+    {
+        return _boostCoolDown;
     }
 }

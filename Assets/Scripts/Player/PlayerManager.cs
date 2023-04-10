@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-
+public enum ClassType { SCOUT, DEMO, HEAVY, NONE };
 public class PlayerManager : NetworkBehaviour
 {
-    public enum ClassType { SCOUT, DEMO, HEAVY, NONE };
+   
 
     // Start is called before the first frame update
     [SerializeField] public GameObject vehicle;
@@ -35,6 +35,7 @@ public class PlayerManager : NetworkBehaviour
         if (IsOwner)
         {
             virtualCamera.gameObject.SetActive(true);
+            type = GameObject.FindObjectOfType<NetworkManagerUI>().type;
         }
         vehicle = GameObject.FindGameObjectWithTag("Plane");
 

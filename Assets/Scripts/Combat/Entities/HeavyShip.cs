@@ -39,6 +39,8 @@ public class HeavyShip : PlayerShip {
     [SerializeField] GameObject shieldStrong;
 
 
+   
+
     public override void HandleShoot(bool input) {
         // LASER BEAM!!!
       
@@ -211,5 +213,15 @@ public class HeavyShip : PlayerShip {
     {
         hit.AddEffect(new FragileEffect(hit));
         Debug.Log($"Heavy knows that {hit.name} was hit for {atk.Damage} damage.\nApplied a fragile debuff.");
+    }
+
+    public override float GetPrimaryFireStatus()
+    {
+        return _fireTimer;
+    }
+
+    public override float GetSpecialFireStatus()
+    {
+        return _shieldResetTimer;
     }
 }

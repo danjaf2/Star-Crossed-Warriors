@@ -35,6 +35,8 @@ public class DemoShip : PlayerShip {
 
     public bool playerControlled = false;
 
+    
+
    
 
     public override void HandleMissile(bool input) {
@@ -139,5 +141,15 @@ public class DemoShip : PlayerShip {
         hit.AddEffect(new FragileEffect(hit));
         hit.AddEffect(new ResetAggroEffect(hit));
         Debug.Log($"Demoman knows that {hit.name} was hit for {atk.Damage} damage.\nApplied a fragile debuff.");
+    }
+
+    public override float GetPrimaryFireStatus()
+    {
+        return _fireTimer; 
+    }
+
+    public override float GetSpecialFireStatus()
+    {
+        return _EmpTimer; 
     }
 }
