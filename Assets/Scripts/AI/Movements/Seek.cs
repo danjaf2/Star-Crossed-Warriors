@@ -29,7 +29,7 @@ namespace AI
                 {
                     if(body.velocity.magnitude > 65) {
                         //print("Here");
-                        Vector3 point = GetPredictedPoint(agent.TargetPosition, body.velocity, this.transform.position, projectileSpeed);
+                        Vector3 point = GetPredictedPoint(agent.TargetPosition, body.velocity, this.transform.position, ((this.transform.forward * projectileSpeed) + GetComponent<Rigidbody>().velocity).magnitude);
                         direction = point - this.transform.position;
                         Debug.DrawLine(this.transform.position, point);
                     }

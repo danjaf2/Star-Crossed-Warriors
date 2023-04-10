@@ -21,7 +21,9 @@ public class HeavyShip : PlayerShip {
     [SerializeField] PayloadMissile _missilePrefab;
     [SerializeField] Transform _missileSpawnPos;
     [SerializeField] float _missileCost;
+    [SerializeField] float _missileDelay;
     bool _missileInputHeld;
+    public float _missileTimer = 5.0f;
 
     [Header("SpecialAbility")]
     [SerializeField] bool shieldIsActive; 
@@ -69,10 +71,12 @@ public class HeavyShip : PlayerShip {
 
     public override void HandleMissile(bool input) {
         // cluster missile / acid cloud missle
-        if(input) {
+        if (_missileTimer > 0) { _missileTimer-= Time.fixedDeltaTime; }
+        if (input) {
             _missileInputHeld = true;
         }
-        else if(_missileInputHeld) {
+        else if(_missileInputHeld&& _missileTimer <= 0) {
+            _missileTimer = _missileDelay;
             _missileInputHeld = false;
             PayloadMissile.Create(_missilePrefab, _missileSpawnPos.position, _Rbody.velocity*5);
             LoseEnergy(_missileCost);

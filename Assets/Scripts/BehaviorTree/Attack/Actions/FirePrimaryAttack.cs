@@ -43,7 +43,12 @@ public class FirePrimaryAttack : Node
                         ship.SetShootInput(true);
                     }
                 }
-                
+
+                if (referenceTree.TryGetComponent<HeavyShip>(out HeavyShip h))
+                {
+                    ship.SetShootInput(true);
+                }
+
             }
             else
             {

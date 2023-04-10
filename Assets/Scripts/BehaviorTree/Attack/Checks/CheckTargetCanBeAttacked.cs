@@ -37,7 +37,7 @@ public class CheckTargetCanBeAttacked : Node
                 Vector3 ev = Vector3.zero;
                 if (predictiveAiming)
                 {
-                    ev = GetPredictedPoint(target.position, target.GetComponent<Rigidbody>().velocity, referenceTree.transform.position, projectileSpeed) - referenceTree.transform.position;
+                    ev = GetPredictedPoint(target.position, target.GetComponent<Rigidbody>().velocity, referenceTree.transform.position, ((referenceTree.transform.forward * projectileSpeed) + referenceTree.GetComponent<Rigidbody>().velocity).magnitude) - referenceTree.transform.position;
                 }
                 else
                 {
