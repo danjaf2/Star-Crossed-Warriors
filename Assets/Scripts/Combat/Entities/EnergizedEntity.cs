@@ -6,8 +6,8 @@ public class EnergizedEntity : Entity {
 
     [SerializeField] int _maxEnergy = 300;
 
-    public float Energy { get => _energy.Value; }
-    public NetworkVariable<float> _energy = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public float Energy { get => _energy.Value; set { _energy.Value = value; } }
+    public NetworkVariable<float> _energy = new NetworkVariable<float>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     protected override void Awake() {
         base.Awake();
@@ -20,7 +20,19 @@ public class EnergizedEntity : Entity {
             SetEnergyServerRpc(_maxEnergy);
         }
     }
-    
+
+    public void Start()
+    {
+        if (IsOwner)
+        {
+            _energy.Value = _maxEnergy;
+        }
+        else
+        {
+            SetEnergyServerRpc(_maxEnergy);
+        }
+    }
+
     public void RecoverEnergy(float amount) {
         //print("Recover?");
         //print(_energy.Value);
@@ -37,8 +49,16 @@ public class EnergizedEntity : Entity {
             GainEnergyServerRpc(amount);
         }
     }
+    private void Update()
+    {
+       
+    }
 
-    public void LoseEnergy(float amount)
+    public float GetOwnEnergy()
+    {
+        return _energy.Value;
+    }
+        public void LoseEnergy(float amount)
     {
         if(IsOwner) { 
             _energy.Value = _energy.Value - amount;

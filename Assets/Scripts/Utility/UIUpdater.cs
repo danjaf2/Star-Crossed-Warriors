@@ -18,7 +18,7 @@ public class UIUpdater : MonoBehaviour
 
     void Start()
     {
-        player = GetComponentInParent<PlayerManager>(); 
+        player = gameObject.GetComponentInParent<PlayerManager>(); 
     }
 
     
@@ -32,7 +32,7 @@ public class UIUpdater : MonoBehaviour
     {
         //Add relevant calls here
 
-        playerStats.text = "SHIP STATUS - " + player.playerClass.GetType()+" \r\n HEALTH: "+ player.playerClass.Health +"\r\n ENERGY: " + player.playerClass.Energy; 
+        playerStats.text = "SHIP STATUS - " + player.playerClass.GetType()+" \r\n HEALTH: "+ player.playerClass.Health +"\r\n ENERGY: " + player.playerClass._energy.Value; 
 
         if(player.playerClass.isStunned)
         {

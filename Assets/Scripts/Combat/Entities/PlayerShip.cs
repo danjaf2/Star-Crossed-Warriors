@@ -49,6 +49,11 @@ public abstract class PlayerShip : ShipEntity {
         HandleShoot(_shootInput);
         HandleMissile(_missileInput);
         HandleAbility(_abilityInput);
+
+       // Debug.Log("Current Energy Level: " + _energy.Value + " - " + gameObject.name); 
+
+
+        
     }
 
     private void Update()
