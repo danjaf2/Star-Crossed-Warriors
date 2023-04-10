@@ -139,10 +139,10 @@ public class HeavyShip : PlayerShip {
         }
         else
         {
-            _health -= atk.Damage;
+            _health.Value -= atk.Damage;
         }
         
-        if (_health <= 0)
+        if (_health.Value <= 0)
         {
             if (atk.Sender == null) { Debug.Log(this.name + " was destroyed!"); }
             else { Debug.Log(this.name + $" was destroyed by {atk.Sender.name}!"); }

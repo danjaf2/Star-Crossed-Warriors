@@ -1,9 +1,10 @@
+using Unity.Netcode;
 using UnityEngine;
 
 /// <summary>
 /// Represents a publicly available object that should only have a single instance.
 /// </summary>
-public abstract class Singleton<T> : MonoBehaviour where T : Component {
+public abstract class Singleton<T> : NetworkBehaviour where T : Component {
     private static T _instance;
     public static T Instance {
         get {

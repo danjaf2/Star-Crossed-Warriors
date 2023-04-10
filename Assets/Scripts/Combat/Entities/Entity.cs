@@ -9,8 +9,8 @@ public class Entity : NetworkBehaviour {
     [Header("Gameplay")]
     [SerializeField] public int _maxHealth = 150;
 
-    public float Health { get => _health; }
-    public float _health;
+    public float Health { get => _health.Value; }
+    public NetworkVariable<float> _health = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public event Action<Attack> OnHit;
     public event Action OnTick;
@@ -19,12 +19,17 @@ public class Entity : NetworkBehaviour {
     public virtual void Hit(Attack atk) {
         ApplyEffectsOnHit(atk);
 
-        _health -= atk.Damage;
-        if (_health <= 0) {
+        if(IsOwner) {
+        _health.Value -= atk.Damage;
+        }
+        if (_health.Value <= 0) {
             if (atk.Sender == null) { Debug.Log(this.name + " was destroyed!"); }
             else { Debug.Log(this.name + $" was destroyed by {atk.Sender.name}!"); }
-
-            OnDeath();
+            if (IsOwner)
+            {
+                _health.Value = -10;
+            }
+            //OnDeath();
         }
         else
         {
@@ -42,9 +47,15 @@ public class Entity : NetworkBehaviour {
     }
 
     protected void Repair(float hpAmount) {
-        _health += hpAmount;
-        if (_health > _maxHealth) {
-            _health = _maxHealth;
+        if (IsOwner)
+        {
+            _health.Value += hpAmount;
+        }
+        if (_health.Value > _maxHealth) {
+            if (IsOwner)
+            {
+                _health.Value = _maxHealth;
+            }
         }
     }
     protected virtual void OnDeath() {
@@ -53,19 +64,24 @@ public class Entity : NetworkBehaviour {
             ObjectiveManager.Instance.OnObjectiveComplete(obj);
         }
 
-        ParticleManager.Instance.InstantiateExplosion(this.gameObject); 
-
-        Destroy(this.gameObject, 0.2f);
+        ParticleManager.Instance.InstantiateExplosion(this.gameObject);
+        Destroy(this.gameObject, 0.01f);
     }
 
 
     #region Lifetime
     protected virtual void Awake() {
-        _health = _maxHealth;
+        _health.Value = _maxHealth;
         _activeEffects = new List<Effect>();
     }
 
     protected virtual void FixedUpdate() {
+        Debug.Log(_health.Value);
+        if (_health.Value < 0)
+        {
+            OnDeath();
+        }
+
         OnTick?.Invoke();
     }
     #endregion

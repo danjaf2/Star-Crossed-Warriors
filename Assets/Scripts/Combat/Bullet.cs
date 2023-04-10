@@ -33,6 +33,7 @@ public class Bullet : MonoBehaviour {
             {
                 // Deliver the attack to the hit entity.
                 entity.Hit(_toDeliver);
+
                 PerformActionOnCollision(_variant);
                 //Destroy(this.gameObject);
             }
