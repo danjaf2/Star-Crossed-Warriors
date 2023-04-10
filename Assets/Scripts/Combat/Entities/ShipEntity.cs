@@ -4,20 +4,37 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ShipEntity : EnergizedEntity {
 
-    Rigidbody _rbody;
+    protected Rigidbody _Rbody;
     protected Vector3 _Direction;
 
     protected override void Awake() {
         base.Awake();
-        _rbody = GetComponent<Rigidbody>();
+        try { 
+        if (transform.parent.TryGetComponent(out Rigidbody rb))
+        {
+            _Rbody = rb;
+        }
+        else
+        {
+            if (transform.TryGetComponent(out Rigidbody rb2))
+            {
+                _Rbody = rb2;
+            }
+        }
+        }catch(System.Exception ex)
+        {
+            Debug.Log(this.gameObject.name);
+        }
+
     }
+
 
 
     public override void Hit(Attack atk) {
         base.Hit(atk);
 
         // Compute knockback.
-        _rbody.AddForce(atk.Force, ForceMode.Impulse);
+        _Rbody.AddForce(atk.Force, ForceMode.Impulse);
     }
 
     // Not sure if any of this will come in useful.

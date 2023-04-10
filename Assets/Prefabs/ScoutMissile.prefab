@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9013795959425396319}
   - component: {fileID: 6922922580296697683}
   - component: {fileID: 3930090457981809396}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Render
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,8 @@ GameObject:
   - component: {fileID: 4818404360374707405}
   - component: {fileID: 5863268986758618950}
   - component: {fileID: 5424758534955462821}
-  m_Layer: 0
+  - component: {fileID: 807933373712011509}
+  m_Layer: 10
   m_Name: ScoutMissile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,8 +233,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 2
+  _health: 0
   _turnSpeed: 400
-  _speed: 125
+  _speed: 400
   _blastRadius: 2
   _lifetime: 100
 --- !u!136 &4818404360374707405
@@ -282,3 +284,29 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &807933373712011509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790267289813192893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1

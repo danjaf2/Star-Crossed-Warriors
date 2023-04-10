@@ -83,7 +83,7 @@ public class ScoutShip : PlayerShip {
                 _bulletPrefab,
                 bulletAttack,
                 bulletSpawnPosition.transform.position, 
-                this.transform.forward * _bulletSpeed
+                this.transform.forward * _bulletSpeed + _Rbody.velocity
             );
 
             _fireTimer = _bulletDelay;
@@ -121,29 +121,14 @@ public class ScoutShip : PlayerShip {
         // On releasing the key.
         else if (_missileInputHeld) {
             if (_lockOnTimer <= 0 && _missileTarget != null) {
-                float speed =0;
-                
-                if(transform.parent.TryGetComponent(out Rigidbody rb))
-                {
-                    speed = rb.velocity.magnitude+_missileBaseSpeed;
-                }
-                else
-                {
-                    if (transform.TryGetComponent(out Rigidbody rb2))
-                    {
-                        speed = rb2.velocity.magnitude + _missileBaseSpeed;
-                    }
-                }
 
-                    HomingMissile.Create(
+                HomingMissile.Create(
                     _missilePrefab,
                     missileSpawnPosition.transform.position,
-                    this.transform.rotation,
+                    _Rbody.velocity,
                     _missileTarget,
-                    new Attack(_missileDamage, this),
-                    speed
+                    new Attack(_missileDamage, this)
                 );
-                
             }
 
             _missileTarget = null;

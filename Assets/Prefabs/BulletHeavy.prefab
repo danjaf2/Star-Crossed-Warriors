@@ -210,7 +210,7 @@ Transform:
   m_GameObject: {fileID: 8624268437639619090}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8.736153, y: 8.736153, z: 8.736153}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 955044010871554072}
@@ -229,6 +229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 757ce78a08d64e848ba67598cbf78764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _variant: 0
+  _EMPRange: 100
 --- !u!96 &612206024168508369
 TrailRenderer:
   serializedVersion: 2
@@ -271,7 +273,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 10
+  m_Time: 0.01
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 10
@@ -348,5 +350,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}

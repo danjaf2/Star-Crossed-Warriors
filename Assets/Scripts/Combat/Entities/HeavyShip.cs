@@ -18,16 +18,12 @@ public class HeavyShip : PlayerShip {
     float _fireTimer = 5.0f;
 
     [Header("Missile")]
-    [SerializeField] HomingMissile _missilePrefab;
-    [SerializeField] float _missileDamage;
-    [SerializeField] GameObject missileSpawnPosition;
-    [SerializeField] float _missileBaseSpeed;
-    [SerializeField] TrackEntitiesInArea _missileRange;
-    [SerializeField] int _missileLockOnDelay;
-
+    [SerializeField] PayloadMissile _missilePrefab;
+    [SerializeField] Transform _missileSpawnPos;
+    [SerializeField] float _missileCost;
+    [SerializeField] float _missileDelay;
     bool _missileInputHeld;
-    int _lockOnTimer;
-    public Entity _missileTarget;
+    public float _missileTimer = 5.0f;
 
     [Header("SpecialAbility")]
     [SerializeField] bool shieldIsActive; 
@@ -66,7 +62,7 @@ public class HeavyShip : PlayerShip {
                 _bulletPrefab,
                 bulletAttack,
                 spawnPosition.transform.position,
-                this.transform.forward *( _bulletSpeed+currentSpeed)
+                this.transform.forward *( _bulletSpeed)
             );
 
             _fireTimer = _bulletDelay;
@@ -75,60 +71,15 @@ public class HeavyShip : PlayerShip {
 
     public override void HandleMissile(bool input) {
         // cluster missile / acid cloud missle
-
-        if (input)
-        {
-            if (_missileRange == null)
-            {
-                _missileRange = this.GetComponent<TrackEntitiesInArea>();
-            }
-
-            if (_missileTarget != null && _missileRange.Contains(_missileTarget))
-            {
-                if (_lockOnTimer > 0) { _lockOnTimer--; }
-            }
-            else if (_missileRange.HasAny(out Entity inRange))
-            {
-                Debug.Log(inRange);
-                _missileTarget = inRange;
-                _lockOnTimer = _missileLockOnDelay;
-            }
-
+        if (_missileTimer > 0) { _missileTimer-= Time.fixedDeltaTime; }
+        if (input) {
             _missileInputHeld = true;
         }
-        // On releasing the key.
-        else if (_missileInputHeld)
-        {
-            if (_lockOnTimer <= 0 && _missileTarget != null)
-            {
-                float speed = 0;
-
-                if (transform.parent.TryGetComponent(out Rigidbody rb))
-                {
-                    speed = rb.velocity.magnitude + _missileBaseSpeed;
-                }
-                else
-                {
-                    if (transform.TryGetComponent(out Rigidbody rb2))
-                    {
-                        speed = rb2.velocity.magnitude + _missileBaseSpeed;
-                    }
-                }
-
-                HomingMissile.Create(
-                _missilePrefab,
-                missileSpawnPosition.transform.position,
-                this.transform.rotation,
-                _missileTarget,
-                new Attack(_missileDamage, this),
-                speed
-            );
-
-            }
-
-            _missileTarget = null;
+        else if(_missileInputHeld&& _missileTimer <= 0) {
+            _missileTimer = _missileDelay;
             _missileInputHeld = false;
-            _lockOnTimer = _missileLockOnDelay;
+            PayloadMissile.Create(_missilePrefab, _missileSpawnPos.position, _Rbody.velocity*5);
+            LoseEnergy(_missileCost);
         }
     }
 

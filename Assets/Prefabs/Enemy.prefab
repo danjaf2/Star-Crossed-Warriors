@@ -442,6 +442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 150
+  _health: 0
   _maxEnergy: 300
   isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 0c343a920678f694b89abcba5e870ba2, type: 3}
@@ -454,7 +455,7 @@ MonoBehaviour:
   _missileDamage: 0
   missileSpawnPosition: {fileID: 292851016}
   _missileBaseSpeed: 0
-  _missileRange: {fileID: 0}
+  _missileRange: {fileID: 8819334828189467492}
   _missileLockOnDelay: 0
   _missileTarget: {fileID: 0}
   _boostDelay: 10

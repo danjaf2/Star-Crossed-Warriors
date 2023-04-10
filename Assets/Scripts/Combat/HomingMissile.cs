@@ -15,7 +15,6 @@ public class HomingMissile : Entity {
     Entity _target;
     bool _detonated;
 
-    //Vector3 _velocity;
     Rigidbody _rbody;
 
     Attack _toDeliver;
@@ -29,13 +28,13 @@ public class HomingMissile : Entity {
         _turnSpeed *= Time.fixedDeltaTime;
     }
 
-    #region FOR DEBUG ONLY
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.G)) {
-            _target = GameObject.Find("missile_test_target").GetComponent<Entity>();
-        }
-    }
-    #endregion
+    //#region FOR DEBUG ONLY
+    //private void Update() {
+    //    if(Input.GetKeyDown(KeyCode.G)) {
+    //        _target = GameObject.Find("missile_test_target").GetComponent<Entity>();
+    //    }
+    //}
+    //#endregion
 
     protected override void FixedUpdate() {
         base.FixedUpdate();
@@ -78,11 +77,11 @@ public class HomingMissile : Entity {
         );
     }
 
-    public static HomingMissile Create(HomingMissile prefab, Vector3 position, Quaternion rotation, Entity target, Attack attack, float speed) {
-        HomingMissile missile = Instantiate(prefab, position, rotation);
+    public static HomingMissile Create(HomingMissile prefab, Vector3 position, Vector3 initVelocity, Entity target, Attack attack) {
+        HomingMissile missile = Instantiate(prefab, position, Quaternion.Euler(initVelocity));
         missile._toDeliver = attack;
         missile._target = target;
-        missile._speed = speed;
+        missile._rbody.velocity = initVelocity;
         return missile;
     }
 }

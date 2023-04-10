@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum ClassType { SCOUT, DEMO, HEAVY, NONE };
@@ -15,6 +16,7 @@ public class PlayerManager : NetworkBehaviour
     [SerializeField] public float currentEnergyPercentage = 100;
 
     [SerializeField] public ClassType type;
+    private NetworkVariable<int> classNum = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] public PlayerShip playerClass;
 
     //[SerializeField] public List<GameObject> specialAbilityPrefabs;
@@ -37,7 +39,8 @@ public class PlayerManager : NetworkBehaviour
             virtualCamera.gameObject.SetActive(true);
             type = GameObject.FindObjectOfType<NetworkManagerUI>().type;
         }
-        vehicle = GameObject.FindGameObjectWithTag("Plane");
+        
+        //vehicle = GameObject.FindGameObjectWithTag("Plane");
 
         if (type == ClassType.DEMO)
         {
@@ -45,6 +48,7 @@ public class PlayerManager : NetworkBehaviour
             {
                 virtualCamera.LookAt = dCamL.transform;
                 virtualCamera.Follow = dCamF.transform;
+                classNum.Value = (int) type;
             }
             playerClass = new DemoShip();
         }
@@ -54,6 +58,7 @@ public class PlayerManager : NetworkBehaviour
             {
                 virtualCamera.LookAt = sCamL.transform;
                 virtualCamera.Follow = sCamF.transform;
+                classNum.Value = (int)type;
             }
             playerClass = new ScoutShip();
         }
@@ -63,6 +68,7 @@ public class PlayerManager : NetworkBehaviour
             {
                 virtualCamera.LookAt = hCamL.transform;
                 virtualCamera.Follow = hCamF.transform;
+                classNum.Value = (int)type;
             }
             playerClass = new HeavyShip();
         }
@@ -71,9 +77,9 @@ public class PlayerManager : NetworkBehaviour
             playerClass = null;
         }
 
-        vehicles[(int)type].SetActive(true); //Set correct vehicle to active
-
-        playerClass = vehicles[(int)type].GetComponent<PlayerShip>();
+        vehicles[classNum.Value].SetActive(true); //Set correct vehicle to active
+        playerClass = vehicles[classNum.Value].GetComponent<PlayerShip>();
+        TeamManager.Instance.AddToListAllies(vehicles[classNum.Value]);
         base.OnNetworkSpawn(); // Not sure if this is needed though, but good to have it.
     }
     void Start()

@@ -149,7 +149,7 @@ public class PlaneController : NetworkBehaviour
             {
 
                 //Should be changed latter
-                foreach (GameObject ally in TeamManager.alliesList)
+                foreach (GameObject ally in TeamManager.Instance.alliesList)
                 {
                     if (ally.TryGetComponent<BaseAlly>(out BaseAlly friend))
                     {

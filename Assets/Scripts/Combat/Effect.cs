@@ -54,7 +54,6 @@ public class ResetAggroEffect : Effect
     public override int Duration => 1;
     public override bool Stacks => false;
 
-    float _dmgMultiplier;
     public ResetAggroEffect(Entity affecting) : base(affecting)
     {
         if (affecting.gameObject.TryGetComponent<AIAgent>(out AIAgent agent))
