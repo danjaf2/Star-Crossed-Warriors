@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
 public class ContinuousDamageZone : ZoneOfEffect<Entity> {
@@ -14,7 +15,9 @@ public class ContinuousDamageZone : ZoneOfEffect<Entity> {
         if(_lifetime-- <= 0) { Destroy(this.gameObject); }
 
         foreach (var entity in _InRange) {
+            if (NetworkManager.Singleton.IsServer) {
             entity.Hit(new Attack(_damagePerSecond * Time.fixedDeltaTime, null));
+            }
         }
     }
 }

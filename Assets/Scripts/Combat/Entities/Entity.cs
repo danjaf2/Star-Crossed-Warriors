@@ -77,41 +77,51 @@ public class Entity : NetworkBehaviour {
             }
         }
     }
-    protected virtual void OnDeath() {
-        if(TryGetComponent<SimpleObjective>(out SimpleObjective obj))
+    protected virtual void OnDeath()
+    {
+
+        if(this.gameObject.layer == 10)
+        {
+            ParticleManager.Instance.InstantiateExplosion(this.gameObject);
+            Destroy(this.gameObject, 0.01f);
+        }
+        if (TryGetComponent<SimpleObjective>(out SimpleObjective obj))
         {
             ObjectiveManager.Instance.OnObjectiveComplete(obj);
         }
 
-        if(TryGetComponent(out PlayerShip ship))
+        if (TryGetComponent(out PlayerShip ship))
         {
-                if(ship.transform.parent.TryGetComponent(out Rigidbody body))
-                {
-                    body.velocity = Vector3.zero;
-                    body.transform.position = new Vector3(0,0,0);
+            if (ship.transform.parent.TryGetComponent(out Rigidbody body))
+            {
+                body.velocity = Vector3.zero;
+                body.transform.position = new Vector3(0, 0, 0);
 
                 Debug.Log(_health.Value);
-                }
-                else
+            }
+            else
+            {
+                if (ship.transform.TryGetComponent(out Rigidbody body2))
                 {
-                    if (ship.transform.TryGetComponent(out Rigidbody body2))
-                    {
                     if (ship.respawnPosition != null)
                     {
                         body2.velocity = Vector3.zero;
                         body2.transform.position = ship.respawnPosition.transform.position;
                     }
-                    }
                 }
-            ship.GetComponent<Entity>().Repair(1000);
-        }
-        else
-        {
-            ParticleManager.Instance.InstantiateExplosion(this.gameObject);
-            Destroy(this.gameObject, 0.01f);
-        }
+            }
+            if (NetworkManager.Singleton.IsServer)
+            {
+                _health.Value = _maxHealth;
+            }
+            else
+            {
+                ParticleManager.Instance.InstantiateExplosion(this.gameObject);
+                Destroy(this.gameObject, 0.01f);
+            }
 
-        
+
+        }
     }
 
 

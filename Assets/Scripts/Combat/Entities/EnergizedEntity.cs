@@ -8,46 +8,33 @@ public class EnergizedEntity : Entity {
 
     public float Energy { get => _energy.Value; set { _energy.Value = value; } }
     public NetworkVariable<float> _energy = new NetworkVariable<float>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    private float current;
 
     protected override void Awake() {
+        _energy.Value = _maxEnergy;
         base.Awake();
-        if (IsOwner)
-        {
-            _energy.Value = _maxEnergy;
-        }
-        else
-        {
-            SetEnergyServerRpc(_maxEnergy);
-        }
     }
 
     public void Start()
     {
-        if (IsOwner)
-        {
+        if(NetworkManager.IsServer) {
             _energy.Value = _maxEnergy;
-        }
-        else
-        {
-            SetEnergyServerRpc(_maxEnergy);
         }
     }
 
     public void RecoverEnergy(float amount) {
         //print("Recover?");
         //print(_energy.Value);
-        if (IsOwner)
+        if (NetworkManager.Singleton.IsServer)
         {
             _energy.Value += amount;
+
+            if (_energy.Value > _maxEnergy)
+            {
+                _energy.Value = _maxEnergy;
+            }
+        } 
         
-        if (_energy.Value > _maxEnergy) {
-            _energy.Value = _maxEnergy;
-        }
-        }
-        else
-        {
-            GainEnergyServerRpc(amount);
-        }
     }
     private void Update()
     {
@@ -56,21 +43,19 @@ public class EnergizedEntity : Entity {
 
     public float GetOwnEnergy()
     {
-        return _energy.Value;
+        current = _energy.Value;
+        return current;
     }
         public void LoseEnergy(float amount)
     {
-        if(IsOwner) { 
+        if(NetworkManager.Singleton.IsServer) { 
             _energy.Value = _energy.Value - amount;
             if (_energy.Value <= 0)
             {
                 _energy.Value = 0;
             }
         }
-        else
-        {
-            LoseEnergyServerRpc(amount);
-        }
+        
         
         
     }

@@ -39,7 +39,6 @@ public class HeavyShip : PlayerShip {
 
     public override void HandleShoot(bool input) {
         // LASER BEAM!!!
-      
         if (_fireTimer > 0) { _fireTimer--; }
         float currentSpeed = 800;
         Vector3 forward = this.transform.forward;
@@ -139,7 +138,9 @@ public class HeavyShip : PlayerShip {
         }
         else
         {
+            if(NetworkManager.IsServer) {
             _health.Value -= atk.Damage;
+            }
         }
         
         if (_health.Value <= 0)

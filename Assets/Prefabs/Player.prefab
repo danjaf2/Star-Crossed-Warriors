@@ -1627,6 +1627,22 @@ CapsuleCollider:
   m_Height: 11.259186
   m_Direction: 2
   m_Center: {x: -0.18280268, y: 0.010762851, z: -0.47139233}
+--- !u!114 &1843579940471461428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6923452163845066174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &3557284679464829889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1706,22 +1722,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalRot: {x: 0, y: 0, z: 0, w: 0}
   eulerRot: {x: 0, y: 0, z: 0}
---- !u!114 &1843579940471461428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6923452163845066174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!4 &7736862703126664964 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5895609534982093768, guid: e507be9eda017654ebe5c798e9a785b4, type: 3}
@@ -2546,6 +2546,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d92e976420af3546a31801282f07b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2324597128234181646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8554425759712298594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &5290528613896041492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2576,22 +2592,6 @@ MonoBehaviour:
   ally: 1
   range: 5000
   sensitivity: 0.5
---- !u!114 &2324597128234181646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8554425759712298594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!1 &8554425759712298598 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100004, guid: 7fea2db65062cc645a42de560c2e6d8c, type: 3}

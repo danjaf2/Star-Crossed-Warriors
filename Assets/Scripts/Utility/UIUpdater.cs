@@ -30,9 +30,15 @@ public class UIUpdater : MonoBehaviour
 
     public void UpdateUI()
     {
+        float health;
+        float energy=10000;
         //Add relevant calls here
-
-        playerStats.text = "SHIP STATUS - " + player.playerClass.GetType()+" \r\n HEALTH: "+ player.playerClass.Health +"\r\n ENERGY: " + player.playerClass._energy.Value; 
+        if (player.playerClass.playerControlled)
+        {
+            energy = player.playerClass._energy.Value;
+            print(energy);
+        }
+        playerStats.text = "SHIP STATUS - " + player.playerClass.GetType()+" \r\n HEALTH: "+ player.playerClass.Health +"\r\n ENERGY: " + energy; 
 
         if(player.playerClass.isStunned)
         {
