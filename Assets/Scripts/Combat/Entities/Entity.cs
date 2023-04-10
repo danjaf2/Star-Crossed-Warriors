@@ -22,12 +22,19 @@ public class Entity : NetworkBehaviour {
         if(IsOwner) {
         _health.Value -= atk.Damage;
         }
+        else
+        {
+            DamageServerRpc(atk.Damage);
+        }
         if (_health.Value <= 0) {
             if (atk.Sender == null) { Debug.Log(this.name + " was destroyed!"); }
             else { Debug.Log(this.name + $" was destroyed by {atk.Sender.name}!"); }
             if (IsOwner)
             {
                 _health.Value = -10;
+            }
+            else {
+                //DamageServerRpc(-1000);
             }
             //OnDeath();
         }
@@ -39,6 +46,12 @@ public class Entity : NetworkBehaviour {
 
         atk.Hit(this);
         OnHit?.Invoke(atk);
+    }
+
+    [ServerRpc(RequireOwnership =false)]
+    private void DamageServerRpc(float damage)
+    {
+        _health.Value -= damage;
     }
 
     public void InvokeAttack(Attack atk)

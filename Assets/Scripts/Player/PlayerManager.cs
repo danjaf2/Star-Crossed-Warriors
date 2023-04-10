@@ -32,11 +32,14 @@ public class PlayerManager : NetworkBehaviour
     public GameObject hCamF;
     public GameObject hCamL;
 
+    public GameObject canvas;
+
     public override void OnNetworkSpawn()
     { // This is basically a Start method
         if (IsOwner)
         {
             virtualCamera.gameObject.SetActive(true);
+            canvas.SetActive(true);
             type = GameObject.FindObjectOfType<NetworkManagerUI>().type;
         }
         

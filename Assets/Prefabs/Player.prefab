@@ -884,6 +884,7 @@ MonoBehaviour:
   sCamL: {fileID: 164558410}
   hCamF: {fileID: 4231403553305378211}
   hCamL: {fileID: 602609619872181275}
+  canvas: {fileID: 5042698477668039468}
 --- !u!54 &2126581154
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1131,6 +1132,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6343305812774060400, guid: 1fa3b1e981905324c97d3d3a37c72b44, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6343305812774060411, guid: 1fa3b1e981905324c97d3d3a37c72b44, type: 3}
       propertyPath: player
       value: 
@@ -1281,6 +1286,11 @@ MonoBehaviour:
 --- !u!224 &5042698477668039456 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6343305812774060412, guid: 1fa3b1e981905324c97d3d3a37c72b44, type: 3}
+  m_PrefabInstance: {fileID: 2160796032393280092}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5042698477668039468 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6343305812774060400, guid: 1fa3b1e981905324c97d3d3a37c72b44, type: 3}
   m_PrefabInstance: {fileID: 2160796032393280092}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &5042698477969907636 stripped
@@ -1658,8 +1668,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 150
-  _health: 0
+  _health:
+    m_InternalValue: 0
   _maxEnergy: 300
+  _energy:
+    m_InternalValue: 0
   playerControlled: 1
   isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 0c343a920678f694b89abcba5e870ba2, type: 3}
@@ -1853,8 +1866,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 150
-  _health: 0
+  _health:
+    m_InternalValue: 0
   _maxEnergy: 300
+  _energy:
+    m_InternalValue: 0
   playerControlled: 1
   isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 099f89479c5ac774b870d04859a2eca9, type: 3}
@@ -2459,8 +2475,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 150
-  _health: 0
+  _health:
+    m_InternalValue: 0
   _maxEnergy: 300
+  _energy:
+    m_InternalValue: 0
   playerControlled: 1
   isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 00062493a749a6e48941d65d95e801fd, type: 3}
@@ -2471,6 +2490,8 @@ MonoBehaviour:
   _missilePrefab: {fileID: 9204454656491265301, guid: 8959a0aea7a10ef46982af87fbc35d0e, type: 3}
   _missileSpawnPos: {fileID: 5210688782792294347}
   _missileCost: 0
+  _missileDelay: 0
+  _missileTimer: 5
   shieldIsActive: 0
   _shieldHPBase: 400
   _shieldCurrentHP: 400
