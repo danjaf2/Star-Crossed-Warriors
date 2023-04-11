@@ -2,20 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[SerializeField] public enum AudioCategory { SHOOT, HIT, LOWHP, DEATH, SUCCESS, AIMENGAGE, SPEEDUP, LOWMANA };
 public class AudioManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public enum AudioCategory { HIT, LOWHP, DEATH, SUCCESS, AIMENGAGE, SPEEDUP, LOWMANA};
-    public class AudioResource
-    {
-        public AudioSource source;
-        public AudioCategory cat;
-        public int id; 
-    }
-
-    public List<AudioResource> resources;
+    
+   public List<AudioResource> resources;
     void Start()
     {
         
@@ -34,6 +27,7 @@ public class AudioManager : MonoBehaviour
             if(resource.cat == toPlay && resource.id == id)
             {
                 resource.source.Play();
+
                 return; 
             }
         }
