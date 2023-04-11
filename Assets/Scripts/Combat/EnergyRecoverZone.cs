@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class EnergyRecoverZone : ZoneOfEffect<EnergizedEntity> {
@@ -27,7 +28,10 @@ public class EnergyRecoverZone : ZoneOfEffect<EnergizedEntity> {
     protected override void FixedUpdate() {
         base.FixedUpdate();
         foreach (var entity in _InRange) {
-           entity.RecoverEnergy(_energyRecover * Time.fixedDeltaTime);
+            if (NetworkManager.Singleton.IsServer)
+            {
+                entity.RecoverEnergy(_energyRecover * Time.fixedDeltaTime);
+            }
         }
     }
 }
