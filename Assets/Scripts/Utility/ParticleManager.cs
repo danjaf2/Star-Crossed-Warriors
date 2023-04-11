@@ -7,6 +7,7 @@ public class ParticleManager : Singleton<ParticleManager>
     [SerializeField] public GameObject explisionPrefab;
     [SerializeField] public GameObject EMPPrefab;
     [SerializeField] public GameObject explisionPrefab2;
+    [SerializeField] public GameObject EMPPrefab2;
 
     protected override void Awake() {
         Instance = this;
@@ -28,7 +29,8 @@ public class ParticleManager : Singleton<ParticleManager>
 
     public void InstantiateEMP(GameObject target)
     {
-        GameObject inst = GameObject.Instantiate(EMPPrefab, target.transform);
+        //GameObject inst = GameObject.Instantiate(EMPPrefab, target.transform);
+        GameObject inst = GameObject.Instantiate(EMPPrefab2, target.transform);
 
         GameObject.Destroy(inst, 2f);
     }
