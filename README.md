@@ -1,1 +1,1 @@
-# COMP-476-Project
+# Star-Crossed Warriors
