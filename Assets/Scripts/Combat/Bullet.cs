@@ -3,7 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public enum BulletVariant { REGULAR, EMP}; 
+public enum BulletVariant { REGULAR, EMP, MINE}; 
 public class Bullet : MonoBehaviour {
 
     const int DEFAULT_LIFETIME = 100;
@@ -16,11 +16,12 @@ public class Bullet : MonoBehaviour {
     Attack _toDeliver;
 
     public BulletVariant _variant = BulletVariant.REGULAR;
-    public float _EMPRange = 100f; 
+    public float _EMPRange = 100f;
+    public float _explosionRange = 100f;
 
 
     private void FixedUpdate() {
-        if(_lifetime-- <= 0) {
+        if(_lifetime-- <= 0 && _variant != BulletVariant.MINE) {
             //Destroy(this.gameObject);
             PerformActionOnCollision(_variant); 
             return;
@@ -92,7 +93,11 @@ public class Bullet : MonoBehaviour {
             case BulletVariant.EMP:
                 PerformEMPBlast(); 
                 Destroy(this.gameObject, 3f);
-                break; 
+                break;
+            case BulletVariant.MINE:
+                Explode(); 
+                Destroy(this.gameObject, 3f);
+                break;
             default:
                 Destroy(this.gameObject);
                 break; //Do nothing
@@ -117,5 +122,34 @@ public class Bullet : MonoBehaviour {
         GameObject.FindObjectOfType<ParticleManager>().InstantiateEMP(gameObject); 
 
     }
-    
+
+    public void Explode()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _explosionRange);
+        foreach (var hitCollider in hitColliders)
+        {
+            PlayerShip ship = hitCollider.gameObject.GetComponent<PlayerShip>();
+
+            if(hitCollider.gameObject.tag == "Player")
+            {
+                ship = hitCollider.gameObject.GetComponentInChildren<PlayerShip>();
+            }
+            if (ship != null && _toDeliver != null)
+            {
+                _toDeliver = new Attack(100, gameObject.GetComponent<MineField>());
+                ship.Hit(_toDeliver);
+                Debug.Log("MINE - " + ship.name + " was hit by an explosion");
+            }
+            else if (ship != null)
+            {
+                _toDeliver = new Attack(100, gameObject.GetComponent<MineField>());
+                ship.Hit(_toDeliver); 
+                Debug.Log("MINE - " + ship.name + " was hit by an explosion");
+            }
+        }
+
+        GameObject.FindObjectOfType<ParticleManager>().InstantiateExplosion2(gameObject);
+
+    }
+
 }

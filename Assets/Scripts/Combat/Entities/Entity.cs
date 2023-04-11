@@ -21,6 +21,7 @@ public class Entity : NetworkBehaviour {
 
         if(IsOwner) {
         _health.Value -= atk.Damage;
+            Debug.Log("Health for " + gameObject.name + " is " + _health.Value);
         }
         else
         {
@@ -42,7 +43,10 @@ public class Entity : NetworkBehaviour {
         {
             if (atk.Sender == null) { Debug.Log(this.name + " was shoot!"); }
             else { Debug.Log(this.name + $" was shoot by {atk.Sender.name}!"); }
+            Debug.Log("Health for " + gameObject.name + " is " + _health.Value);
         }
+
+     
 
         atk.Hit(this);
         OnHit?.Invoke(atk);

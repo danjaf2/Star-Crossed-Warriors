@@ -67,6 +67,8 @@ public class AsteroidManager : MonoBehaviour
 
     bool CheckCollision(Asteroid obj1, Asteroid obj2)
     {
+        if(obj1 == null || obj2 == null) return false;
+
         Vector3 distance = obj1.transform.position - obj2.transform.position;
 
         float length = distance.magnitude;
