@@ -60,6 +60,11 @@ public class TestRelay : MonoBehaviour
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
             characterSelectPanel.SetActive(false);
             NetworkManager.Singleton.StartClient();
+
+            while (!NetworkManager.Singleton.IsConnectedClient)
+            {
+                //Wait
+            }
         }
         catch(RelayServiceException e)
         {
