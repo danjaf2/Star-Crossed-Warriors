@@ -19,7 +19,7 @@ public class Entity : NetworkBehaviour {
     public virtual void Hit(Attack atk) {
         ApplyEffectsOnHit(atk);
 
-        if(IsOwner) {
+        if(NetworkManager.Singleton.IsServer) {
         _health.Value -= atk.Damage;
             Debug.Log("Health for " + gameObject.name + " is " + _health.Value);
         }
@@ -30,7 +30,7 @@ public class Entity : NetworkBehaviour {
         if (_health.Value <= 0) {
             if (atk.Sender == null) { Debug.Log(this.name + " was destroyed!"); }
             else { Debug.Log(this.name + $" was destroyed by {atk.Sender.name}!"); }
-            if (IsOwner)
+            if (NetworkManager.Singleton.IsServer)
             {
                 _health.Value = -10;
             }
@@ -70,12 +70,12 @@ public class Entity : NetworkBehaviour {
     }
 
     protected void Repair(float hpAmount) {
-        if (IsOwner)
+        if (NetworkManager.Singleton.IsServer)
         {
             _health.Value += hpAmount;
         }
         if (_health.Value > _maxHealth) {
-            if (IsOwner)
+            if (NetworkManager.Singleton.IsServer)
             {
                 _health.Value = _maxHealth;
             }
@@ -85,6 +85,11 @@ public class Entity : NetworkBehaviour {
     {
 
         if(this.gameObject.layer == 10)
+        {
+            ParticleManager.Instance.InstantiateExplosion(this.gameObject);
+            Destroy(this.gameObject, 0.01f);
+        }
+        if (this.gameObject.layer == 8)
         {
             ParticleManager.Instance.InstantiateExplosion(this.gameObject);
             Destroy(this.gameObject, 0.01f);
