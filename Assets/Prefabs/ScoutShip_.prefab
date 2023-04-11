@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6752861143345834602}
   - component: {fileID: 6752861143345834600}
   - component: {fileID: 6752861143345834606}
+  - component: {fileID: 8196140785663373790}
   m_Layer: 0
   m_Name: ScoutShip_
   m_TagString: Untagged
@@ -49,15 +50,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 150
+  _health:
+    m_InternalValue: 0
   _maxEnergy: 300
-  _flightSpeed: 0
-  _fireRate: 0
-  _lockOnDelay: 0
+  _energy:
+    m_InternalValue: 100
+  playerControlled: 0
+  respawnPosition: {fileID: 0}
+  isStunned: 0
   _bulletPrefab: {fileID: 3900607670785296070, guid: 0c343a920678f694b89abcba5e870ba2, type: 3}
   _bulletDamage: 4
   _bulletSpeed: 40
   _bulletDelay: 100
+  _bulletCost: 0
+  bulletSpawnPosition: {fileID: 0}
   _missilePrefab: {fileID: 7596523783035753511, guid: 20df6fcc83265cd4f9f913d190bc958a, type: 3}
+  _missileDamage: 0
+  missileSpawnPosition: {fileID: 0}
+  _missileBaseSpeed: 0
+  _missileRange: {fileID: 0}
+  _missileLockOnDelay: 0
+  _missileCost: 15
+  _missileTarget: {fileID: 0}
+  _boostDelay: 0
+  _boostCoolDown: 0
+  _boostMultiplier: 5
+  _abilityCost: 10
 --- !u!114 &6752861143345834602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,6 +117,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.5, y: 1, z: 7}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8196140785663373790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6752861143345834605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &6752861145308627194
 GameObject:
   m_ObjectHideFlags: 0

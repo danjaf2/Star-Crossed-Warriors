@@ -2,9 +2,10 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using Unity.Netcode;
 
 public enum BulletVariant { REGULAR, EMP, MINE}; 
-public class Bullet : MonoBehaviour {
+public class Bullet :  NetworkBehaviour{
 
     const int DEFAULT_LIFETIME = 100;
 
@@ -67,9 +68,23 @@ public class Bullet : MonoBehaviour {
     public static Bullet Create(Bullet prefab, Attack attack, Vector3 position, Vector3 velocity, int layer = int.MaxValue) {
         Bullet newBullet = Instantiate(prefab, position, Quaternion.identity);
         newBullet.InitValues(attack, velocity, DEFAULT_LIFETIME, layer);
+        newBullet.TestServerRpc();
 
         GameObject.FindObjectOfType<AudioManager>().playAudio(AudioCategory.SHOOT, 0); 
         return newBullet;
+    }
+    [ServerRpc(RequireOwnership =false)]
+    private void TestServerRpc()
+    {
+        Debug.Log("THIS IS WHAT SERVER SEES");
+        this.transform.GetComponent<NetworkObject>().Spawn(true);
+        TestClientRpc();
+    }
+    [ClientRpc]
+    private void TestClientRpc()
+    {
+        Debug.Log("THIS IS WHAT CLIENT SEES");
+        this.transform.GetComponent<NetworkObject>().Spawn(true);
     }
 
     void InitValues(Attack attack, Vector3 velocity, int lifetime, int layer) {
