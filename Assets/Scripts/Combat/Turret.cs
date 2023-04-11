@@ -105,11 +105,14 @@ public class Turret : ScoutShip
         Vector3 currentPos =transform.position;
         foreach (Collider t in targets)
         {
-            float dist = Vector3.Distance(t.transform.position, currentPos);
-            if (dist < minDist)
+            if (t != null)
             {
-                tMin = t;
-                minDist = dist;
+                float dist = Vector3.Distance(t.transform.position, currentPos);
+                if (dist < minDist)
+                {
+                    tMin = t;
+                    minDist = dist;
+                }
             }
         }
         return tMin;
