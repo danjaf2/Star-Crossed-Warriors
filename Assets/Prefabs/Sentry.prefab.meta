@@ -1,6 +1,11 @@
 fileFormatVersion: 2
-guid: 00c94f142e045e34c82fe21616cf9cc8
+<<<<<<<< Updated upstream:Assets/Prefabs/Sentry.prefab.meta
+guid: 6228ed606192d0f4da11dba56e5d853b
 PrefabImporter:
+========
+guid: cbc636f930f78c841a91c76a805bdfec
+DefaultImporter:
+>>>>>>>> Stashed changes:Assets/Plugins/QFSW/Quantum Console/Source/Demo Scene/DemoScene.unity.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
