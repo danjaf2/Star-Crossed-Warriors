@@ -110,7 +110,7 @@ public class ScoutShip : PlayerShip {
     private void ReactToBulletHit(Attack atk, Entity hit) {
         hit.AddEffect(new FragileEffect(hit));
         hit.AddEffect(new ResetAggroEffect(hit));
-        Debug.Log($"Scout knows that {hit.name} was hit for {atk.Damage} damage.\nApplied a fragile debuff.");
+        //Debug.Log($"Scout knows that {hit.name} was hit for {atk.Damage} damage.\nApplied a fragile debuff.");
     }
 
     // strong homing missile
@@ -131,7 +131,7 @@ public class ScoutShip : PlayerShip {
                 if (_lockOnTimer > 0) { _lockOnTimer--; }
             }
             else if (_missileRange.HasAny(out Entity inRange)) {
-                Debug.Log(inRange);
+                //Debug.Log(inRange);
                 _missileTarget = inRange;
                 _lockOnTimer = _missileLockOnDelay;
             }

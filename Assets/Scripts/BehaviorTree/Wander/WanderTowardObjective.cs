@@ -84,7 +84,7 @@ public class WanderTowardObjective : Node
                         }
                         if (zone != null && Vector3.Distance(referenceTree.transform.position, ((SimpleObjective)root.GetData("CurrentObjective")).gameObject.transform.position)>=500)
                         {
-                            Debug.Log("Wandering Towards objective");
+                            //Debug.Log("Wandering Towards objective");
                             int randomNumber = Random.Range(0, zone.waypoints.Count - 1);
                             agent.goalWaypoint = zone.waypoints[randomNumber];
                             state = NodeState.SUCCESS;

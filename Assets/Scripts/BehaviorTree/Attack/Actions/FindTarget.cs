@@ -84,7 +84,7 @@ public class FindTarget : Node
             root.SetData("target", t);
             referenceTree.GetComponent<AIAgent>().TrackTarget(t);
             //Debug.Log(validTargets[0].transform.name);
-            Debug.Log("Found Target");
+           // Debug.Log("Found Target");
         }
 
         state = NodeState.SUCCESS;

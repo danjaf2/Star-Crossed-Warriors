@@ -128,7 +128,7 @@ public class Bullet :  NetworkBehaviour{
             if (ship != null)
             {
                 ship.BeStunned();
-                Debug.Log("Ship was stunned"); 
+                //Debug.Log("Ship was stunned"); 
             }
         }
 
@@ -153,13 +153,13 @@ public class Bullet :  NetworkBehaviour{
             {
                 _toDeliver = new Attack(100, gameObject.GetComponent<MineField>());
                 ship.Hit(_toDeliver);
-                Debug.Log("MINE - " + ship.name + " was hit by an explosion");
+               // Debug.Log("MINE - " + ship.name + " was hit by an explosion");
             }
             else if (ship != null)
             {
                 _toDeliver = new Attack(100, gameObject.GetComponent<MineField>());
                 ship.Hit(_toDeliver); 
-                Debug.Log("MINE - " + ship.name + " was hit by an explosion");
+                //Debug.Log("MINE - " + ship.name + " was hit by an explosion");
             }
         }
 

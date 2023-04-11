@@ -17,19 +17,34 @@ public class Entity : NetworkBehaviour {
 
 
     public virtual void Hit(Attack atk) {
+        if(TryGetComponent(out SimpleObjective objective)) { 
+            if(!objective.active)
+            {
+                return;
+            }
+        }
+
         ApplyEffectsOnHit(atk);
 
         if(NetworkManager.Singleton.IsServer) {
         _health.Value -= atk.Damage;
-            Debug.Log("Health for " + gameObject.name + " is " + _health.Value);
+            //Debug.Log("Health for " + gameObject.name + " is " + _health.Value);
         }
         else
         {
             DamageServerRpc(atk.Damage);
         }
         if (_health.Value <= 0) {
-            if (atk.Sender == null) { Debug.Log(this.name + " was destroyed!"); }
-            else { Debug.Log(this.name + $" was destroyed by {atk.Sender.name}!"); }
+            if (atk.Sender == null) { 
+                
+                //Debug.Log(this.name + " was destroyed!"); 
+            
+            }
+            else { 
+                
+                //Debug.Log(this.name + $" was destroyed by {atk.Sender.name}!"); 
+            
+            }
             if (NetworkManager.Singleton.IsServer)
             {
                 _health.Value = -10;
@@ -41,9 +56,14 @@ public class Entity : NetworkBehaviour {
         }
         else
         {
-            if (atk.Sender == null) { Debug.Log(this.name + " was shoot!"); }
-            else { Debug.Log(this.name + $" was shoot by {atk.Sender.name}!"); }
-            Debug.Log("Health for " + gameObject.name + " is " + _health.Value);
+            if (atk.Sender == null) {
+                
+                //Debug.Log(this.name + " was shoot!");
+            
+            }
+            else { //Debug.Log(this.name + $" was shoot by {atk.Sender.name}!");
+            }
+           // Debug.Log("Health for " + gameObject.name + " is " + _health.Value);
         }
 
      
@@ -106,7 +126,7 @@ public class Entity : NetworkBehaviour {
                 body.velocity = Vector3.zero;
                 body.transform.position = new Vector3(0, 0, 0);
 
-                Debug.Log(_health.Value);
+                //Debug.Log(_health.Value);
             }
             else
             {

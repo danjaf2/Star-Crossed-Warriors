@@ -100,7 +100,7 @@ namespace AI
             //Pathfinding logic 
             if (trackedTarget == null && (path.Count == 0|| goalWaypoint != currentGoalWaypoint) && (goalWaypoint!=null||goalWaypoint!=currentGoalWaypoint))
             {
-                Debug.Log("Finding Path!");
+                //Debug.Log("Finding Path!");
                 pathIndex = 0;
                 path = pathfinding.FindPath(mostRecentWaypoint, goalWaypoint);
                 currentGoalWaypoint = goalWaypoint;

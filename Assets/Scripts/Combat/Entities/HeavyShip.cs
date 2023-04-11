@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using UnityEditor.TextCore.Text;
 using UnityEngine;
 
 public class HeavyShip : PlayerShip {
@@ -115,7 +114,7 @@ public class HeavyShip : PlayerShip {
             shieldStrong.SetActive(true);
             shieldWeak.SetActive(false);
 
-            Debug.Log("Shield Is Active"); 
+            //Debug.Log("Shield Is Active"); 
         }
         else if (_shieldResetTimer <= 0 && shieldIsActive)
         {
@@ -160,15 +159,27 @@ public class HeavyShip : PlayerShip {
         
         if (_health.Value <= 0)
         {
-            if (atk.Sender == null) { Debug.Log(this.name + " was destroyed!"); }
-            else { Debug.Log(this.name + $" was destroyed by {atk.Sender.name}!"); }
+            if (atk.Sender == null) { 
+                //Debug.Log(this.name + " was destroyed!"); 
+            
+            }
+            else { 
+                //Debug.Log(this.name + $" was destroyed by {atk.Sender.name}!"); 
+            }
 
             OnDeath();
         }
         else
         {
-            if (atk.Sender == null) { Debug.Log(this.name + " was shoot!"); }
-            else { Debug.Log(this.name + $" was shoot by {atk.Sender.name}!"); }
+            if (atk.Sender == null) { 
+                
+                //Debug.Log(this.name + " was shoot!"); 
+            }
+            else { 
+                
+                //Debug.Log(this.name + $" was shoot by {atk.Sender.name}!");
+            
+            }
         }
 
         atk.Hit(this);
@@ -179,7 +190,7 @@ public class HeavyShip : PlayerShip {
     private void ReactToBulletHit(Attack atk, Entity hit)
     {
         hit.AddEffect(new FragileEffect(hit));
-        Debug.Log($"Heavy knows that {hit.name} was hit for {atk.Damage} damage.\nApplied a fragile debuff.");
+       // Debug.Log($"Heavy knows that {hit.name} was hit for {atk.Damage} damage.\nApplied a fragile debuff.");
     }
 
     public override float GetPrimaryFireStatus()

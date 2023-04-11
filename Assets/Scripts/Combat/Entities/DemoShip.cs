@@ -172,7 +172,7 @@ public class DemoShip : PlayerShip {
     private void ReactToBulletHit(Attack atk, Entity hit)
     {
         hit.AddEffect(new FragileEffect(hit));
-        Debug.Log($"Demoman knows that {hit.name} was hit for {atk.Damage} damage.\nApplied a fragile debuff.");
+        //Debug.Log($"Demoman knows that {hit.name} was hit for {atk.Damage} damage.\nApplied a fragile debuff.");
     }
 
     public override float GetPrimaryFireStatus()

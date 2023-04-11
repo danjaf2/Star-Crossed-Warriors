@@ -36,7 +36,7 @@ public class UIUpdater : MonoBehaviour
         if (player.playerClass.playerControlled)
         {
             energy = player.playerClass._energy.Value;
-            print(energy);
+            //print(energy);
         }
         playerStats.text = "SHIP STATUS - " + player.playerClass.GetType()+" \r\n HEALTH: "+ player.playerClass._health.Value.ToString("F0") +"\r\n ENERGY: " + energy; 
 

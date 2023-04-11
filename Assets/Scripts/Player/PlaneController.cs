@@ -81,7 +81,7 @@ public class PlaneController : NetworkBehaviour
                 {
                     rb.velocity = Vector3.zero;
                     throttle = 0;
-                    Debug.Log("Player is stunned"); 
+                    //Debug.Log("Player is stunned"); 
                     return; 
                 }
             }
