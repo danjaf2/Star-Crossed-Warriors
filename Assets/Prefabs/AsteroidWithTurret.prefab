@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3158984211332481835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6695481970294799659}
+  m_Layer: 6
+  m_Name: BulletSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6695481970294799659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3158984211332481835}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.702, z: 0.874}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6644863972200823218}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5227078981844633249
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,9 +167,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5227078981844633277}
     m_Modifications:
+    - target: {fileID: 1000010532171060, guid: d9231829d3cedca409477c9327eb6425, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010916063602, guid: d9231829d3cedca409477c9327eb6425, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1000013227101710, guid: d9231829d3cedca409477c9327eb6425, type: 3}
       propertyPath: m_Name
       value: Canon_lvl_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013227101710, guid: d9231829d3cedca409477c9327eb6425, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013227101710, guid: d9231829d3cedca409477c9327eb6425, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4000013053745136, guid: d9231829d3cedca409477c9327eb6425, type: 3}
       propertyPath: m_RootOrder
@@ -216,6 +263,52 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1000013227101710, guid: d9231829d3cedca409477c9327eb6425, type: 3}
   m_PrefabInstance: {fileID: 6645476239571709506}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &6923408905891283994
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6645893509751791692}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!64 &5993070383795855581
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6645893509751791692}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300008, guid: 8b753cd7277b22448a827f90e6efe768, type: 3}
+--- !u!114 &423948925549558271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6645893509751791692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &6645476240583339385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,3 +321,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3532f1de3c94204e9654173462df257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _health:
+    m_InternalValue: 0
+  _maxEnergy: 1000
+  _energy:
+    m_InternalValue: 100
+  playerControlled: 0
+  respawnPosition: {fileID: 0}
+  isStunned: 0
+  _bulletPrefab: {fileID: 3900607670785296070, guid: 0c343a920678f694b89abcba5e870ba2, type: 3}
+  _bulletDamage: 1
+  _bulletSpeed: 10000
+  _bulletDelay: 50
+  _bulletCost: 0
+  bulletSpawnPosition: {fileID: 3158984211332481835}
+  _missilePrefab: {fileID: 7596523783035753511, guid: 20df6fcc83265cd4f9f913d190bc958a, type: 3}
+  _missileDamage: 0
+  missileSpawnPosition: {fileID: 3158984211332481835}
+  _missileBaseSpeed: 0
+  _missileRange: {fileID: 0}
+  _missileLockOnDelay: 0
+  _missileCost: 15
+  _missileTarget: {fileID: 0}
+  _boostDelay: 0
+  _boostCoolDown: 0
+  _boostMultiplier: 0
+  _abilityCost: 10
+  target: {fileID: 0}
+  validTargets: []
+  anchor: {fileID: 5227078981844633249}
+  offset: {x: 0.55, y: 1.1, z: -0.44}

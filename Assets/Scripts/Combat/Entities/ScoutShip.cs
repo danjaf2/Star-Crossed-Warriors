@@ -82,7 +82,7 @@ public class ScoutShip : PlayerShip {
 
     public override void HandleShoot(bool input) {
         if(_fireTimer > 0) { _fireTimer--; }
-        if (_energy.Value <= 0)
+        if (_energy.Value <= 0 || !input || _bulletPrefab == null)
         {
             return;
         }
@@ -90,6 +90,11 @@ public class ScoutShip : PlayerShip {
             LoseEnergy(_bulletCost);
             Attack bulletAttack = new Attack(_bulletDamage, this);
             bulletAttack.OnHit += ReactToBulletHit;
+
+            if(bulletSpawnPosition == null)
+            {
+                bulletSpawnPosition = gameObject; 
+            }
 
             Bullet.Create(
                 _bulletPrefab,
